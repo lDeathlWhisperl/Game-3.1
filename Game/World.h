@@ -6,7 +6,7 @@ class World
 {
 private:
 	char tile = 219;
-	std::vector<std::vector<int>> vertexes;
+	std::vector<int> vertexes;
 
 	void generator(int, int);
 
@@ -14,7 +14,7 @@ private:
 
 	std::string paint(int);
 
-	void dimond(int, int, int, int, int);
+	std::vector<int> diamond(int, int, int, int, int);
 
 public:
 	void draw(int, int);

@@ -13,7 +13,7 @@ int main()
     fullscreen();
     World landscape;
 
-    int size = 25;
+    int size = 32;
 
     //while (true)
     //{
