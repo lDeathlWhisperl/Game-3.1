@@ -8,8 +8,6 @@ private:
 	char tile = 219;
 	std::vector<int> vertexes;
 
-	void generator(int, int);
-
 	void landscape(int, int);
 
 	std::string paint(int);
@@ -17,6 +15,8 @@ private:
 	std::vector<int> diamond(int, int, int, int, int);
 
 public:
+	void generator(int, int);
+
 	void draw(int, int);
 
 	void clean();

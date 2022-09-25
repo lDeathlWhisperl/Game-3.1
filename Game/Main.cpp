@@ -13,15 +13,12 @@ int main()
     fullscreen();
     World landscape;
 
-    int size = 32;
+    int size = 65;
+    landscape.generator(size, size);
 
-    //while (true)
-    //{
-    //  landscape.clean();
+
     landscape.draw(size, size);
-    //char c = _getch();
-    //    if (c == 'x') break;
-    //}
+    //landscape.draw(size, size);
 
     return 0;
 }
