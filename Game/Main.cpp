@@ -11,14 +11,12 @@ void fullscreen()
 int main()
 {
     fullscreen();
-    World landscape;
+    int x = 321, y = 90;
 
-    int size = 65;
-    landscape.generator(size, size);
+    World landscape(x, y);
+    landscape.generator();
 
-
-    landscape.draw(size, size);
-    //landscape.draw(size, size);
+    landscape.draw();
 
     return 0;
 }

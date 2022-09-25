@@ -6,18 +6,21 @@ class World
 {
 private:
 	char tile = 219;
-	std::vector<int> vertexes;
+	int length, width;
+	std::vector<std::vector<int>> vertexes;
 
-	void landscape(int, int);
+	void landscape();
+
+	void smooth();
 
 	std::string paint(int);
 
-	std::vector<int> diamond(int, int, int, int, int);
-
 public:
-	void generator(int, int);
+	World(int l, int w) : length(l), width(w){}
 
-	void draw(int, int);
+	void generator();
+
+	void draw();
 
 	void clean();
 };
