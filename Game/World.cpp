@@ -2,20 +2,28 @@
 #include <cmath>
 #include "World.h"
 
-//32 - forest
+//32 - tree
 //92 - field
 
 //34 - deep water
 //94 - bright water
-//36 - river
 
 //93 - sand
-//90 - stone
-//33 - bridge
+//90 - castle
+//33 - chest
 
 int random(int min, int max)
 {
 	return min + rand() % (max - min + 1);
+}
+
+void World::plantTree(int x, int y)
+{
+	polygons[y - 1][x] = 1;
+	polygons[y][x - 1] = 1;
+	polygons[y][x] = 1;
+	polygons[y][x + 1] = 1;
+	polygons[y + 1][x] = 1;
 }
 
 void World::landscape()
@@ -24,64 +32,83 @@ void World::landscape()
 	{
 		std::vector<int> temp;
 		for (size_t x = 0; x < length; x++)
-			temp.push_back(random(0, 10));
-		vertexes.push_back(temp);
+			temp.push_back(0);
+		polygons.push_back(temp);
 	}
 }
 
 void World::smooth()
 {
-	for (int y = 1; y < width-1; y++)
-	{
-		for (int x = 1; x < length-1; x++)
-		{
-			int vertex_count = 1;
-			int vertex_sum = vertexes[y][x];
-			
-			vertexes[y][x] = (vertexes[y-1][x-1]+ vertexes[y-1][x] + vertexes[y-1][x+1]+ vertexes[y][x-1]+ vertexes[y][x]+ vertexes[y][x+1]+ vertexes[y+1][x-1]+ vertexes[y+1][x]+ vertexes[y+1][x+1]) / 9;
-		}
-	}
-} 
+	for (int y = 1; y < width - 1; y++)
+		for (int x = 1; x < length - 1; x++)
+			polygons[y][x] = (
+				polygons[y - 1][x - 1] + polygons[y - 1][x] + polygons[y - 1][x + 1] +
+				polygons[y][x - 1] + polygons[y][x] + polygons[y][x + 1] +
+				polygons[y + 1][x - 1] + polygons[y + 1][x] + polygons[y + 1][x + 1]) / 9;
+}
 
 void World::generator()
 {
 	srand(static_cast<unsigned int>(time(0)));
 	landscape();
 
+	for (int y = 0; y < width; y++)
+		for (int x = 0; x < length; x++)
+			if (random(0, 10) <= 2)
+				polygons[y][x] = 1;
+
+	for (int y = 0; y < width; y++)
+		for (int x = 0; x < length; x++)
+			if (random(0, 10) <= 8)
+				polygons[y][x] = 4;
+
+	for (int y = 0; y < width; y++)
+		for (int x = 0; x < length; x++)
+			polygons[y][x] += cos(25 * polygons[y][x] * 180 / 3.14) * 25;
+
 	smooth();
 
 	for (int y = 0; y < width; y++)
 		for (int x = 0; x < length; x++)
-			if (random(1, 10) <= 1)
-				vertexes[y][x] = random(3, 5);
+			polygons[y][x] += 1;
 
 	smooth();
 
 	for (int y = 0; y < width; y++)
 		for (int x = 0; x < length; x++)
-			if (random(1, 10) <= 3)
-				vertexes[y][x] = random(3, 7);
+			if (polygons[y][x] > 0)
+				polygons[y][x] = 0;
 
-	smooth();
+	for (int y = 1; y < width - 1; y++)
+		for (int x = 1; x < length - 1; x++)
+			if (polygons[y][x] == 0 && random(0, 10) <= 1)
+				plantTree(x, y);
 }
 
 std::string World::paint(int high)
 {
 	std::string res;
-	
+
 	switch (high)
 	{
+	case -9:
+	case -8:
+	case -7:
+		res = "\x1b[34m";
+		break;
+	case -6:
+	case -5:
+		res = "\x1b[94m";
+		break;
+	case -4:
+	case -3:
+	case -2:
+	case -1:
+	case 0:
+		res = "\x1b[92m";
+		break;
 	case 1:
-		res = "\x1b[34m"; // deep water
-		break;
-	case 2:
-		res = "\x1b[94m"; // water
-		break;
-	case 3:
-		res = "\x1b[92m"; // field
-		break;
-	default:
-		res = "\x1b[32m"; // trees
+		res = "\x1b[32m";
 	}
 
 	res += tile;
@@ -91,13 +118,12 @@ std::string World::paint(int high)
 
 void World::draw()
 {
-	for (int y = 2; y < width-2; y++)
+	for (int y = 1; y < width - 1; y++)
 	{
-		for (int x = 2; x < length-2; x++)
-			std::cout << paint(vertexes[y][x]);// << ' ';
+		for (int x = 1; x < length - 1; x++)
+			std::cout << paint(polygons[y][x]);// << ' ' << vertexes[y][x];
 		std::cout << '\n';
 	}
-		
 }
 
 void World::clean()
