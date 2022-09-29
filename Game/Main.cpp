@@ -11,7 +11,7 @@ void fullscreen()
 int main()
 {
     fullscreen();
-    int x = 321, y = 90;
+    int x = 179, y = 54;
 
     World landscape(x, y);
     landscape.generator();
