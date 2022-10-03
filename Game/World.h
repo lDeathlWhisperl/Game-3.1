@@ -7,7 +7,7 @@ class World
 private:
 	char tile = 219;
 	int length, width;
-	std::vector<std::vector<int>> polygons;
+	std::vector<std::vector<double>> polygons;
 
 	void landscape();
 
@@ -15,12 +15,12 @@ private:
 
 	void plantTree(int, int);
 
-	std::string paint(int);
+	std::string paint(double);
 
 public:
 	World(int l, int w) : length(l), width(w){}
 
-	void generator();
+	void generator(long long int);
 
 	void draw();
 
