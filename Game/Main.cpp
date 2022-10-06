@@ -1,4 +1,5 @@
 ﻿#include <iostream>
+#include <conio.h>
 #include <windows.h>
 #include "World.h"
 
@@ -26,14 +27,37 @@ void fontSize(int num)
 int main()
 {
     fullscreen();
-    int x = 177, y = 52;
+    int x = 177, y = 51;
+    int seed = 17042003;
 
     //fontSize(5);
 
     World landscape(x, y);
-    landscape.generator(17042003);
+    landscape.generator(seed, 0, 0);
 
-    landscape.draw();
-    
+    int mapIndex_x = 0, mapIndex_y = 0;
+    while (1)
+    {
+        landscape.draw();
+        char ch = _getch();
+
+        switch (ch)
+        {
+        case 'w':
+            mapIndex_y--;
+            break;
+        case 'a':
+            mapIndex_x--;
+            break;
+        case 's':
+            mapIndex_y++;
+            break;
+        case 'd':
+            mapIndex_x++;
+            break;
+        }
+        landscape.generator(seed, mapIndex_x, mapIndex_y);
+        landscape.clean();
+    }
     return 0;
 }

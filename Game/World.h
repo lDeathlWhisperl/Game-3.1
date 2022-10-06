@@ -7,11 +7,9 @@ class World
 private:
 	char tile = 219;
 	int length, width;
-	std::vector<std::vector<double>> polygons;
+	std::vector<std::vector<double>> highMap;
 
 	void landscape();
-
-	void smooth();
 
 	void plantTree(int, int);
 
@@ -20,7 +18,7 @@ private:
 public:
 	World(int l, int w) : length(l), width(w){}
 
-	void generator(long long int);
+	void generator(long long int, int, int);
 
 	void draw();
 

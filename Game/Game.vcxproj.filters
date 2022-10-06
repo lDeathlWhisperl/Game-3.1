@@ -21,7 +21,7 @@
     <ClCompile Include="World.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="PerlinNoise.cpp">
+    <ClCompile Include="Perlin.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>

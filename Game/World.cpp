@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cmath>
+#include <windows.h>
 #include "Perlin.h"
 #include "World.h"
 
@@ -8,23 +9,17 @@
 
 //34 - deep water
 //94 - bright water
+//36 - river
 
 //93 - sand
 //90 - stone
-//33 - path
-
-int random(int min, int max)
-{
-	return min + rand() % (max - min + 1);
-}
+//33 - chest
 
 void World::plantTree(int x, int y)
 {
-	polygons[y - 1][x] = 2;
-	polygons[y][x - 1] = 2;
-	polygons[y][x] = 2;
-	polygons[y][x + 1] = 2;
-	polygons[y + 1][x] = 2;
+	highMap[y - 1][x] = 2;
+	highMap[y][x - 1] = 2;
+	highMap[y][x] = 2;
 }
 
 void World::landscape()
@@ -34,45 +29,27 @@ void World::landscape()
 		std::vector<double> temp;
 		for (int x = 0; x < length; x++)
 			temp.push_back(0);
-		polygons.push_back(temp);
+		highMap.push_back(temp);
 	}
 }
 
-void World::smooth()
+void World::generator(long long int seed, int x_index, int y_index)
 {
-	for (int y = 1; y < width - 1; y++)
-		for (int x = 1; x < length - 1; x++)
-			polygons[y][x] = (
-				polygons[y - 1][x - 1] + polygons[y - 1][x] + polygons[y - 1][x + 1] +
-				polygons[y][x - 1] + polygons[y][x] + polygons[y][x + 1] +
-				polygons[y + 1][x - 1] + polygons[y + 1][x] + polygons[y + 1][x + 1]) / 9;
-}
-
-void World::generator(long long int seed)
-{
-	srand(static_cast<unsigned int>(time(0)));
 	PerlinNoise pn(seed);
 	landscape();
 
 	for (int y = 0; y < width; y++)
 		for (int x = 0; x < length; x++)
 		{
-			double t_x = (double)x / ((double)length);
-			double t_y = (double)y / ((double)width);
-			polygons[y][x] = pn.noise(3 * t_x, 3 * t_y, 600);
-		}
+			double t_x = (double)(x + x_index) / ((double)length);
+			double t_y = (double)(y + y_index) / ((double)width);
 
-	
-	for (int y = 0; y < width; y++)
-		for (int x = 0; x < length; x++)
-			if (polygons[y][x] > 0.34 && polygons[y][x] <= 0.5 || polygons[y][x] > 0.545)
-				polygons[y][x] = 1;
-	
-	for (int y = 1; y < width-1; y++)
-		for (int x = 1; x < length-1; x++)
-			if (polygons[y][x] == 1 && random(0, 100) <= 5)
-				plantTree(x, y);
-	
+			highMap[y][x] = pn.noise(3 * t_x, 3 * t_y, 600);
+
+			if ((highMap[y][x] > 0.34 && highMap[y][x] <= 0.5 || highMap[y][x] >= 0.546) && y > 0 && y < width - 1 && x > 0 && x < length - 1)
+				if (pn.noise(222 * t_x, 222 * t_y, 600) >= 0.38 && pn.noise(222 * t_x, 222 * t_y, 600) <= 0.45)
+					plantTree(x,y);
+		}
 }
 
 std::string World::paint(double high)
@@ -86,9 +63,9 @@ std::string World::paint(double high)
 	else if (high > 0.3 && high <= 0.34)
 		res = "\x1b[93m";				//sand
 	else if(high > 0.5 && high <= 0.545)
-		res = "\x1b[33m";				//paths
+		res = "\x1b[36m";				//river
 	else
-		res = "\x1b[92m";
+		res = "\x1b[92m";               //field
 
 	if(high == 2)
 		res = "\x1b[32m";				//tree
@@ -103,12 +80,19 @@ void World::draw()
 	for (int y = 0; y < width; y++)
 	{
 		for (int x = 0; x < length; x++)
-			std::cout << paint(polygons[y][x]);
+			std::cout << paint(highMap[y][x]);
 		std::cout << '\n';
 	}
 }
 
 void World::clean()
 {
-	std::cout << "\x1b[2J";
+	HANDLE hOut;
+	COORD Position;
+
+	hOut = GetStdHandle(STD_OUTPUT_HANDLE);
+
+	Position.X = 0;
+	Position.Y = 0;
+	SetConsoleCursorPosition(hOut, Position);
 }
