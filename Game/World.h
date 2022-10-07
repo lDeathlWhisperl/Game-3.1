@@ -13,6 +13,8 @@ private:
 
 	void plantTree(int, int);
 
+	void plantCactus(int, int);
+
 	std::string paint(double);
 
 public:
