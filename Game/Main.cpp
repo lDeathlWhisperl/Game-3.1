@@ -3,6 +3,10 @@
 #include <windows.h>
 #include "World.h"
 
+#include "Units.h"
+
+#define gameloop while(true)
+
 void fullscreen()
 {
     ShowWindow(GetForegroundWindow(), SW_SHOWMAXIMIZED);
@@ -28,15 +32,17 @@ int main()
 {
     fullscreen();
     int x = 177, y = 51;
-    int seed = 17042003;
+    unsigned int seed = 17042003;
 
     //fontSize(5);
 
     World landscape(x, y);
     landscape.generator(seed, 0, 0);
 
-    int mapIndex_x = 0, mapIndex_y = 0;
-    while (1)
+    int mapIndex_x = 0, 
+        mapIndex_y = 0;
+
+    gameloop
     {
         landscape.draw();
         char ch = _getch();

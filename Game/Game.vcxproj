@@ -144,7 +144,10 @@
     <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Monsters.h" />
     <ClInclude Include="Perlin.h" />
+    <ClInclude Include="CreatureI.h" />
+    <ClInclude Include="Units.h" />
     <ClInclude Include="World.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

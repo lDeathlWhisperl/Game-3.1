@@ -17,9 +17,9 @@
 
 void World::plantTree(int x, int y)
 {
-	highMap[y - 1][x] = 2;
-	highMap[y][x - 1] = 2;
-	highMap[y][x] = 2;
+	map[y - 1][x] = 2;
+	map[y][x - 1] = 2;
+	map[y][x] = 2;
 }
 
 void World::landscape()
@@ -29,11 +29,11 @@ void World::landscape()
 		std::vector<double> temp;
 		for (int x = 0; x < length; x++)
 			temp.push_back(0);
-		highMap.push_back(temp);
+		map.push_back(temp);
 	}
 }
 
-void World::generator(long long int seed, int x_index, int y_index)
+void World::generator(unsigned int seed, int x_index, int y_index)
 {
 	PerlinNoise pn(seed);
 	landscape();
@@ -44,9 +44,11 @@ void World::generator(long long int seed, int x_index, int y_index)
 			double t_x = (double)(x + x_index) / ((double)length);
 			double t_y = (double)(y + y_index) / ((double)width);
 
-			highMap[y][x] = pn.noise(3 * t_x, 3 * t_y, 600);
+			//landscape noise
+			map[y][x] = pn.noise(3 * t_x, 3 * t_y, 600);
 
-			if ((highMap[y][x] > 0.34 && highMap[y][x] <= 0.5 || highMap[y][x] >= 0.546) && y > 0 && y < width - 1 && x > 0 && x < length - 1)
+			//foliage noise
+			if ((map[y][x] > 0.34 && map[y][x] <= 0.5 || map[y][x] >= 0.546) && y > 0 && x > 0)
 				if (pn.noise(222 * t_x, 222 * t_y, 600) >= 0.38 && pn.noise(222 * t_x, 222 * t_y, 600) <= 0.45)
 					plantTree(x,y);
 		}
@@ -62,13 +64,16 @@ std::string World::paint(double high)
 		res = "\x1b[94m";				//bright water
 	else if (high > 0.3 && high <= 0.34)
 		res = "\x1b[93m";				//sand
-	else if(high > 0.5 && high <= 0.545)
+	else if (high > 0.5 && high <= 0.545)
 		res = "\x1b[36m";				//river
 	else
 		res = "\x1b[92m";               //field
 
 	if(high == 2)
 		res = "\x1b[32m";				//tree
+
+	if (high == 3)
+		res += "\x1b[0m";
 
 	res += tile;
 	res += "\x1b[0m";
@@ -80,7 +85,7 @@ void World::draw()
 	for (int y = 0; y < width; y++)
 	{
 		for (int x = 0; x < length; x++)
-			std::cout << paint(highMap[y][x]);
+			std::cout << paint(map[y][x]);
 		std::cout << '\n';
 	}
 }

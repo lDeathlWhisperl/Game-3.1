@@ -5,9 +5,9 @@
 class World
 {
 private:
-	char tile = 219;
+	unsigned char tile = 219;
 	int length, width;
-	std::vector<std::vector<double>> highMap;
+	std::vector<std::vector<double>> map;
 
 	void landscape();
 
@@ -18,7 +18,7 @@ private:
 public:
 	World(int l, int w) : length(l), width(w){}
 
-	void generator(long long int, int, int);
+	void generator(unsigned int, int, int);
 
 	void draw();
 
