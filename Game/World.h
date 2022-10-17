@@ -5,7 +5,6 @@
 class World
 {
 private:
-	unsigned char tile = 219;
 	int length, width;
 	std::vector<std::vector<double>> map;
 
@@ -15,14 +14,14 @@ private:
 
 	void plantCactus(int, int);
 
-	std::string paint(double);
-
 public:
 	World(int l, int w) : length(l), width(w){}
 
 	void generator(unsigned int, int, int);
 
-	void draw();
+	std::vector<std::vector<double>> getMap();
 
-	void clean();
+	int x();
+
+	int y();
 };

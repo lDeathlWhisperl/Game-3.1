@@ -141,12 +141,14 @@
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Perlin.cpp" />
+    <ClCompile Include="Render.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Monsters.h" />
     <ClInclude Include="Perlin.h" />
-    <ClInclude Include="CreatureI.h" />
+    <ClInclude Include="Actor.h" />
+    <ClInclude Include="Render.h" />
     <ClInclude Include="Units.h" />
     <ClInclude Include="World.h" />
   </ItemGroup>

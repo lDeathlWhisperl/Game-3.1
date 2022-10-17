@@ -1,9 +1,9 @@
 #pragma once
 
 #include <iostream>
-#include "CreatureI.h"
+#include "Actor.h"
 
-class Archer : public CreatureI
+class Archer : public Actor
 {
 public:
 	

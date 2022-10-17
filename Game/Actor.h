@@ -3,7 +3,7 @@
 constexpr auto dead = false;
 constexpr auto alive = true;
 
-class CreatureI
+class Actor
 {
 protected:
 	int HP,

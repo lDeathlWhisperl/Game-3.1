@@ -24,6 +24,9 @@
     <ClCompile Include="Perlin.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="Render.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="World.h">
@@ -32,13 +35,16 @@
     <ClInclude Include="Perlin.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="CreatureI.h">
+    <ClInclude Include="Actor.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Units.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Monsters.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Render.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
