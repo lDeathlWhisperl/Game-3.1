@@ -1,12 +1,15 @@
 #pragma once
 
-#include <vector>
+#include <list>
+#include <iostream>
+
+#include "Perlin.h"
 
 class World
 {
 private:
 	int length, width;
-	std::vector<std::vector<double>> map;
+	double **map = new double*[width];
 
 	void landscape();
 
@@ -18,10 +21,10 @@ public:
 	World(int l, int w) : length(l), width(w){}
 
 	void generator(unsigned int, int, int);
+	
+	double getMap(int, int);
 
-	std::vector<std::vector<double>> getMap();
+	int getLength();
 
-	int x();
-
-	int y();
+	int getWidth();
 };

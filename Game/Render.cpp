@@ -1,8 +1,4 @@
 #include "Render.h"
-//#include "World.h"
-
-#include <iostream>
-#include <windows.h>
 
 std::string Render::paint(double high)
 {
@@ -20,8 +16,8 @@ std::string Render::paint(double high)
 	else
 		res = "\x1b[92m";               //field
 
-	if (high == 2)
-		res = "\x1b[32m";				//tree
+	if (high == 2 || high == 4)
+		res = "\x1b[32m";				//tree or cactus
 
 	if (high == 3)
 		res += "\x1b[93m";				//desert
@@ -31,13 +27,21 @@ std::string Render::paint(double high)
 	return res;
 }
 
-void Render::draw(World world)
+void Render::draw(World &world, Player &player)
 {
-	std::vector<std::vector<double>> map = world.getMap();
-	for (int y = 0; y < world.y(); y++)
+	HUD hud;
+	for (int y = 0; y < world.getWidth(); y++)
 	{
-		for (int x = 0; x < world.x(); x++)
-			std::cout << paint(map[y][x]);
+		for (int x = 0; x < world.getLength(); x++)
+		{
+			hud.draw(player, x, y);
+
+			if ((x == world.getLength() / 2 && y == world.getWidth() / 2) && world.getMap(x, y) != 2)
+				std::cout << player.showPlayer();
+			else
+				std::cout << paint(world.getMap(x, y));
+		}
+
 		std::cout << '\n';
 	}
 }

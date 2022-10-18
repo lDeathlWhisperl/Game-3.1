@@ -1,13 +1,11 @@
 ﻿#include <iostream>
-#include <conio.h>
 #include <windows.h>
 
 #include "World.h"
 #include "Render.h"
+#include "Player.h"
 
-//#include "Units.h"
-
-#define gameloop while(true)
+#define gameLoop() while(true)
 
 void fullscreen()
 {
@@ -33,39 +31,24 @@ void fontSize(int num)
 int main()
 {
     fullscreen();
-    int x = 211, y = 49;
+    int x = 177, y = 51;
     unsigned int seed = 17042003;
 
     //fontSize(5);
 
-    World landscape(x, y-3);
+    World landscape(x, y);
     Render render;
+    Player player;
+
     landscape.generator(seed, 0, 0);
-
-    int mapIndex_x = 0, 
-        mapIndex_y = 0;
-
-    gameloop
+    
+    gameLoop()
     {
-        render.draw(landscape);
-        char ch = _getch();
+        render.draw(landscape, player);
 
-        switch (ch)
-        {
-        case 'w':
-            mapIndex_y--;
-            break;
-        case 'a':
-            mapIndex_x--;
-            break;
-        case 's':
-            mapIndex_y++;
-            break;
-        case 'd':
-            mapIndex_x++;
-            break;
-        }
-        landscape.generator(seed, mapIndex_x, mapIndex_y);
+        player.controller();
+        landscape.generator(seed, player.getPos_x(), player.getPos_y());
+
         render.clean();
     }
     return 0;
