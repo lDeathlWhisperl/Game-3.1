@@ -38,7 +38,7 @@ int HUD::getLength()
 	return length;
 }
 
-void HUD::draw(Player player, int& x, int& y)
+void HUD::addToViewport(Player player, int& x, int& y)
 {
 	if (x == 0 && (y == 0 || y == 3))
 	{

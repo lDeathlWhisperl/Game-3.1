@@ -1,16 +1,5 @@
 #include "World.h"
 
-//32 - tree
-//92 - field
-
-//34 - deep water
-//94 - bright water
-//36 - river
-
-//93 - sand
-//90 - stone
-//33 - chest
-
 void World::plantTree(int getLength, int getWidth)
 {
 	map[getWidth - 1][getLength] = 2;

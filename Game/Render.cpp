@@ -1,5 +1,16 @@
 #include "Render.h"
 
+//32 - tree
+//92 - field
+
+//34 - deep water
+//94 - bright water
+//36 - river
+
+//93 - sand
+//90 - stone
+//33 - chest
+
 std::string Render::paint(double high)
 {
 	std::string res;
@@ -34,7 +45,11 @@ void Render::draw(World &world, Player &player)
 	{
 		for (int x = 0; x < world.getLength(); x++)
 		{
-			hud.draw(player, x, y);
+			hud.addToViewport(player, x, y);
+
+			if ((x == world.getLength() / 2 && y == world.getWidth() / 2) && world.getMap(x, y) == 4)
+				player.getDamage(1);
+			
 
 			if ((x == world.getLength() / 2 && y == world.getWidth() / 2) && world.getMap(x, y) != 2)
 				std::cout << player.showPlayer();

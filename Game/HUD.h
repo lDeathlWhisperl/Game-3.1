@@ -18,5 +18,5 @@ public:
 
 	int getLength();
 
-	void draw(Player, int&, int&);
+	void addToViewport(Player, int&, int&);
 };

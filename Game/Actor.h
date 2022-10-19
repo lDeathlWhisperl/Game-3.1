@@ -57,4 +57,14 @@ public:
 	{
 		return status;
 	}
+
+	void setPos_x(int coord)
+	{
+		pos_x = coord;
+	}
+
+	void setPos_y(int coord)
+	{
+		pos_y = coord;
+	}
 };
