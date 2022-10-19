@@ -20,6 +20,8 @@ private:
 public:
 	World(int l, int w) : length(l), width(w){}
 
+	~World();
+
 	void generator(unsigned int, int, int);
 	
 	double getMap(int, int);

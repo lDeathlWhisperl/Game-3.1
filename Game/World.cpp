@@ -1,5 +1,12 @@
 #include "World.h"
 
+World::~World()
+{
+	for (int i = 0; i < width; i++)
+		for (int j = 0; j < length; j++)
+			delete[] map[j];
+}
+
 void World::plantTree(int getLength, int getWidth)
 {
 	map[getWidth - 1][getLength] = 2;

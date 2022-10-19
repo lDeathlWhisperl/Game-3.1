@@ -47,9 +47,10 @@ void Render::draw(World &world, Player &player)
 		{
 			hud.addToViewport(player, x, y);
 
+
+
 			if ((x == world.getLength() / 2 && y == world.getWidth() / 2) && world.getMap(x, y) == 4)
-				player.getDamage(1);
-			
+				player.getDamage(1);			
 
 			if ((x == world.getLength() / 2 && y == world.getWidth() / 2) && world.getMap(x, y) != 2)
 				std::cout << player.showPlayer();

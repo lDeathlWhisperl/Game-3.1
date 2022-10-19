@@ -31,7 +31,7 @@ void fontSize(int num)
 int main()
 {
     fullscreen();
-    int x = 177, y = 51;
+    int x = 211, y = 49;
     unsigned int seed = 17042003;
 
     //fontSize(5);

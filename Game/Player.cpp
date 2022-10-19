@@ -2,7 +2,9 @@
 
 void Player::controller()
 {
-    char ch = _getch();
+    char ch = '0';
+    if(_kbhit())
+        ch = _getch();
 
     switch (ch)
     {
@@ -22,10 +24,37 @@ void Player::controller()
         character = '>';
         pos_x++;
         break;
+    case 'q':
+
+        break;
+    case 'e':
+        //std::cout << "\x1b[90m" << (unsigned char)219 << "\x1b[0m";
+        break;
     }
 }
 
 char Player::showPlayer()
 {
     return character;
+}
+
+void Player::getDamage(int dmg)
+{
+    Actor::getDamage(dmg);
+
+    switch (character)
+    {
+    case '^':
+        pos_y += 1;
+        break;
+    case '<':
+        pos_x += 1;
+        break;
+    case 'V':
+        pos_y -= 1;
+        break;
+    case '>':
+        pos_x -= 1;
+        break;
+    }
 }

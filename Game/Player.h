@@ -3,6 +3,7 @@
 #include "Actor.h"
 
 #include <conio.h>
+#include <iostream>
 
 class Player : public Actor
 {
@@ -12,4 +13,6 @@ public:
     void controller();
 
     char showPlayer();
+
+    void getDamage(int);
 };
