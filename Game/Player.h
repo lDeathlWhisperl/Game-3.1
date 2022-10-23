@@ -1,13 +1,16 @@
 #pragma once
 
-#include "Actor.h"
+#include "Character.h"
+#include "Block.h"
 
 #include <conio.h>
 #include <iostream>
+#include <vector>
 
-class Player : public Actor
+class Player : public Character
 {
-	char character = '^';
+	char character = '^',
+        lastPressedKey = '\0';
 
 public:
     void controller();
@@ -15,4 +18,8 @@ public:
     char showPlayer();
 
     void getDamage(int);
+
+    char getLastPressedKey();
+
+    bool placeBlock(std::vector<Block>&, int, int, bool, bool&);
 };

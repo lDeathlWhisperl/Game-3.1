@@ -2,7 +2,7 @@
 
 void Player::controller()
 {
-    char ch = '0';
+    char ch = '\0';
     if(_kbhit())
         ch = _getch();
 
@@ -28,9 +28,11 @@ void Player::controller()
 
         break;
     case 'e':
-        //std::cout << "\x1b[90m" << (unsigned char)219 << "\x1b[0m";
+
         break;
     }
+
+    lastPressedKey = ch;
 }
 
 char Player::showPlayer()
@@ -40,7 +42,7 @@ char Player::showPlayer()
 
 void Player::getDamage(int dmg)
 {
-    Actor::getDamage(dmg);
+    Character::getDamage(dmg);
 
     switch (character)
     {
@@ -57,4 +59,36 @@ void Player::getDamage(int dmg)
         pos_x -= 1;
         break;
     }
+}
+
+char Player::getLastPressedKey()
+{
+    return lastPressedKey;
+}
+
+bool Player::placeBlock(std::vector<Block>& blocks, int x, int y, bool player_coords, bool& do_once)
+{
+    if (player_coords && lastPressedKey == 'e')
+    {
+        blocks.push_back(Block(x, y));
+    }
+
+    if (do_once && !blocks.empty())
+    {
+        for (int i = 0; i < blocks.size(); i++)
+            blocks[i].offset(lastPressedKey);
+        do_once = false;
+    }
+
+    if (!blocks.empty())
+    {
+        for (int i = 0; i < blocks.size(); i++)
+            if (x == blocks[i].getPos_x() && y == blocks[i].getPos_y())
+            {
+                blocks[i].show();
+                return true;
+                break;
+            }
+    }
+    return false;
 }
