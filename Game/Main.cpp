@@ -1,10 +1,6 @@
-﻿//#include <iostream>
-#include <windows.h>
+﻿#include <windows.h>
 
-#include "World.h"
 #include "Render.h"
-#include "Player.h"
-#include "Block.h"
 
 #define gameLoop() while(true)
 
