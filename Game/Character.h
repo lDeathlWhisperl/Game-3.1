@@ -12,6 +12,8 @@ protected:
 		armor = 5,
 		strength = 0;
 
+	char character = '\0';
+
 	bool status = alive;
 
 public:
@@ -26,7 +28,10 @@ public:
 			armor = 0;
 
 		if (HP <= 0)
+		{
 			status = dead;
+			character = 'X';
+		}
 	}
 
 	int getHP()

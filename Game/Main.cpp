@@ -3,6 +3,7 @@
 #include "Render.h"
 
 #define gameLoop() while(true)
+#define game_over break
 
 void fullscreen()
 {
@@ -38,16 +39,17 @@ int main()
     Render render;
     Player player;
 
-    std::vector<Block> blocks;
-
     landscape.generator(seed, 0, 0);
 
     gameLoop()
     {
-        render.draw(landscape, player, blocks);
+        render.draw(landscape, player);
 
         player.controller();
         landscape.generator(seed, player.getPos_x(), player.getPos_y());
+
+        if (!player.getStatus())
+            game_over;
 
         render.update();
     }

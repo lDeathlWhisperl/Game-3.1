@@ -29,9 +29,4 @@ public:
 	int getLength();
 
 	int getWidth();
-
-	void setHigh(int x, int y, int num)
-	{
-		map[y][x] = num;
-	}
 };

@@ -1,4 +1,10 @@
 #include "Player.h"
+#include <algorithm>
+
+Player::Player()
+{
+    character = '^';
+}
 
 void Player::controller()
 {
@@ -8,30 +14,31 @@ void Player::controller()
 
     switch (ch)
     {
-    case 'w':
-        character = '^';
+    case w:
+    case W:
         pos_y--;
+    case ARROW_UP:
+        character = '^';
         break;
-    case 'a':
-        character = '<';
+    case a:
+    case A:
         pos_x--;
+    case ARROW_LEFT:
+        character = '<';
         break;
-    case 's':
-        character = 'V';
+    case s:
+    case S:
         pos_y++;
+    case ARROW_DOWN:
+        character = 'V';
         break;
-    case 'd':
-        character = '>';
+    case d:
+    case D:
         pos_x++;
-        break;
-    case 'q':
-
-        break;
-    case 'e':
-
+    case ARROW_RIGHT:
+        character = '>';
         break;
     }
-
     lastPressedKey = ch;
 }
 
@@ -43,22 +50,23 @@ char Player::showPlayer()
 void Player::getDamage(int dmg)
 {
     Character::getDamage(dmg);
-
+    /* fixing
     switch (character)
     {
     case '^':
-        pos_y += 1;
+        pos_y++;
         break;
     case '<':
-        pos_x += 1;
+        pos_x++;
         break;
     case 'V':
-        pos_y -= 1;
+        pos_y--;
         break;
     case '>':
-        pos_x -= 1;
+        pos_x--;
         break;
     }
+    */
 }
 
 char Player::getLastPressedKey()
@@ -66,29 +74,39 @@ char Player::getLastPressedKey()
     return lastPressedKey;
 }
 
-bool Player::placeBlock(std::vector<Block>& blocks, int x, int y, bool player_coords, bool& do_once)
+bool Player::placeBase(int x, int y, bool player_coords, bool& do_once)
 {
-    if (player_coords && lastPressedKey == 'e')
-    {
-        blocks.push_back(Block(x, y));
-    }
+    if (player_coords && (lastPressedKey == e || lastPressedKey == E))
+        base.push_back(Base(x, y));
 
-    if (do_once && !blocks.empty())
+    std::sort(base.begin(), base.end());
+    base.erase(std::unique(base.begin(), base.end()), base.end());
+
+    if (do_once)
     {
-        for (int i = 0; i < blocks.size(); i++)
-            blocks[i].offset(lastPressedKey);
+        for (int i = 0; i < base.size(); i++)
+            base[i].offset(lastPressedKey);
         do_once = false;
     }
 
-    if (!blocks.empty())
+    for (int i = 0; i < base.size(); i++)
+        if (x == base[i].getPos_x() && y == base[i].getPos_y())
+        {
+            base[i].show();
+            return true;
+        }
+    return false;
+}
+
+void Player::breakBase(int x, int y, bool player_coords)
+{
+    if (player_coords && (lastPressedKey == q || lastPressedKey == Q))
     {
-        for (int i = 0; i < blocks.size(); i++)
-            if (x == blocks[i].getPos_x() && y == blocks[i].getPos_y())
+        for (int i = 0; i < base.size(); i++)
+            if (x == base[i].getPos_x() && y == base[i].getPos_y())
             {
-                blocks[i].show();
-                return true;
-                break;
+                base.erase(base.begin() + i);
+                return;
             }
     }
-    return false;
 }

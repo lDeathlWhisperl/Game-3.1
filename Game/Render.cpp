@@ -38,10 +38,11 @@ std::string Render::paint(double high)
 	return res;
 }
 
-void Render::draw(World &world, Player &player, std::vector<Block> &blocks)
+void Render::draw(World &world, Player &player)
 {
 	HUD hud;
 	bool do_once = true;
+
 	for (int y = 0; y < world.getWidth(); y++)
 	{
 		for (int x = 0; x < world.getLength(); x++)
@@ -49,21 +50,19 @@ void Render::draw(World &world, Player &player, std::vector<Block> &blocks)
 			bool player_coords = x == world.getLength() / 2 && y == world.getWidth() / 2;
 			hud.addToViewport(player, x, y);
 
+			player.breakBase(x, y, player_coords);
+
+			if (player.placeBase(x, y, player_coords, do_once))
+				continue;
+
 			if (player_coords && world.getMap(x, y) == 4)
 				player.getDamage(1);
-
-			//
-			if (player.placeBlock(blocks, x, y, player_coords, do_once))
-				continue;
-			
-			//
 
 			if (player_coords && world.getMap(x, y) != 2)
 				std::cout << player.showPlayer();
 			else
 				std::cout << paint(world.getMap(x, y));
 		}
-
 		std::cout << '\n';
 	}
 }
