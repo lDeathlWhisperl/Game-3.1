@@ -150,6 +150,7 @@
   <ItemGroup>
     <ClInclude Include="Actor.h" />
     <ClInclude Include="Base.h" />
+    <ClInclude Include="Castle.h" />
     <ClInclude Include="HUD.h" />
     <ClInclude Include="Monsters.h" />
     <ClInclude Include="Perlin.h" />
@@ -158,6 +159,9 @@
     <ClInclude Include="Render.h" />
     <ClInclude Include="Units.h" />
     <ClInclude Include="World.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="log.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

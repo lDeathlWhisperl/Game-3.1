@@ -39,6 +39,7 @@ int main()
     Render render;
     Player player;
 
+    landscape.landscape();
     landscape.generator(seed, 0, 0);
 
     gameLoop()

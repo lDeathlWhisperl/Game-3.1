@@ -24,6 +24,12 @@ std::string Render::paint(double high)
 		res = "\x1b[93m";				//sand
 	else if (high > 0.5 && high <= 0.545)
 		res = "\x1b[36m";				//river
+	else if (high == 777)
+		res = "\x1b[90m";
+	else if(high == 776)
+		res = "\x1b[33m";
+	else if(high == 775)
+		res = "\x1b[30m";
 	else
 		res = "\x1b[92m";               //field
 

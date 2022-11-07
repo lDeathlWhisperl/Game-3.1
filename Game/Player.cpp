@@ -38,6 +38,8 @@ void Player::controller()
     case ARROW_RIGHT:
         character = '>';
         break;
+    case 'x':
+        getDamage(100);
     }
     lastPressedKey = ch;
 }
