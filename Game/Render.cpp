@@ -49,11 +49,11 @@ void Render::draw(World &world, Player &player)
 	HUD hud;
 	bool do_once = true;
 
-	for (int y = 0; y < world.getWidth(); y++)
+	for (int y = 1; y < world.getWidth()-8; y++)
 	{
-		for (int x = 0; x < world.getLength(); x++)
+		for (int x = 1; x < world.getLength()-16; x++)
 		{
-			bool player_coords = x == world.getLength() / 2 && y == world.getWidth() / 2;
+			bool player_coords = x == (world.getLength()-15) / 2 && y == (world.getWidth()-7) / 2;
 			hud.addToViewport(player, x, y);
 
 			player.breakBase(x, y, player_coords);

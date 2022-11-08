@@ -35,7 +35,7 @@ int main()
     unsigned int seed = 17042003;
     getConsoleScreenSize(x, y);
 
-    World landscape(x, y-1);
+    World landscape(x+17, y+8);
     Render render;
     Player player;
 

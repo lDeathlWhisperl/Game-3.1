@@ -9,7 +9,7 @@ World::~World()
 
 void World::plantTree(int x, int y)
 {
-	map[y - 1][x] = 2;
+	if(map[y - 1][x] != 776)map[y - 1][x] = 2;
 	map[y][x - 1] = 2;
 	map[y][x] = 2;
 }
@@ -76,8 +76,9 @@ void World::generator(unsigned int seed, int x_index, int y_index)
 					plantCactus(x, y);
 			
 			//spawn castle
-			if (pn.noise(555 * t_x, 555 * t_y, 600) * 10 >= 8.88 && map[y][x] > 0.3 && map[y][x] != 3 && (map[y][x] < 0.5 || map[y][x] > 0.545) && x < length)
-				castle.draw(map, x, y);
+			if ((map[y][x] > 0.3 && map[y][x] != 3 && map[y][x] != 4) && (map[y][x] < 0.5 || map[y][x] > 0.545))
+				if (pn.noise(666 * t_x, 666 * t_y, 600) * 10 <= 1.3)
+					castle.draw(map, x, y);
 		}
 }
 

@@ -40,19 +40,19 @@ int HUD::getLength()
 
 void HUD::addToViewport(Player player, int& x, int& y)
 {
-	if (x == 0 && (y == 0 || y == 3))
+	if (x == 1 && (y == 1 || y == 4))
 	{
 		frame();
 		x += getLength();
 	}
 
-	if (x == 0 && y == 1)
+	if (x == 1 && y == 2)
 	{
 		healthBar(player);
 		x += getLength();
 	}
 
-	if (x == 0 && y == 2)
+	if (x == 1 && y == 3)
 	{
 		armorBar(player);
 		x += getLength();
