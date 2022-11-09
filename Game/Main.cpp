@@ -27,6 +27,12 @@ void getConsoleScreenSize(int& x, int& y)
     else
         printf("Error: %d\n", GetLastError());
 }
+//debug only
+void colors()
+{
+    for (int i = 0; i < 100; i++)
+        std::cout << "\x1b[" << i << "m" << (char)219 << ' ' << i << "\x1b[0m\n";
+}
 
 int main()
 {
@@ -41,7 +47,8 @@ int main()
 
     landscape.landscape();
     landscape.generator(seed, 0, 0);
-
+    landscape.enterTheDungeon(x, y);
+    exit(0);
     gameLoop()
     {
         render.draw(landscape, player);

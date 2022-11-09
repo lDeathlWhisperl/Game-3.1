@@ -50,7 +50,6 @@ void World::landscape()
 void World::generator(unsigned int seed, int x_index, int y_index)
 {
 	PerlinNoise pn(seed);
-	Castle castle;
 
 	for (int y = 0; y < width; y++)
 		for (int x = 0; x < length; x++)

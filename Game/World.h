@@ -9,6 +9,7 @@
 class World
 {
 private:
+	Castle castle;
 	int length, width;
 	double **map = new double*[width];
 
@@ -30,4 +31,9 @@ public:
 	int getLength();
 
 	int getWidth();
+
+	void enterTheDungeon(int x, int y)
+	{
+		castle.dungeon(x, y, length-17, width-8);
+	}
 };

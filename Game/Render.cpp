@@ -56,6 +56,16 @@ void Render::draw(World &world, Player &player)
 			bool player_coords = x == (world.getLength()-15) / 2 && y == (world.getWidth()-7) / 2;
 			hud.addToViewport(player, x, y);
 
+			//
+			if (player_coords && player.getLastPressedKey() == 32 && world.getMap(x, y) == 776)
+			{
+				system("cls");
+				world.enterTheDungeon(player.getPos_x(), player.getPos_y());
+				system("pause");
+				system("cls");
+			}
+			//
+
 			player.breakBase(x, y, player_coords);
 
 			if (player.placeBase(x, y, player_coords, do_once))

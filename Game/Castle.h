@@ -1,90 +1,109 @@
 #pragma once
 
+#include <vector>
+#include "Dungeon.h"
+
 class Castle
 {
-	int door = 776,
-		stone = 777,
+	int door   = 776,
+		stone  = 777,
 		window = 775;
 
 	int pos_x = 0, 
 		pos_y = 0;
 
-	void line_1(double **world, int &x, int &y)
+	double** world_copy;
+
+	void line_1(int x, int y)
 	{
 		pos_x -= 14;
 		if (pos_x < 0) pos_x = 0;
 
 		for (int i = pos_x; i <= x; i++)
-			world[y][i] = stone;
+			world_copy[y][i] = stone;
 
 		if (x - 7 >= 0)
-			world[y][x - 7] = door;
+			world_copy[y][x - 7] = door;
 	}
 
-	void line_2(double **world, int x)
+	void line_2(int x)
 	{
 		pos_y--;
 		if (pos_y < 0) pos_y = 0;
 
 		for (int i = x, count = 3; i >= pos_x; i--, count++)
 			if (count % 4 == 0)
-				world[pos_y][i] = window;
+				world_copy[pos_y][i] = window;
 			else
-				world[pos_y][i] = stone;
+				world_copy[pos_y][i] = stone;
 	}
 
-	void line_3(double **world, int x)
+	void line_3(int x)
 	{
 		pos_y--;
 		if (pos_y < 0) pos_y = 0;
 
 		for (int i = pos_x; i <= x; i++)
-			world[pos_y][i] = stone;
+			world_copy[pos_y][i] = stone;
 	}
 
-	void line_4(double **world, int x)
+	void line_4(int x)
 	{
 		pos_y--;
 		if (pos_y < 0) pos_y = 0;
 
 		for (int i = x, count = 1; i >= pos_x; count++, i--)
-			if (((count % 2 != 0 && count < 5) || (count % 2 != 0 && count > 11)) || (count > 4 && count < 12))
-				world[pos_y][i] = stone;
-
+			if ((count % 2 != 0) || (count >= 6 && count <= 10))
+				world_copy[pos_y][i] = stone;
 	}
 
-	void line_5(double **world, int x)
+	void line_5(int &x)
+	{
+		pos_y--;
+		if (pos_y < 0) pos_y = 0;
+		x -= 4;
+		if (x < 0) x = 0;
+
+		for (int i = x, count = 5; count < 12; count++, i--)
+			if (count == 6 || count == 10)
+				world_copy[pos_y][i] = window;
+			else
+				world_copy[pos_y][i] = stone;
+	}
+
+	void line_6(int x)
 	{
 		pos_y--;
 		if (pos_y < 0) pos_y = 0;
 
-		for (int i = x, count = 1; i >= pos_x; count++, i--)
-			if (count == 12)
-				break;
-			else if (count == 6 || count == 10)
-				world[pos_y][i] = window;
-			else if (count > 4)
-				world[pos_y][i] = stone;
+		for (int i = x, count = 5; count < 12; count++, i--)
+				world_copy[pos_y][i] = stone;
 	}
 
-	void line_6(double **world, int x)
+	void line_7(int x)
 	{
 		pos_y--;
 		if (pos_y < 0) pos_y = 0;
 
-		for (int i = x, count = 1; i >= pos_x; count++, i--)
-			if (count > 4 && count < 12)
-				world[pos_y][i] = stone;
+		for (int i = x, count = 5; count < 12; count++, i--)
+			if (count % 2 != 0)
+				world_copy[pos_y][i] = stone;
 	}
 
-	void line_7(double **world, int x)
+	bool isColapse()
 	{
-		pos_y--;
-		if (pos_y < 0) pos_y = 0;
+		int temp_x = pos_x - 15,
+			temp_y = pos_y - 7;
 
-		for (int i = x, count = 1; i >= pos_x; count++, i--)
-			if (count > 4 && count < 12 && count % 2 != 0)
-				world[pos_y][i] = stone;
+		if (temp_x < 0) temp_x = 0;
+		if (temp_y < 0) temp_y = 0;
+
+		for (int y = temp_y; y < pos_y; y++)
+			for (int x = temp_x; x < pos_x; x++)
+				if (world_copy[y][x] >= 775)
+					return true;
+				
+		return false;
 	}
 public:
 	void draw(double** world, int x, int y)
@@ -92,25 +111,36 @@ public:
 		pos_x = x;
 		pos_y = y;
 
+		world_copy = world;
+		if (isColapse()) return;
 		//
-		line_1(world, x, y);
+		line_1(x, y);
 		if (pos_y == 0) return;
 		//
-		line_2(world, x);
+		line_2(x);
 		if (pos_y == 0) return;
 		//
-		line_3(world, x);
+		line_3(x);
 		if (pos_y == 0) return;
 		//
-		line_4(world, x);
+		line_4(x);
 		if (pos_y == 0) return;
 		//
-		line_5(world, x);
+		line_5(x);
 		if (pos_y == 0) return;
 		//
-		line_6(world, x);
+		line_6(x);
 		if (pos_y == 0) return;
 		//
-		line_7(world, x);
+		line_7(x);
+	}
+
+	void dungeon(int player_x, int player_y, int width, int height)
+	{		
+		srand(player_x + player_y);
+		Dungeon dungeon(width, height);
+
+		dungeon.generate(2);
+		dungeon.draw();
 	}
 };

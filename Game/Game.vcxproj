@@ -151,6 +151,7 @@
     <ClInclude Include="Actor.h" />
     <ClInclude Include="Base.h" />
     <ClInclude Include="Castle.h" />
+    <ClInclude Include="Dungeon.h" />
     <ClInclude Include="HUD.h" />
     <ClInclude Include="Monsters.h" />
     <ClInclude Include="Perlin.h" />
