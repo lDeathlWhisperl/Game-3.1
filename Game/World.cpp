@@ -95,3 +95,31 @@ int World::getWidth()
 {
 	return width;
 }
+
+void World::enterTheDungeon(Player& player)
+{
+	Dungeon dungeon(length-17, width-8);
+	dungeon.generate(5);
+
+	int temp_x = player.getPos_x(),
+		temp_y = player.getPos_y();
+
+	player.setPos_x(0);
+	player.setPos_y(0);
+
+	while (true)
+	{
+		Render::draw_dungeon(dungeon,player);
+
+		player.controller();
+
+
+		if (player.getLastPressedKey() == 32)
+			break;
+		
+		Render::update();
+	}
+
+	player.setPos_x(temp_x);
+	player.setPos_y(temp_y);
+}

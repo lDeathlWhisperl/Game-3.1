@@ -3,8 +3,11 @@
 #include <list>
 #include <iostream>
 
+#include "Render.h"
 #include "Perlin.h"
 #include "Castle.h"
+#include "Player.h"
+#include "Dungeon.h"
 
 class World
 {
@@ -32,8 +35,5 @@ public:
 
 	int getWidth();
 
-	void enterTheDungeon(int x, int y)
-	{
-		castle.dungeon(x, y, length-17, width-8);
-	}
+	void enterTheDungeon(Player&);
 };

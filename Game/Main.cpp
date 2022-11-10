@@ -47,11 +47,13 @@ int main()
 
     landscape.landscape();
     landscape.generator(seed, 0, 0);
-    landscape.enterTheDungeon(x, y);
-    exit(0);
+
+    player.setPos_x(47);
+    player.setPos_y(-1);
+
     gameLoop()
     {
-        render.draw(landscape, player);
+        render.draw_world(landscape, player);
 
         player.controller();
         landscape.generator(seed, player.getPos_x(), player.getPos_y());
@@ -59,7 +61,7 @@ int main()
         if (!player.getStatus())
             game_over;
 
-        render.update();
+        Render::update();
     }
     return 0;
 }

@@ -7,11 +7,18 @@
 #include <iostream>
 #include <windows.h>
 
+class World;
+class Dungeon;
+
 class Render
 {
-	std::string paint(double);
-public:
-	void draw(World&, Player&);
+	static std::string paint_dungeon(int);
 
-	void update();
+	std::string paint_world(double);
+public:
+	void draw_world(World&, Player&);
+
+	static void draw_dungeon(Dungeon, Player&);
+
+	static void update();
 };

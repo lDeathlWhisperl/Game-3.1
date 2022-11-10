@@ -1,7 +1,6 @@
 #pragma once
 
-#include <vector>
-#include "Dungeon.h"
+#include "Player.h"
 
 class Castle
 {
@@ -133,14 +132,5 @@ public:
 		if (pos_y == 0) return;
 		//
 		line_7(x);
-	}
-
-	void dungeon(int player_x, int player_y, int width, int height)
-	{		
-		srand(player_x + player_y);
-		Dungeon dungeon(width, height);
-
-		dungeon.generate(2);
-		dungeon.draw();
 	}
 };

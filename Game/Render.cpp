@@ -11,7 +11,7 @@
 //90 - stone
 //33 - chest
 
-std::string Render::paint(double high)
+std::string Render::paint_world(double high)
 {
 	std::string res;
 	unsigned char tile = 219;
@@ -44,7 +44,45 @@ std::string Render::paint(double high)
 	return res;
 }
 
-void Render::draw(World &world, Player &player)
+std::string Render::paint_dungeon(int num)
+{
+	unsigned char tile = 219;
+	std::string res;
+	switch (num)
+	{
+	case 1:
+		res = "\x1b[90m";
+		break;
+	case 2:
+		res = "\x1b[97m";
+		break;
+	default:
+		res = "\x1b[30m";
+	}
+	res += tile;
+	res += "\x1b[0m";
+	return res;
+}
+
+
+void Render::draw_dungeon(Dungeon dungeon, Player& player)
+{
+	for (int y = 0; y < dungeon.getHeight(); y++)
+	{
+		for (int x = 0; x < dungeon.getWidth(); x++)
+		{
+			bool player_coords = (x == player.getPos_x() && y == player.getPos_y());
+
+			if (player_coords)
+				std::cout << player.showPlayer();
+			else
+				std::cout << paint_dungeon(dungeon.get(x, y));
+		}
+		std::cout << '\n';
+	}
+}
+
+void Render::draw_world(World &world, Player &player)
 {
 	HUD hud;
 	bool do_once = true;
@@ -60,7 +98,7 @@ void Render::draw(World &world, Player &player)
 			if (player_coords && player.getLastPressedKey() == 32 && world.getMap(x, y) == 776)
 			{
 				system("cls");
-				world.enterTheDungeon(player.getPos_x(), player.getPos_y());
+				world.enterTheDungeon(player);
 				system("pause");
 				system("cls");
 			}
@@ -77,7 +115,7 @@ void Render::draw(World &world, Player &player)
 			if (player_coords && world.getMap(x, y) != 2)
 				std::cout << player.showPlayer();
 			else
-				std::cout << paint(world.getMap(x, y));
+				std::cout << paint_world(world.getMap(x, y));
 		}
 		std::cout << '\n';
 	}
