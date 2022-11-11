@@ -53,7 +53,7 @@ private:
 	int d_width, d_height;
 	std::vector<int> d_data;
 	std::vector<Room> d_rooms;
-	bool out;
+	bool out = false;
 
 	void generatePassage(const Point&, const Point&);
 

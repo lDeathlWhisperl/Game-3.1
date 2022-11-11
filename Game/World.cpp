@@ -98,11 +98,14 @@ int World::getWidth()
 
 void World::enterTheDungeon(Player& player)
 {
+	srand(player.getPos_x() + player.getPos_y());
 	Dungeon dungeon(length - 17, width - 8);
 	dungeon.generate(5);
 
 	int temp_x = player.getPos_x(),
 		temp_y = player.getPos_y();
+
+
 
 	player.setPos_x(dungeon.getStart_x());
 	player.setPos_y(dungeon.getStart_y());
