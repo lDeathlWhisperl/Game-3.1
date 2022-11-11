@@ -7,7 +7,7 @@
 class Base : public Actor
 {
 public:
-	Base(int x, int y);
+	Base(int x, int y) : Actor(x, y) {};
 
 	void offset(char);
 

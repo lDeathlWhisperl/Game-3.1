@@ -1,44 +1,62 @@
 #include "Player.h"
 #include <algorithm>
 
+bool collision(int num)
+{
+    switch (num)
+    {
+    case 0:
+    case 2:
+    case 3:
+        return true;
+    default:
+        return false;
+    }
+}
+
 Player::Player()
 {
     character = '^';
 }
 
-void Player::controller()
+void Player::controller(int coll)
 {
     char ch = '\0';
-    if(_kbhit())
+    if (_kbhit())
         ch = _getch();
 
     switch (ch)
     {
     case w:
     case W:
-        pos_y--;
+        if (!collision(coll))
+            pos_y--;
     case ARROW_UP:
         character = '^';
         break;
     case a:
     case A:
-        pos_x--;
+        if (!collision(coll))
+            pos_x--;
     case ARROW_LEFT:
         character = '<';
         break;
     case s:
     case S:
-        pos_y++;
+        if (!collision(coll))
+            pos_y++;
     case ARROW_DOWN:
         character = 'V';
         break;
     case d:
     case D:
-        pos_x++;
+        if (!collision(coll))
+            pos_x++;
     case ARROW_RIGHT:
         character = '>';
         break;
     case 'x':
+        armor -= 5;
         getDamage(100);
     }
     lastPressedKey = ch;

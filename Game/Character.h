@@ -10,7 +10,8 @@ class Character : public Actor
 protected:
 	int HP = 25,
 		armor = 5,
-		strength = 0;
+		strength = 0,
+		max_HP = 25;
 
 	char character = '\0';
 
@@ -32,6 +33,11 @@ public:
 			status = dead;
 			character = 'X';
 		}
+	}
+
+	int getMaxHP()
+	{
+		return max_HP;
 	}
 
 	int getHP()

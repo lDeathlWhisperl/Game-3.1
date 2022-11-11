@@ -104,8 +104,14 @@ void World::enterTheDungeon(Player& player)
 	int temp_x = player.getPos_x(),
 		temp_y = player.getPos_y();
 
-	player.setPos_x(0);
-	player.setPos_y(0);
+	player.setPos_x(dungeon.getStart_x());
+	player.setPos_y(dungeon.getStart_y());
+
+	int collision[4][2] =
+	{
+		{0, 1}, {-1, 0},
+		{1, 0}, {0, -1}
+	};
 
 	while (true)
 	{
@@ -113,8 +119,7 @@ void World::enterTheDungeon(Player& player)
 
 		player.controller();
 
-
-		if (player.getLastPressedKey() == 32)
+		if (!player.getStatus() || dungeon.isExit())
 			break;
 		
 		Render::update();

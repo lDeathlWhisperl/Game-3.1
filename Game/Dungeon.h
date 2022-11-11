@@ -37,21 +37,23 @@ public:
 
 	int get(int, int);
 
-	int getWidth()
-	{
-		return d_width;
-	}
+	int getWidth();
 
-	int getHeight()
-	{
-		return d_height;
-	}
+	int getHeight();
+
+	int getStart_x();
+
+	int getStart_y();
+
+	bool isExit();
+
+	void Exit();
 
 private:
 	int d_width, d_height;
 	std::vector<int> d_data;
 	std::vector<Room> d_rooms;
-	std::vector<std::vector<int>> temp;
+	bool exit = false;
 
 	void generatePassage(const Point&, const Point&);
 

@@ -42,18 +42,15 @@ int main()
     getConsoleScreenSize(x, y);
 
     World landscape(x+17, y+8);
-    Render render;
     Player player;
 
     landscape.landscape();
     landscape.generator(seed, 0, 0);
-
-    player.setPos_x(47);
-    player.setPos_y(-1);
-
+    //colors();
+    //exit(0);
     gameLoop()
     {
-        render.draw_world(landscape, player);
+        Render::draw_world(landscape, player);
 
         player.controller();
         landscape.generator(seed, player.getPos_x(), player.getPos_y());

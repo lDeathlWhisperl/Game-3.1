@@ -14,9 +14,9 @@ class Render
 {
 	static std::string paint_dungeon(int);
 
-	std::string paint_world(double);
+	static std::string paint_world(double);
 public:
-	void draw_world(World&, Player&);
+	static void draw_world(World&, Player&);
 
 	static void draw_dungeon(Dungeon, Player&);
 

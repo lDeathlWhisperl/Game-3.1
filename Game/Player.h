@@ -42,25 +42,16 @@ class Player : public Character
 public:
     Player();
 
-    void controller();
+    bool placeBase(int, int, bool, bool&);
 
-    char showPlayer();
+    void breakBase(int, int, bool);
 
     void getDamage(int);
 
+    void controller(int = -100);
+
+    char showPlayer();
+
     char getLastPressedKey();
 
-    bool placeBase(int, int, bool, bool&);
-
-    void breakBase(int , int , bool);
-
-    void isGettingDamage(bool is)
-    {
-        isDamaged = is;
-    }
-
-    bool isGettingDamage()
-    {
-        return isDamaged;
-    }
 };

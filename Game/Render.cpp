@@ -51,10 +51,13 @@ std::string Render::paint_dungeon(int num)
 	switch (num)
 	{
 	case 1:
-		res = "\x1b[90m";
+		res = "\x1b[96m";
 		break;
 	case 2:
-		res = "\x1b[97m";
+		res = "\x1b[90m";
+		break;
+	case 3:
+		res = "\x1b[33m";
 		break;
 	default:
 		res = "\x1b[30m";
@@ -64,14 +67,17 @@ std::string Render::paint_dungeon(int num)
 	return res;
 }
 
-
+ 
 void Render::draw_dungeon(Dungeon dungeon, Player& player)
 {
+	HUD hud;
+
 	for (int y = 0; y < dungeon.getHeight(); y++)
 	{
 		for (int x = 0; x < dungeon.getWidth(); x++)
 		{
 			bool player_coords = (x == player.getPos_x() && y == player.getPos_y());
+			hud.addToViewport(player, x, y, 1, 1);
 
 			if (player_coords)
 				std::cout << player.showPlayer();
@@ -92,14 +98,13 @@ void Render::draw_world(World &world, Player &player)
 		for (int x = 1; x < world.getLength()-16; x++)
 		{
 			bool player_coords = x == (world.getLength()-15) / 2 && y == (world.getWidth()-7) / 2;
-			hud.addToViewport(player, x, y);
+			hud.addToViewport(player, x, y, 2, 2);
 
 			//
 			if (player_coords && player.getLastPressedKey() == 32 && world.getMap(x, y) == 776)
 			{
 				system("cls");
 				world.enterTheDungeon(player);
-				system("pause");
 				system("cls");
 			}
 			//

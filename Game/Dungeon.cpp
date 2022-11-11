@@ -33,16 +33,8 @@ void Dungeon::generate(int roomsCount) {
 			d_data[(room.x + x) + (room.y + y) * d_width] = 1;
 		}
 	}
-	//
+	
 	Point start, end;
-
-	start.x = d_rooms[0].x;
-	start.y = d_rooms[0].y;
-	start.cost = 0;
-
-	end.x = d_rooms[d_rooms.size() - 1].x;
-	end.y = d_rooms[d_rooms.size() - 1].y;
-
 
 	for (int i = 0; i < d_rooms.size() - 1; i++)
 	{
@@ -53,19 +45,20 @@ void Dungeon::generate(int roomsCount) {
 		end.y = d_rooms[i + 1].y + d_rooms[i + 1].height / 2;
 		generatePassage(start, end);
 	}
-	generateWalls();
 
-	for(int y = 0; y < d_height; y++)
-	{
-		temp.push_back(std::vector<int>());
-		for (int x = 0; x < d_width; x++)
-			temp[y].push_back(d_data[x + y * d_width]);
-	}
+	int x = d_rooms[0].x + d_rooms[0].width / 2,
+		y = d_rooms[0].y - 1;
+
+	d_data[x + y * d_width] = 1;
+	y--;
+	d_data[x + y * d_width] = 3;
+
+	generateWalls();
 }
 
 int Dungeon::get(int x, int y)
 {
-	return temp[y][x];
+	return d_data[x + y * d_width];
 }
 
 void Dungeon::generatePassage(const Point& start, const Point& finish)
@@ -84,17 +77,53 @@ void Dungeon::generatePassage(const Point& start, const Point& finish)
 }
 
 void Dungeon::generateWalls() {
-	static const int offsets[8][2] = {
+	static const int offsets[8][2] = 
+	{
 		{-1,-1}, { 0,-1}, { 1,-1}, { 1, 0},
 		{ 1, 1}, { 0, 1}, {-1, 1}, {-1, 0},
 	};
 
-	for (int x = 1; x < d_width - 1; ++x) for (int y = 1; y < d_height - 1; ++y) {
-		if (d_data[x + y * d_width] == 0) for (int i = 0; i < 8; ++i) {
-			if (d_data[(x + offsets[i][0]) + (y + offsets[i][1]) * d_width] == 1) {
-				d_data[x + y * d_width] = 2;
-				break;
-			}
-		}
-	}
+	for (int x = 1; x < d_width - 1; ++x)
+		for (int y = 1; y < d_height - 1; ++y)
+			if (d_data[x + y * d_width] == 0)
+				for (int i = 0; i < 8; ++i)
+					if (d_data[(x + offsets[i][0]) + (y + offsets[i][1]) * d_width] == 1)
+					{
+						d_data[x + y * d_width] = 2;
+						break;
+					}
+}
+
+int Dungeon::getHeight()
+{
+	return d_height;
+}
+
+int Dungeon::getWidth()
+{
+	return d_width;
+}
+
+int Dungeon::getStart_x()
+{
+	if (!d_rooms.empty())
+		return d_rooms[0].x + d_rooms[0].width / 2;
+	return 0;
+}
+
+int Dungeon::getStart_y()
+{
+	if (!d_rooms.empty())
+		return d_rooms[0].y - 1;
+	return 0;
+}
+
+bool Dungeon::isExit()
+{
+	return exit;
+};
+
+void Dungeon::Exit()
+{
+	exit = true;
 }

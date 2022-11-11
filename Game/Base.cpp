@@ -1,11 +1,5 @@
 #include "Base.h"
 
-Base::Base(int x, int y)
-{
-	pos_x = x;
-	pos_y = y;
-}
-
 void Base::offset(char pressedKey)
 {
 	switch (pressedKey)

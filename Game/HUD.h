@@ -2,21 +2,21 @@
 
 #include <iostream>
 
-#include "Player.h"
+#include "Character.h"
 
 class HUD
 {
-	int length = 27;
+	int length = 0;
 
 	void frame();
 
-	void healthBar(Player);
+	void healthBar(Character);
 
-	void armorBar(Player);
+	void armorBar(Character);
 
 public:
 
 	int getLength();
 
-	void addToViewport(Player, int&, int&);
+	void addToViewport(Character, int&, int&, int, int);
 };
