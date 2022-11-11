@@ -1,13 +1,12 @@
 #include "Player.h"
 #include <algorithm>
 
-bool collision(int num)
+bool exception(int num)
 {
     switch (num)
     {
     case 0:
     case 2:
-    case 3:
         return true;
     default:
         return false;
@@ -19,7 +18,7 @@ Player::Player()
     character = '^';
 }
 
-void Player::controller(int coll)
+void Player::controller()
 {
     char ch = '\0';
     if (_kbhit())
@@ -29,28 +28,28 @@ void Player::controller(int coll)
     {
     case w:
     case W:
-        if (!collision(coll))
+        if (!exception(top_collision_index))
             pos_y--;
     case ARROW_UP:
         character = '^';
         break;
     case a:
     case A:
-        if (!collision(coll))
+        if (!exception(left_collision_index))
             pos_x--;
     case ARROW_LEFT:
         character = '<';
         break;
     case s:
     case S:
-        if (!collision(coll))
+        if (!exception(bottom_collision_index))
             pos_y++;
     case ARROW_DOWN:
         character = 'V';
         break;
     case d:
     case D:
-        if (!collision(coll))
+        if (!exception(right_collision_index))
             pos_x++;
     case ARROW_RIGHT:
         character = '>';
@@ -59,7 +58,12 @@ void Player::controller(int coll)
         armor -= 5;
         getDamage(100);
     }
+
     lastPressedKey = ch;
+    top_collision_index    = -1;
+    left_collision_index   = -1;
+    right_collision_index  = -1;
+    bottom_collision_index = -1;
 }
 
 char Player::showPlayer()

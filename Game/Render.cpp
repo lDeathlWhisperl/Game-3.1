@@ -68,7 +68,7 @@ std::string Render::paint_dungeon(int num)
 }
 
  
-void Render::draw_dungeon(Dungeon dungeon, Player& player)
+void Render::draw_dungeon(Dungeon& dungeon, Player& player)
 {
 	HUD hud;
 
@@ -78,6 +78,9 @@ void Render::draw_dungeon(Dungeon dungeon, Player& player)
 		{
 			bool player_coords = (x == player.getPos_x() && y == player.getPos_y());
 			hud.addToViewport(player, x, y, 1, 1);
+
+			if (player_coords && dungeon.get(x, y) == 3 && player.getLastPressedKey() == 32)
+				dungeon.Exit();
 
 			if (player_coords)
 				std::cout << player.showPlayer();

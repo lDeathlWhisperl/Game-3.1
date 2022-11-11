@@ -18,7 +18,7 @@ class Render
 public:
 	static void draw_world(World&, Player&);
 
-	static void draw_dungeon(Dungeon, Player&);
+	static void draw_dungeon(Dungeon&, Player&);
 
 	static void update();
 };

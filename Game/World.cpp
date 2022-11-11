@@ -9,7 +9,7 @@ World::~World()
 
 void World::plantTree(int x, int y)
 {
-	if(map[y - 1][x] != 776)map[y - 1][x] = 2;
+	if (map[y - 1][x] != 776)map[y - 1][x] = 2;
 	map[y][x - 1] = 2;
 	map[y][x] = 2;
 }
@@ -73,7 +73,7 @@ void World::generator(unsigned int seed, int x_index, int y_index)
 			if (map[y][x] == 3 && x > 0 && x < length - 1 && y > 0 && y < width - 1)
 				if (pn.noise(555 * t_x, 555 * t_y, 600) >= 0.38 && pn.noise(555 * t_x, 555 * t_y, 600) <= 0.45)
 					plantCactus(x, y);
-			
+
 			//spawn castle
 			if ((map[y][x] > 0.3 && map[y][x] != 3 && map[y][x] != 4) && (map[y][x] < 0.5 || map[y][x] > 0.545))
 				if (pn.noise(666 * t_x, 666 * t_y, 600) * 10 <= 1.3)
@@ -98,7 +98,7 @@ int World::getWidth()
 
 void World::enterTheDungeon(Player& player)
 {
-	Dungeon dungeon(length-17, width-8);
+	Dungeon dungeon(length - 17, width - 8);
 	dungeon.generate(5);
 
 	int temp_x = player.getPos_x(),
@@ -107,21 +107,21 @@ void World::enterTheDungeon(Player& player)
 	player.setPos_x(dungeon.getStart_x());
 	player.setPos_y(dungeon.getStart_y());
 
-	int collision[4][2] =
-	{
-		{0, 1}, {-1, 0},
-		{1, 0}, {0, -1}
-	};
-
 	while (true)
 	{
-		Render::draw_dungeon(dungeon,player);
+		Render::draw_dungeon(dungeon, player);
 
+		int top = dungeon.get(player.getPos_x(), player.getPos_y() - 1),
+			left = dungeon.get(player.getPos_x() - 1, player.getPos_y()),
+			right = dungeon.get(player.getPos_x() + 1, player.getPos_y()),
+			bottom = dungeon.get(player.getPos_x(), player.getPos_y() + 1);
+
+		player.collision(top, left, right, bottom);
 		player.controller();
 
 		if (!player.getStatus() || dungeon.isExit())
 			break;
-		
+
 		Render::update();
 	}
 

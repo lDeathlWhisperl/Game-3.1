@@ -55,7 +55,7 @@ public:
 		return strength;
 	}
 
-	int getStatus()
+	bool getStatus()
 	{
 		return status;
 	}

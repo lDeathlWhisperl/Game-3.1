@@ -28,12 +28,13 @@ void Dungeon::generate(int roomsCount) {
 
 	d_data.assign(d_width * d_height, 0);
 
-	for (const Room& room : d_rooms) {
-		for (int x = 0; x < room.width; ++x) for (int y = 0; y < room.height; ++y) {
-			d_data[(room.x + x) + (room.y + y) * d_width] = 1;
-		}
-	}
+	for (const Room& room : d_rooms)
+		for (int x = 0; x < room.width; ++x)
+			for (int y = 0; y < room.height; ++y)
+				d_data[(room.x + x) + (room.y + y) * d_width] = 1;
+		
 	
+
 	Point start, end;
 
 	for (int i = 0; i < d_rooms.size() - 1; i++)
@@ -77,7 +78,7 @@ void Dungeon::generatePassage(const Point& start, const Point& finish)
 }
 
 void Dungeon::generateWalls() {
-	static const int offsets[8][2] = 
+	static const int offsets[8][2] =
 	{
 		{-1,-1}, { 0,-1}, { 1,-1}, { 1, 0},
 		{ 1, 1}, { 0, 1}, {-1, 1}, {-1, 0},
@@ -120,10 +121,10 @@ int Dungeon::getStart_y()
 
 bool Dungeon::isExit()
 {
-	return exit;
+	return out;
 };
 
 void Dungeon::Exit()
 {
-	exit = true;
+	out = true;
 }

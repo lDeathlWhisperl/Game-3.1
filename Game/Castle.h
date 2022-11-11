@@ -11,7 +11,7 @@ class Castle
 	int pos_x = 0, 
 		pos_y = 0;
 
-	double** world_copy;
+	double** world_copy = {};
 
 	void line_1(int x, int y)
 	{
