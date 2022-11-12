@@ -8,16 +8,21 @@ constexpr auto alive = true;
 class Character : public Actor
 {
 protected:
-	int HP = 25,
-		armor = 5,
+	int HP       = 25,
+		armor    = 5,
 		strength = 0,
-		max_HP = 25;
+		max_HP   = 25,
+		level    = 0;
 
 	char character = '\0';
 
 	bool status = alive;
 
 public:
+	Character() {}
+
+	Character(int hp, int arm, int str) : HP(hp), armor(arm), strength(str), max_HP(hp) {}
+
 	void getDamage(int dmg)
 	{
 		if (armor > 0)
@@ -50,7 +55,7 @@ public:
 		return armor;
 	}
 
-	int getStrength()
+	int attack()
 	{
 		return strength;
 	}

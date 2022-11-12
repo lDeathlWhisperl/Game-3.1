@@ -13,6 +13,21 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Файлы заголовков\Monster type">
+      <UniqueIdentifier>{7be06b9e-eaab-4c9e-96fc-735c142f3ff0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Monster">
+      <UniqueIdentifier>{4694a0eb-ae0b-4914-a614-27278a59f11d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Monster\Undead">
+      <UniqueIdentifier>{4fbc3504-8258-4022-9631-26155a1f4857}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Monster\Demon">
+      <UniqueIdentifier>{33486ea4-d724-441e-8a1c-b0feec59d357}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Monster\Spirit">
+      <UniqueIdentifier>{c568ede0-d42d-42f1-85c1-73993ea0d76f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -33,13 +48,13 @@
     <ClCompile Include="Base.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="AStar.cpp">
-      <Filter>Файлы ресурсов</Filter>
-    </ClCompile>
     <ClCompile Include="Dungeon.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="World.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="AStar.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
@@ -65,12 +80,6 @@
     <ClInclude Include="Character.h">
       <Filter>Файлы ресурсов</Filter>
     </ClInclude>
-    <ClInclude Include="Units.h">
-      <Filter>Файлы ресурсов</Filter>
-    </ClInclude>
-    <ClInclude Include="Monsters.h">
-      <Filter>Файлы ресурсов</Filter>
-    </ClInclude>
     <ClInclude Include="Actor.h">
       <Filter>Файлы ресурсов</Filter>
     </ClInclude>
@@ -81,7 +90,58 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="AStar.hpp">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="AI.h">
       <Filter>Файлы ресурсов</Filter>
+    </ClInclude>
+    <ClInclude Include="Undead.h">
+      <Filter>Файлы заголовков\Monster type</Filter>
+    </ClInclude>
+    <ClInclude Include="Demon.h">
+      <Filter>Файлы заголовков\Monster type</Filter>
+    </ClInclude>
+    <ClInclude Include="Spirit.h">
+      <Filter>Файлы заголовков\Monster type</Filter>
+    </ClInclude>
+    <ClInclude Include="Skeleton.h">
+      <Filter>Файлы заголовков\Monster\Undead</Filter>
+    </ClInclude>
+    <ClInclude Include="Zombie.h">
+      <Filter>Файлы заголовков\Monster\Undead</Filter>
+    </ClInclude>
+    <ClInclude Include="Draugr.h">
+      <Filter>Файлы заголовков\Monster\Undead</Filter>
+    </ClInclude>
+    <ClInclude Include="Rang_1.h">
+      <Filter>Файлы заголовков\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="Rang_2.h">
+      <Filter>Файлы заголовков\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="Rang_3.h">
+      <Filter>Файлы заголовков\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="Spawner.h">
+      <Filter>Файлы заголовков\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="Imp.h">
+      <Filter>Файлы заголовков\Monster\Demon</Filter>
+    </ClInclude>
+    <ClInclude Include="Possessed.h">
+      <Filter>Файлы заголовков\Monster\Demon</Filter>
+    </ClInclude>
+    <ClInclude Include="Mancubus.h">
+      <Filter>Файлы заголовков\Monster\Demon</Filter>
+    </ClInclude>
+    <ClInclude Include="Mummy.h">
+      <Filter>Файлы заголовков\Monster\Spirit</Filter>
+    </ClInclude>
+    <ClInclude Include="Gin.h">
+      <Filter>Файлы заголовков\Monster\Spirit</Filter>
+    </ClInclude>
+    <ClInclude Include="Ghoul.h">
+      <Filter>Файлы заголовков\Monster\Spirit</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -105,8 +105,6 @@ void World::enterTheDungeon(Player& player)
 	int temp_x = player.getPos_x(),
 		temp_y = player.getPos_y();
 
-
-
 	player.setPos_x(dungeon.getStart_x());
 	player.setPos_y(dungeon.getStart_y());
 

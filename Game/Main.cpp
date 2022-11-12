@@ -30,7 +30,7 @@ void getConsoleScreenSize(int& x, int& y)
 //debug only
 void colors()
 {
-    for (int i = 0; i < 100; i++)
+    for (int i = 1; i < 110; i++)
         std::cout << "\x1b[" << i << "m" << (char)219 << ' ' << i << "\x1b[0m\n";
 }
 

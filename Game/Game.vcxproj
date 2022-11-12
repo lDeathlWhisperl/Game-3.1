@@ -151,18 +151,33 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actor.h" />
+    <ClInclude Include="AI.h" />
     <ClInclude Include="AStar.hpp" />
     <ClInclude Include="Base.h" />
     <ClInclude Include="Castle.h" />
+    <ClInclude Include="Demon.h" />
+    <ClInclude Include="Draugr.h" />
     <ClInclude Include="Dungeon.h" />
+    <ClInclude Include="Ghoul.h" />
+    <ClInclude Include="Gin.h" />
     <ClInclude Include="HUD.h" />
-    <ClInclude Include="Monsters.h" />
+    <ClInclude Include="Imp.h" />
+    <ClInclude Include="Mancubus.h" />
+    <ClInclude Include="Mummy.h" />
     <ClInclude Include="Perlin.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="Possessed.h" />
+    <ClInclude Include="Rang_1.h" />
+    <ClInclude Include="Rang_2.h" />
+    <ClInclude Include="Rang_3.h" />
     <ClInclude Include="Render.h" />
-    <ClInclude Include="Units.h" />
+    <ClInclude Include="Skeleton.h" />
+    <ClInclude Include="Spawner.h" />
+    <ClInclude Include="Spirit.h" />
+    <ClInclude Include="Undead.h" />
     <ClInclude Include="World.h" />
+    <ClInclude Include="Zombie.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="log.txt" />
