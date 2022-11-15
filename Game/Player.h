@@ -12,10 +12,6 @@ class Player : public Character
     char lastPressedKey = '\0';
     std::vector<Base> base;
     bool isDamaged = false;
-    int top_collision_index   = -1,
-        left_collision_index  = -1,
-        right_collision_index = -1,
-        bottom_collision_index = -1;
 
     enum buttons
     {
@@ -48,14 +44,7 @@ public:
 
     bool placeBase(int, int, bool, bool&);
 
-    void collision(int top, int left, int right, int bottom)
-    {
-        top_collision_index   = top;
-        left_collision_index  = left;
-        right_collision_index = right;
-        bottom_collision_index = bottom;
-
-    }
+    void controller(int, int, int, int);
 
     void breakBase(int, int, bool);
 

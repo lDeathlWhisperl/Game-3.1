@@ -143,6 +143,9 @@
     <ClInclude Include="Ghoul.h">
       <Filter>Файлы заголовков\Monster\Spirit</Filter>
     </ClInclude>
+    <ClInclude Include="Monster.h">
+      <Filter>Файлы заголовков\Monster</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="log.txt" />

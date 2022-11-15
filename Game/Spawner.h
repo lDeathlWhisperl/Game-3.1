@@ -19,14 +19,3 @@ public:
 	virtual Demon* spawn_demon() = 0;
 	virtual Spirit* spawn_spirit() = 0;
 };
-
-void spawn(Spawner &spawn)
-{
-	Undead* undead = spawn.spawn_undead();
-	Demon* demon = spawn.spawn_demon();
-	Spirit* spirit = spawn.spawn_spirit();
-	undead->draw();
-	demon->draw();
-	spirit->draw();
-	delete undead;
-};

@@ -10,13 +10,13 @@ class HUD
 
 	void frame();
 
-	void healthBar(Character);
+	void healthBar(Character*);
 
-	void armorBar(Character);
+	void armorBar(Character*);
 
 public:
 
 	int getLength();
 
-	void addToViewport(Character, int&, int&, int, int);
+	void addToViewport(Character*, int&, int&, int, int);
 };

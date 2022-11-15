@@ -1,4 +1,7 @@
 #include "World.h"
+#include "Monster.h"
+
+
 
 World::~World()
 {
@@ -108,20 +111,28 @@ void World::enterTheDungeon(Player& player)
 	player.setPos_x(dungeon.getStart_x());
 	player.setPos_y(dungeon.getStart_y());
 
+	AI *monster_1 = spawn(getRandomNumber(1, 3), getRandomNumber(1, 2)),
+	   *monster_2 = spawn(getRandomNumber(1, 3), getRandomNumber(1, 2)),
+	   *monster_3 = spawn(getRandomNumber(1, 3), getRandomNumber(1, 2)),
+	   *monster_4 = spawn(getRandomNumber(1, 3), getRandomNumber(1, 2));
+
+	monster_1->draw();
+	monster_2->draw();
+	monster_3->draw();
+	monster_4->draw();
+	system("pause");
 	while (true)
 	{
 		Render::draw_dungeon(dungeon, player);
 
-		int top = dungeon.get(player.getPos_x(), player.getPos_y() - 1),
-			left = dungeon.get(player.getPos_x() - 1, player.getPos_y()),
-			right = dungeon.get(player.getPos_x() + 1, player.getPos_y()),
+		int top    = dungeon.get(player.getPos_x(), player.getPos_y() - 1),
+			left   = dungeon.get(player.getPos_x() - 1, player.getPos_y()),
+			right  = dungeon.get(player.getPos_x() + 1, player.getPos_y()),
 			bottom = dungeon.get(player.getPos_x(), player.getPos_y() + 1);
 
-		player.collision(top, left, right, bottom);
-		player.controller();
+		player.controller(top, left, right, bottom);
 
-		if (!player.getStatus() || dungeon.isExit())
-			break;
+		if (!player.getStatus() || dungeon.isExit()) break;
 
 		Render::update();
 	}

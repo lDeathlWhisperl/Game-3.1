@@ -163,6 +163,7 @@
     <ClInclude Include="HUD.h" />
     <ClInclude Include="Imp.h" />
     <ClInclude Include="Mancubus.h" />
+    <ClInclude Include="Monster.h" />
     <ClInclude Include="Mummy.h" />
     <ClInclude Include="Perlin.h" />
     <ClInclude Include="Character.h" />

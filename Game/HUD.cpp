@@ -6,12 +6,12 @@ void HUD::frame()
 		std::cout << (unsigned char)219;
 }
 
-void HUD::healthBar(Character character)
+void HUD::healthBar(Character* character)
 {
 	std::cout << (unsigned char)219;
 
 	for (int i = 1; i < length - 1; i++)
-		if (i <= character.getHP())
+		if (i <= character->getHP())
 			std::cout << "\x1b[31m" << (unsigned char)219 << "\x1b[0m";
 		else
 			std::cout << ' ';
@@ -19,12 +19,12 @@ void HUD::healthBar(Character character)
 	std::cout << (unsigned char)219;
 }
 
-void HUD::armorBar(Character character)
+void HUD::armorBar(Character* character)
 {
 	std::cout << (unsigned char)219;
 
 	for (int i = 1; i < length - 1; i++)
-		if (i <= character.getArmor())
+		if (i <= character->getArmor())
 			std::cout << "\x1b[32m" << (unsigned char)219 << "\x1b[0m";
 		else
 			std::cout << (unsigned char)219;
@@ -38,9 +38,9 @@ int HUD::getLength()
 	return length;
 }
 
-void HUD::addToViewport(Character character, int& x, int& y, int pos_x, int pos_y)
+void HUD::addToViewport(Character* character, int& x, int& y, int pos_x, int pos_y)
 {
-	length = character.getMaxHP() + 2;
+	length = character->getMaxHP() + 2;
 	if (x == pos_x && (y == pos_y || y == pos_y + 3))
 	{
 		frame();

@@ -18,7 +18,7 @@ Player::Player()
     character = '^';
 }
 
-void Player::controller()
+void Player::controller(int top, int left, int right, int bottom)
 {
     char ch = '\0';
     if (_kbhit())
@@ -28,28 +28,28 @@ void Player::controller()
     {
     case w:
     case W:
-        if (!exception(top_collision_index))
+        if (!exception(top))
             pos_y--;
     case ARROW_UP:
         character = '^';
         break;
     case a:
     case A:
-        if (!exception(left_collision_index))
+        if (!exception(left))
             pos_x--;
     case ARROW_LEFT:
         character = '<';
         break;
     case s:
     case S:
-        if (!exception(bottom_collision_index))
+        if (!exception(bottom))
             pos_y++;
     case ARROW_DOWN:
         character = 'V';
         break;
     case d:
     case D:
-        if (!exception(right_collision_index))
+        if (!exception(right))
             pos_x++;
     case ARROW_RIGHT:
         character = '>';
@@ -60,10 +60,46 @@ void Player::controller()
     }
 
     lastPressedKey = ch;
-    top_collision_index    = -1;
-    left_collision_index   = -1;
-    right_collision_index  = -1;
-    bottom_collision_index = -1;
+}
+
+void Player::controller()
+{
+    char ch = '\0';
+    if (_kbhit())
+        ch = _getch();
+
+    switch (ch)
+    {
+    case w:
+    case W:
+            pos_y--;
+    case ARROW_UP:
+        character = '^';
+        break;
+    case a:
+    case A:
+            pos_x--;
+    case ARROW_LEFT:
+        character = '<';
+        break;
+    case s:
+    case S:
+            pos_y++;
+    case ARROW_DOWN:
+        character = 'V';
+        break;
+    case d:
+    case D:
+            pos_x++;
+    case ARROW_RIGHT:
+        character = '>';
+        break;
+    case 'x':
+        armor -= 5;
+        getDamage(100);
+    }
+
+    lastPressedKey = ch;
 }
 
 char Player::showPlayer()

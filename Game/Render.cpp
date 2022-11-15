@@ -77,7 +77,7 @@ void Render::draw_dungeon(Dungeon& dungeon, Player& player)
 		for (int x = 0; x < dungeon.getWidth(); x++)
 		{
 			bool player_coords = (x == player.getPos_x() && y == player.getPos_y());
-			hud.addToViewport(player, x, y, 1, 1);
+			hud.addToViewport(&player, x, y, 1, 1);
 
 			if (player_coords && dungeon.get(x, y) == 3 && player.getLastPressedKey() == 32)
 				dungeon.Exit();
@@ -101,7 +101,7 @@ void Render::draw_world(World &world, Player &player)
 		for (int x = 1; x < world.getLength()-16; x++)
 		{
 			bool player_coords = x == (world.getLength()-15) / 2 && y == (world.getWidth()-7) / 2;
-			hud.addToViewport(player, x, y, 2, 2);
+			hud.addToViewport(&player, x, y, 2, 2);
 
 			//
 			if (player_coords && player.getLastPressedKey() == 32 && world.getMap(x, y) == 776)
