@@ -1,7 +1,4 @@
 #include "World.h"
-#include "Monster.h"
-
-
 
 World::~World()
 {
@@ -97,46 +94,4 @@ int World::getLength()
 int World::getWidth()
 {
 	return width;
-}
-
-void World::enterTheDungeon(Player& player)
-{
-	srand(player.getPos_x() + player.getPos_y());
-	Dungeon dungeon(length - 17, width - 8);
-	dungeon.generate(5);
-
-	int temp_x = player.getPos_x(),
-		temp_y = player.getPos_y();
-
-	player.setPos_x(dungeon.getStart_x());
-	player.setPos_y(dungeon.getStart_y());
-
-	AI *monster_1 = spawn(getRandomNumber(1, 3), getRandomNumber(1, 2)),
-	   *monster_2 = spawn(getRandomNumber(1, 3), getRandomNumber(1, 2)),
-	   *monster_3 = spawn(getRandomNumber(1, 3), getRandomNumber(1, 2)),
-	   *monster_4 = spawn(getRandomNumber(1, 3), getRandomNumber(1, 2));
-
-	monster_1->draw();
-	monster_2->draw();
-	monster_3->draw();
-	monster_4->draw();
-	system("pause");
-	while (true)
-	{
-		Render::draw_dungeon(dungeon, player);
-
-		int top    = dungeon.get(player.getPos_x(), player.getPos_y() - 1),
-			left   = dungeon.get(player.getPos_x() - 1, player.getPos_y()),
-			right  = dungeon.get(player.getPos_x() + 1, player.getPos_y()),
-			bottom = dungeon.get(player.getPos_x(), player.getPos_y() + 1);
-
-		player.controller(top, left, right, bottom);
-
-		if (!player.getStatus() || dungeon.isExit()) break;
-
-		Render::update();
-	}
-
-	player.setPos_x(temp_x);
-	player.setPos_y(temp_y);
 }

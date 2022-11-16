@@ -67,6 +67,38 @@ std::string Render::paint_dungeon(int num)
 	return res;
 }
 
+void Render::enterTheDungeon(Player& player, int length, int width)
+{
+	srand(player.getPos_x() + player.getPos_y());
+	Dungeon dungeon(length - 17, width - 8);
+	dungeon.generate(5);
+
+	int temp_x = player.getPos_x(),
+		temp_y = player.getPos_y();
+
+	player.setPos_x(dungeon.spawn_x());
+	player.setPos_y(dungeon.spawn_y());
+
+	while (true)
+	{
+		Render::draw_dungeon(dungeon, player);
+
+		int top = dungeon.get(player.getPos_x(), player.getPos_y() - 1),
+			left = dungeon.get(player.getPos_x() - 1, player.getPos_y()),
+			right = dungeon.get(player.getPos_x() + 1, player.getPos_y()),
+			bottom = dungeon.get(player.getPos_x(), player.getPos_y() + 1);
+
+		player.controller(top, left, right, bottom);
+
+		if (!player.getStatus() || dungeon.isExit()) break;
+
+		Render::update();
+	}
+
+	player.setPos_x(temp_x);
+	player.setPos_y(temp_y);
+}
+
  
 void Render::draw_dungeon(Dungeon& dungeon, Player& player)
 {
@@ -77,14 +109,22 @@ void Render::draw_dungeon(Dungeon& dungeon, Player& player)
 		for (int x = 0; x < dungeon.getWidth(); x++)
 		{
 			bool player_coords = (x == player.getPos_x() && y == player.getPos_y());
+			bool skip = true;
 			hud.addToViewport(&player, x, y, 1, 1);
 
 			if (player_coords && dungeon.get(x, y) == 3 && player.getLastPressedKey() == 32)
 				dungeon.Exit();
 
-			if (player_coords)
+			for (int i = 0; i < 8; i++)
+				if (dungeon.monsters[i]->getPos_x() == x && dungeon.monsters[i]->getPos_y() == y)
+				{
+					dungeon.monsters[i]->draw();
+					skip = false;
+				}
+
+			if (player_coords && skip)
 				std::cout << player.showPlayer();
-			else
+			else if (skip)
 				std::cout << paint_dungeon(dungeon.get(x, y));
 		}
 		std::cout << '\n';
@@ -103,14 +143,12 @@ void Render::draw_world(World &world, Player &player)
 			bool player_coords = x == (world.getLength()-15) / 2 && y == (world.getWidth()-7) / 2;
 			hud.addToViewport(&player, x, y, 2, 2);
 
-			//
 			if (player_coords && player.getLastPressedKey() == 32 && world.getMap(x, y) == 776)
 			{
 				system("cls");
-				world.enterTheDungeon(player);
+				enterTheDungeon(player, world.getLength(), world.getWidth());
 				system("cls");
 			}
-			//
 
 			player.breakBase(x, y, player_coords);
 

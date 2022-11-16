@@ -1,10 +1,8 @@
 #pragma once
 
-#include <vector>
 #include <queue>
-#include <iostream>
 
-#include "AStar.hpp"
+#include "Monster.h"
 
 struct Point {
 	int x, y, cost;
@@ -41,14 +39,15 @@ public:
 
 	int getHeight();
 
-	int getStart_x();
+	int spawn_x();
 
-	int getStart_y();
+	int spawn_y();
 
 	bool isExit();
 
 	void Exit();
 
+	AI* monsters[8] = {};
 private:
 	int d_width, d_height;
 	std::vector<int> d_data;
@@ -58,4 +57,39 @@ private:
 	void generatePassage(const Point&, const Point&);
 
 	void generateWalls();
+
+	int getRandomNumber(int min, int max)
+	{
+		return min + rand() % (max - min + 1);
+	}
+
+	AI* spawn(int rang, int monster)
+	{
+		Spawner* spawner;
+		AI* ai;
+		switch (rang)
+		{
+		case 1:
+			spawner = new Rang_1;
+			break;
+		case 2:
+			spawner = new Rang_2;
+			break;
+		default:
+			spawner = new Rang_3;
+		}
+
+		switch (monster)
+		{
+		case 1:
+			ai = spawner->spawn_undead();
+			break;
+		case 2:
+			ai = spawner->spawn_demon();
+			break;
+		default:
+			ai = spawner->spawn_spirit();
+		}
+		return ai;
+	}
 };

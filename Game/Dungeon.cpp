@@ -1,4 +1,5 @@
 #include "Dungeon.h"
+#include <fstream>
 
 bool Dungeon::Room::intersect(const Room& r) const
 {
@@ -55,6 +56,23 @@ void Dungeon::generate(int roomsCount) {
 	d_data[x + y * d_width] = 3;
 
 	generateWalls();
+
+	int room = 1;
+	for (int i = 1; i < 9; i++)
+	{
+		monsters[i - 1] = spawn(getRandomNumber(1, 3), getRandomNumber(1, 2));
+		if (i % 2 == 0)
+		{
+			monsters[i - 1]->setPos_x(d_rooms[room].x);
+			monsters[i - 1]->setPos_y(d_rooms[room].y);
+			room++;
+		}
+		else
+		{
+			monsters[i - 1]->setPos_x(d_rooms[room].x + d_rooms[room].width - 1);
+			monsters[i - 1]->setPos_y(d_rooms[room].y + d_rooms[room].height - 1);
+		}
+	}
 }
 
 int Dungeon::get(int x, int y)
@@ -105,14 +123,14 @@ int Dungeon::getWidth()
 	return d_width;
 }
 
-int Dungeon::getStart_x()
+int Dungeon::spawn_x()
 {
 	if (!d_rooms.empty())
 		return d_rooms[0].x + d_rooms[0].width / 2;
 	return 0;
 }
 
-int Dungeon::getStart_y()
+int Dungeon::spawn_y()
 {
 	if (!d_rooms.empty())
 		return d_rooms[0].y - 1;

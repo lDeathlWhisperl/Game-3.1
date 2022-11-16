@@ -1,6 +1,4 @@
-﻿#include <windows.h>
-
-#include "Render.h"
+﻿#include "Render.h"
 
 #define gameLoop() while(true)
 #define game_over break

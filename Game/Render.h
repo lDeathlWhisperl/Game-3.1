@@ -1,20 +1,20 @@
 #pragma once
 
-#include "World.h"
-#include "Player.h"
-#include "HUD.h"
-
-#include <iostream>
 #include <windows.h>
 
-class World;
-class Dungeon;
+#include "Player.h"
+#include "HUD.h"
+#include "World.h"
+#include "Dungeon.h"
+
 
 class Render
 {
 	static std::string paint_dungeon(int);
 
 	static std::string paint_world(double);
+
+	static void enterTheDungeon(Player&, int, int);
 public:
 	static void draw_world(World&, Player&);
 

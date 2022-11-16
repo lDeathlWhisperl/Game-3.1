@@ -1,13 +1,9 @@
 #pragma once
 
 #include <list>
-#include <iostream>
 
-#include "Render.h"
 #include "Perlin.h"
 #include "Castle.h"
-#include "Player.h"
-#include "Dungeon.h"
 
 class World
 {
@@ -34,6 +30,4 @@ public:
 	int getLength();
 
 	int getWidth();
-
-	void enterTheDungeon(Player&);
 };

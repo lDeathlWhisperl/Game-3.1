@@ -1,7 +1,5 @@
 #pragma once
 
-#include "Player.h"
-
 class Castle
 {
 	int door   = 776,
