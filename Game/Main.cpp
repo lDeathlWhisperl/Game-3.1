@@ -44,6 +44,8 @@ int main()
 
     landscape.landscape();
     landscape.generator(seed, 0, 0);
+    player.setPos_x(47);
+    player.setPos_y(-1);
     //colors();
     //exit(0);
     gameLoop()

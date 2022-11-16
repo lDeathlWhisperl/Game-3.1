@@ -50,7 +50,7 @@ public:
 	AI* monsters[8] = {};
 private:
 	int d_width, d_height;
-	std::vector<int> d_data;
+	std::vector<int> d_data, walls_coords;
 	std::vector<Room> d_rooms;
 	bool out = false;
 
@@ -58,38 +58,7 @@ private:
 
 	void generateWalls();
 
-	int getRandomNumber(int min, int max)
-	{
-		return min + rand() % (max - min + 1);
-	}
+	int getRandomNumber(int, int);
 
-	AI* spawn(int rang, int monster)
-	{
-		Spawner* spawner;
-		AI* ai;
-		switch (rang)
-		{
-		case 1:
-			spawner = new Rang_1;
-			break;
-		case 2:
-			spawner = new Rang_2;
-			break;
-		default:
-			spawner = new Rang_3;
-		}
-
-		switch (monster)
-		{
-		case 1:
-			ai = spawner->spawn_undead();
-			break;
-		case 2:
-			ai = spawner->spawn_demon();
-			break;
-		default:
-			ai = spawner->spawn_spirit();
-		}
-		return ai;
-	}
+	AI* spawn(int, int);
 };

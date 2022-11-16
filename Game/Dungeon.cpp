@@ -61,6 +61,7 @@ void Dungeon::generate(int roomsCount) {
 	for (int i = 1; i < 9; i++)
 	{
 		monsters[i - 1] = spawn(getRandomNumber(1, 3), getRandomNumber(1, 2));
+		monsters[i - 1]->collision(walls_coords, d_width, d_height);
 		if (i % 2 == 0)
 		{
 			monsters[i - 1]->setPos_x(d_rooms[room].x);
@@ -84,8 +85,7 @@ void Dungeon::generatePassage(const Point& start, const Point& finish)
 {
 	AStar::Generator generator;
 	generator.setWorldSize({ d_width, d_height });
-	generator.setHeuristic(AStar::Heuristic::euclidean);
-	generator.setDiagonalMovement(false);
+
 	auto path = generator.findPath({ start.x, start.y }, { finish.x, finish.y });
 
 	for (auto& coordinate : path)
@@ -93,6 +93,42 @@ void Dungeon::generatePassage(const Point& start, const Point& finish)
 		int index = coordinate.y * d_width + coordinate.x;
 		d_data[index] = 1;
 	}
+}
+
+AI* Dungeon::spawn(int rang, int monster)
+{
+	Spawner* spawner;
+	AI* ai;
+	switch (rang)
+	{
+	case 1:
+		spawner = new Rang_1;
+		break;
+	case 2:
+		spawner = new Rang_2;
+		break;
+	default:
+		spawner = new Rang_3;
+	}
+
+	switch (monster)
+	{
+	case 1:
+		ai = spawner->spawn_undead();
+		break;
+	case 2:
+		ai = spawner->spawn_demon();
+		break;
+	default:
+		ai = spawner->spawn_spirit();
+	}
+	delete spawner;
+	return ai;
+}
+
+int Dungeon::getRandomNumber(int min, int max)
+{
+	return min + rand() % (max - min + 1);
 }
 
 void Dungeon::generateWalls() {
@@ -109,6 +145,8 @@ void Dungeon::generateWalls() {
 					if (d_data[(x + offsets[i][0]) + (y + offsets[i][1]) * d_width] == 1)
 					{
 						d_data[x + y * d_width] = 2;
+						walls_coords.push_back(x);
+						walls_coords.push_back(y);
 						break;
 					}
 }

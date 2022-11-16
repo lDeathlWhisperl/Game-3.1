@@ -90,9 +90,12 @@ void Render::enterTheDungeon(Player& player, int length, int width)
 
 		player.controller(top, left, right, bottom);
 
-		if (!player.getStatus() || dungeon.isExit()) break;
+		if (!player.getStatus() || dungeon.isExit()) exit(0);
 
 		Render::update();
+
+		for (AI *monster : dungeon.monsters) monster->controller(player);
+		//dungeon.monsters[0]->controller(player);
 	}
 
 	player.setPos_x(temp_x);
@@ -103,28 +106,29 @@ void Render::enterTheDungeon(Player& player, int length, int width)
 void Render::draw_dungeon(Dungeon& dungeon, Player& player)
 {
 	HUD hud;
-
+	
 	for (int y = 0; y < dungeon.getHeight(); y++)
 	{
 		for (int x = 0; x < dungeon.getWidth(); x++)
 		{
 			bool player_coords = (x == player.getPos_x() && y == player.getPos_y());
-			bool skip = true;
+			bool skip = false;
 			hud.addToViewport(&player, x, y, 1, 1);
 
 			if (player_coords && dungeon.get(x, y) == 3 && player.getLastPressedKey() == 32)
 				dungeon.Exit();
-
-			for (int i = 0; i < 8; i++)
-				if (dungeon.monsters[i]->getPos_x() == x && dungeon.monsters[i]->getPos_y() == y)
+			
+			for (AI* monster : dungeon.monsters)
+				if (monster->getPos_x() == x && monster->getPos_y() == y)
 				{
-					dungeon.monsters[i]->draw();
-					skip = false;
+					monster->draw();
+					skip = true;
+					break;
 				}
-
-			if (player_coords && skip)
+			
+			if (player_coords && !skip)
 				std::cout << player.showPlayer();
-			else if (skip)
+			else if (!skip)
 				std::cout << paint_dungeon(dungeon.get(x, y));
 		}
 		std::cout << '\n';

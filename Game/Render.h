@@ -2,7 +2,6 @@
 
 #include <windows.h>
 
-#include "Player.h"
 #include "HUD.h"
 #include "World.h"
 #include "Dungeon.h"
