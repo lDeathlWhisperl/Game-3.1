@@ -170,3 +170,21 @@ void Player::breakBase(int x, int y, bool player_coords)
             }
     }
 }
+
+bool Player::isMoving()
+{
+    switch (lastPressedKey)
+    {
+    case w:
+    case W:
+    case a:
+    case A:
+    case s:
+    case S:
+    case d:
+    case D:
+        return true;
+    default:
+        return false;
+    }
+}

@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AI.cpp" />
     <ClCompile Include="AStar.cpp" />
     <ClCompile Include="Base.cpp" />
     <ClCompile Include="Dungeon.cpp" />

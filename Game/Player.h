@@ -55,4 +55,5 @@ public:
 
     char getLastPressedKey();
 
+    bool isMoving();
 };

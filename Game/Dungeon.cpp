@@ -1,5 +1,5 @@
 #include "Dungeon.h"
-#include <fstream>
+#include <queue>
 
 bool Dungeon::Room::intersect(const Room& r) const
 {

@@ -44,8 +44,8 @@ int main()
 
     landscape.landscape();
     landscape.generator(seed, 0, 0);
-    player.setPos_x(47);
-    player.setPos_y(-1);
+    //player.setPos_x(47);
+    //player.setPos_y(-1);
     //colors();
     //exit(0);
     gameLoop()
@@ -53,7 +53,9 @@ int main()
         Render::draw_world(landscape, player);
 
         player.controller();
-        landscape.generator(seed, player.getPos_x(), player.getPos_y());
+
+        if(player.isMoving())
+            landscape.generator(seed, player.getPos_x(), player.getPos_y());
 
         if (!player.getStatus())
             game_over;

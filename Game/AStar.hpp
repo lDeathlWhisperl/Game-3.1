@@ -1,6 +1,3 @@
-#ifndef __ASTAR_HPP_8F637DB91972F6C878D41D63F7E7214F__
-#define __ASTAR_HPP_8F637DB91972F6C878D41D63F7E7214F__
-
 #include <vector>
 #include <functional>
 #include <set>
@@ -63,5 +60,3 @@ namespace AStar
         static uint octagonal(Vec2i source_, Vec2i target_);
     };
 }
-
-#endif // __ASTAR_HPP_8F637DB91972F6C878D41D63F7E7214F__
