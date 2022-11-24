@@ -1,5 +1,7 @@
 #pragma once
 
+#include <fstream>
+
 class Actor
 {
 protected:
@@ -11,16 +13,6 @@ public:
 
 	Actor(int x, int y) : pos_x(x), pos_y(y) {}
 
-	int getPos_x()
-	{
-		return pos_x;
-	}
-
-	int getPos_y()
-	{
-		return pos_y;
-	}
-
 	void setPos_x(int x)
 	{
 		pos_x = x;
@@ -29,5 +21,15 @@ public:
 	void setPos_y(int y)
 	{
 		pos_y = y;
+	}
+
+	int getPos_x()
+	{
+		return pos_x;
+	}
+
+	int getPos_y()
+	{
+		return pos_y;
 	}
 };

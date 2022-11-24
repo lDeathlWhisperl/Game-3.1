@@ -1,7 +1,7 @@
 #include "Dungeon.h"
 #include <queue>
 
-bool Dungeon::Room::intersect(const Room& r) const
+bool Room::intersect(const Room& r) const
 {
 	return !(r.x >= (x + width) || x >= (r.x + r.width) || r.y >= (y + height) || y >= (r.y + r.height));
 }
@@ -27,12 +27,12 @@ void Dungeon::generate(int roomsCount) {
 			}
 		}
 
-	d_data.assign(d_width * d_height, 0);
+	d_data.assign(d_width * d_height, 6);
 
 	for (const Room& room : d_rooms)
 		for (int x = 0; x < room.width; ++x)
 			for (int y = 0; y < room.height; ++y)
-				d_data[(room.x + x) + (room.y + y) * d_width] = 1;
+				d_data[(room.x + x) + (room.y + y) * d_width] = 7;
 		
 	
 
@@ -51,17 +51,17 @@ void Dungeon::generate(int roomsCount) {
 	int x = d_rooms[0].x + d_rooms[0].width / 2,
 		y = d_rooms[0].y - 1;
 
-	d_data[x + y * d_width] = 1;
+	d_data[x + y * d_width] = 7;
 	y--;
-	d_data[x + y * d_width] = 3;
+	d_data[x + y * d_width] = 5;
 
 	generateWalls();
+	AI::collision(walls_coords, d_width, d_height);
 
 	int room = 1;
 	for (int i = 1; i < 9; i++)
 	{
 		monsters[i - 1] = spawn(getRandomNumber(1, 3), getRandomNumber(1, 2));
-		monsters[i - 1]->collision(walls_coords, d_width, d_height);
 		if (i % 2 == 0)
 		{
 			monsters[i - 1]->setPos_x(d_rooms[room].x);
@@ -74,6 +74,11 @@ void Dungeon::generate(int roomsCount) {
 			monsters[i - 1]->setPos_y(d_rooms[room].y + d_rooms[room].height - 1);
 		}
 	}
+	startPoint_x = d_rooms[0].x + d_rooms[0].width / 2;
+	startPoint_y = d_rooms[0].y - 1;
+	
+	walls_coords.clear();
+	d_rooms.clear();
 }
 
 int Dungeon::get(int x, int y)
@@ -91,7 +96,7 @@ void Dungeon::generatePassage(const Point& start, const Point& finish)
 	for (auto& coordinate : path)
 	{
 		int index = coordinate.y * d_width + coordinate.x;
-		d_data[index] = 1;
+		d_data[index] = 7;
 	}
 }
 
@@ -140,11 +145,11 @@ void Dungeon::generateWalls() {
 
 	for (int x = 1; x < d_width - 1; ++x)
 		for (int y = 1; y < d_height - 1; ++y)
-			if (d_data[x + y * d_width] == 0)
+			if (d_data[x + y * d_width] == 6)
 				for (int i = 0; i < 8; ++i)
-					if (d_data[(x + offsets[i][0]) + (y + offsets[i][1]) * d_width] == 1)
+					if (d_data[(x + offsets[i][0]) + (y + offsets[i][1]) * d_width] == 7)
 					{
-						d_data[x + y * d_width] = 2;
+						d_data[x + y * d_width] = 3;
 						walls_coords.push_back(x);
 						walls_coords.push_back(y);
 						break;
@@ -163,16 +168,12 @@ int Dungeon::getWidth()
 
 int Dungeon::spawn_x()
 {
-	if (!d_rooms.empty())
-		return d_rooms[0].x + d_rooms[0].width / 2;
-	return 0;
+	return startPoint_x;
 }
 
 int Dungeon::spawn_y()
 {
-	if (!d_rooms.empty())
-		return d_rooms[0].y - 1;
-	return 0;
+	return startPoint_y;
 }
 
 bool Dungeon::isExit()

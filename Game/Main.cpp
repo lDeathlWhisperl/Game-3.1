@@ -39,23 +39,21 @@ int main()
     unsigned int seed = 17042003;
     getConsoleScreenSize(x, y);
 
-    World landscape(x+17, y+8);
+    World landscape(x+16, y+8);
     Player player;
 
     landscape.landscape();
     landscape.generator(seed, 0, 0);
-    //player.setPos_x(47);
-    //player.setPos_y(-1);
-    //colors();
-    //exit(0);
+    player.setPos_x(21);
+    player.setPos_y(-29);
+
     gameLoop()
     {
         Render::draw_world(landscape, player);
 
         player.controller();
 
-        if(player.isMoving())
-            landscape.generator(seed, player.getPos_x(), player.getPos_y());
+        landscape.generator(seed, player.getPos_x(), player.getPos_y());
 
         if (!player.getStatus())
             game_over;

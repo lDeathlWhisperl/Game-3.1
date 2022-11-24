@@ -11,9 +11,10 @@
 //90 - stone
 //33 - chest
 
-std::string Render::paint_world(double high)
+std::string Render::paint(double high)
 {
 	std::string res;
+	res.clear();
 	unsigned char tile = 219;
 
 	if (high <= 0.2)
@@ -21,47 +22,34 @@ std::string Render::paint_world(double high)
 	else if (high > 0.2 && high <= 0.3)
 		res = "\x1b[94m";				//bright water
 	else if (high > 0.3 && high <= 0.34)
-		res = "\x1b[93m";				//sand
+		res = "\x1b[93m";				//sand and dessert
 	else if (high > 0.5 && high <= 0.545)
 		res = "\x1b[36m";				//river
-	else if (high == 777)
-		res = "\x1b[90m";
-	else if(high == 776)
-		res = "\x1b[33m";
-	else if(high == 775)
-		res = "\x1b[30m";
 	else
 		res = "\x1b[92m";               //field
 
-	if (high == 2 || high == 4)
-		res = "\x1b[32m";				//tree or cactus
+	int i = static_cast<int>(high);
 
-	if (high == 3)
-		res += "\x1b[93m";				//desert
-
-	res += tile;
-	res += "\x1b[0m";
-	return res;
-}
-
-std::string Render::paint_dungeon(int num)
-{
-	unsigned char tile = 219;
-	std::string res;
-	switch (num)
+	switch (i)
 	{
-	case 1:
-		res = "\x1b[96m";
-		break;
 	case 2:
-		res = "\x1b[90m";
+	case 4:
+		res = "\x1b[32m";				//tree and cactus
 		break;
 	case 3:
-		res = "\x1b[33m";
+		res = "\x1b[90m";				//stone and dungeon walls
 		break;
-	default:
-		res = "\x1b[30m";
+	case 5:
+		res = "\x1b[33m";				//door and pyramid brick
+		break;
+	case 6:
+		res = "\x1b[30m";				//window, dungeon void and pyramid passage
+		break;
+	case 7:
+		res = "\x1b[96m";				//dungeon floor
+		break;
 	}
+
 	res += tile;
 	res += "\x1b[0m";
 	return res;
@@ -70,7 +58,7 @@ std::string Render::paint_dungeon(int num)
 void Render::enterTheDungeon(Player& player, int length, int width)
 {
 	srand(player.getPos_x() + player.getPos_y());
-	Dungeon dungeon(length - 17, width - 8);
+	Dungeon dungeon(length, width);
 	dungeon.generate(5);
 
 	int temp_x = player.getPos_x(),
@@ -90,12 +78,12 @@ void Render::enterTheDungeon(Player& player, int length, int width)
 
 		player.controller(top, left, right, bottom);
 
-		if (!player.getStatus() || dungeon.isExit()) exit(0);
+		if (dungeon.isExit()) break;
+		if (!player.getStatus()) exit(0);
+
+		for (AI* monster : dungeon.monsters) monster->controller(player);
 
 		Render::update();
-
-		for (AI *monster : dungeon.monsters) monster->controller(player);
-		//dungeon.monsters[0]->controller(player);
 	}
 
 	player.setPos_x(temp_x);
@@ -115,7 +103,7 @@ void Render::draw_dungeon(Dungeon& dungeon, Player& player)
 			bool skip = false;
 			hud.addToViewport(&player, x, y, 1, 1);
 
-			if (player_coords && dungeon.get(x, y) == 3 && player.getLastPressedKey() == 32)
+			if (player_coords && dungeon.get(x, y) == 5 && player.getLastPressedKey() == 32)
 				dungeon.Exit();
 			
 			for (AI* monster : dungeon.monsters)
@@ -129,7 +117,7 @@ void Render::draw_dungeon(Dungeon& dungeon, Player& player)
 			if (player_coords && !skip)
 				std::cout << player.showPlayer();
 			else if (!skip)
-				std::cout << paint_dungeon(dungeon.get(x, y));
+				std::cout << paint(dungeon.get(x, y));
 		}
 		std::cout << '\n';
 	}
@@ -140,18 +128,21 @@ void Render::draw_world(World &world, Player &player)
 	HUD hud;
 	bool do_once = true;
 
-	for (int y = 1; y < world.getWidth()-8; y++)
+	for (int y = 1; y < world.getWidth(); y++)
 	{
-		for (int x = 1; x < world.getLength()-16; x++)
+		for (int x = 1; x < world.getLength(); x++)
 		{
-			bool player_coords = x == (world.getLength()-15) / 2 && y == (world.getWidth()-7) / 2;
+			bool player_coords = x == (world.getLength()) / 2 && y == (world.getWidth()) / 2;
 			hud.addToViewport(&player, x, y, 2, 2);
 
-			if (player_coords && player.getLastPressedKey() == 32 && world.getMap(x, y) == 776)
+			if (player_coords && player.getLastPressedKey() == 32 && world.getMap(x, y) == 5)
 			{
 				system("cls");
+				world.clear();
 				enterTheDungeon(player, world.getLength(), world.getWidth());
+				world.landscape();
 				system("cls");
+				return;
 			}
 
 			player.breakBase(x, y, player_coords);
@@ -165,7 +156,7 @@ void Render::draw_world(World &world, Player &player)
 			if (player_coords && world.getMap(x, y) != 2)
 				std::cout << player.showPlayer();
 			else
-				std::cout << paint_world(world.getMap(x, y));
+				std::cout << paint(world.getMap(x, y));
 		}
 		std::cout << '\n';
 	}

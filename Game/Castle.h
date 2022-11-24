@@ -2,9 +2,9 @@
 
 class Castle
 {
-	int door   = 776,
-		stone  = 777,
-		window = 775;
+	int door   = 5,
+		stone  = 3,
+		window = 6;
 
 	int pos_x = 0, 
 		pos_y = 0;
@@ -97,7 +97,7 @@ class Castle
 
 		for (int y = temp_y; y < pos_y; y++)
 			for (int x = temp_x; x < pos_x; x++)
-				if (world_copy[y][x] >= 775)
+				if (world_copy[y][x] == 3)
 					return true;
 				
 		return false;

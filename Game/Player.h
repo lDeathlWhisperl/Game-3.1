@@ -8,9 +8,7 @@
 
 class Player : public Character
 {
-    char lastPressedKey = '\0';
     std::vector<Base> base;
-    bool isDamaged = false;
 
     enum buttons
     {
@@ -38,6 +36,8 @@ class Player : public Character
         s = 115,
         w = 119,
     };
+
+    char lastPressedKey = '\0';
 public:
     Player();
 

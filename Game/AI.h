@@ -9,17 +9,22 @@
 class AI : public Character
 {
 	static AStar::Generator generator;
+
+	static int count;
+
+	int id = 0;
+
+	bool canAttack = false;
 public:
-	AI() : Character(1, 0, 1) {}
+	AI() : Character(1, 0, 1), id(++count) {}
 	
-	AI(int hp, int arm, int str) : Character(hp, arm, str) 
-	{
-		
-	}
+	AI(int hp, int arm, int str) : Character(hp, arm, str), id(++count) {}
+
+	~AI();
 
 	void controller(Player& player);
 
-	void collision(std::vector<int> walls, int width, int height);
+	static void collision(std::vector<int> walls, int width, int height);
 
 	virtual void draw() = 0 {}
 };
