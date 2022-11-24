@@ -152,6 +152,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actor.h" />
+    <ClInclude Include="Adapter.h" />
     <ClInclude Include="AI.h" />
     <ClInclude Include="AStar.hpp" />
     <ClInclude Include="Base.h" />
@@ -163,6 +164,7 @@
     <ClInclude Include="Gin.h" />
     <ClInclude Include="HUD.h" />
     <ClInclude Include="Imp.h" />
+    <ClInclude Include="Log.h" />
     <ClInclude Include="Mancubus.h" />
     <ClInclude Include="Monster.h" />
     <ClInclude Include="Mummy.h" />
@@ -170,7 +172,7 @@
     <ClInclude Include="Character.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Possessed.h" />
-    <ClInclude Include="Adapter.h" />
+    <ClInclude Include="Proxy.h" />
     <ClInclude Include="Rang_1.h" />
     <ClInclude Include="Rang_2.h" />
     <ClInclude Include="Rang_3.h" />

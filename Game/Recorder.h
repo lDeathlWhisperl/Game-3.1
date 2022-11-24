@@ -10,9 +10,9 @@ public:
 	Recorder() {};
 	~Recorder() {};
 
-	static void writeToFile(std::string file, std::string text)
+	static void writeToFile(std::string text)
 	{
-		std::ofstream fout(file);
+		std::ofstream fout("log.txt");
 		fout << text << "\n\n";
 	}
 

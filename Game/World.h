@@ -10,7 +10,7 @@ class World
 private:
 	Castle castle;
 	int length, width;
-	double** map = new double* [width];
+	double** map;
 
 	void plantTree(int, int);
 
@@ -30,6 +30,4 @@ public:
 	int getLength();
 
 	int getWidth();
-
-	void clear();
 };

@@ -67,6 +67,7 @@ void Render::enterTheDungeon(Player& player, int length, int width)
 	std::ofstream fout("log.txt", std::ios::app);
 	fout << "Seed генерации подземелья: " << player.getPos_x() + player.getPos_y() << "\n\n";
 	fout.close();
+
 	int temp_x = player.getPos_x(),
 		temp_y = player.getPos_y();
 
@@ -144,9 +145,9 @@ void Render::draw_world(World &world, Player &player)
 			if (player_coords && player.getLastPressedKey() == 32 && world.getMap(x, y) == 5)
 			{
 				system("cls");
-				world.clear();
+				//world.clear();
 				enterTheDungeon(player, world.getLength(), world.getWidth());
-				world.landscape();
+				//world.landscape();
 				system("cls");
 				return;
 			}

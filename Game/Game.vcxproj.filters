@@ -155,6 +155,12 @@
     <ClInclude Include="Recorder.h">
       <Filter>Файлы заголовков\Recorder</Filter>
     </ClInclude>
+    <ClInclude Include="Proxy.h">
+      <Filter>Файлы заголовков\Recorder</Filter>
+    </ClInclude>
+    <ClInclude Include="Log.h">
+      <Filter>Файлы заголовков\Recorder</Filter>
+    </ClInclude>
     <ClInclude Include="Adapter.h">
       <Filter>Файлы заголовков\Recorder</Filter>
     </ClInclude>
