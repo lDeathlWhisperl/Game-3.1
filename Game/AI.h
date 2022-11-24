@@ -8,6 +8,7 @@
 
 class AI : public Character
 {
+protected:
 	static AStar::Generator generator;
 
 	static int count;
@@ -27,4 +28,6 @@ public:
 	static void collision(std::vector<int> walls, int width, int height);
 
 	virtual void draw() = 0 {}
+
+
 };

@@ -48,21 +48,14 @@ public:
 		d_data.resize(width * height, 0);
 		startPoint_x = 0;
 		startPoint_y = 0;
-
-		std::ofstream fout("log.txt");
-		fout
-			<< "d_data:       " << sizeof(d_data) << '\n'
-			<< "walls_coords: " << sizeof(walls_coords) << '\n'
-			<< "d_rooms:      " << sizeof(d_rooms) << '\n'
-			<< "startPoint_x: " << sizeof(startPoint_x) << '\n'
-			<< "startPoint_y: " << sizeof(startPoint_y) << '\n'
-			<< "d_width:      " << sizeof(d_width) << '\n'
-			<< "d_height:     " << sizeof(d_height) << '\n'
-			<< "out:          " << sizeof(out);
+		std::ofstream fout("log.txt", std::ios::app);
+		fout << "Игрок зашел в подземелье\n\n";
 	}
 
 	~Dungeon()
 	{
+		std::ofstream fout("log.txt", std::ios::app);
+		fout << "Игрок вышел из подземелья\n\n";
 		for (AI* m : monsters)
 			m->~AI();
 		d_data.clear();

@@ -17,7 +17,7 @@ private:
 	void plantCactus(int, int);
 
 public:
-	World(int l, int w) : length(l), width(w){}
+	World(int, int);
 
 	~World();
 

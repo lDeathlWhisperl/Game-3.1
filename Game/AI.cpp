@@ -8,6 +8,8 @@ AI::~AI()
 	if (count == 1)
 		generator.clearCollisions();
 	count--;
+	std::ofstream fout("log.txt", std::ios::app);
+	fout << "Бот " << id << " уничтожен...\n\n";
 }
 
 void AI::controller(Player& player)

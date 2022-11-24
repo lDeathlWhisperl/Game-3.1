@@ -28,6 +28,9 @@
     <Filter Include="Файлы заголовков\Monster\Spirit">
       <UniqueIdentifier>{c568ede0-d42d-42f1-85c1-73993ea0d76f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Файлы заголовков\Recorder">
+      <UniqueIdentifier>{47ed0feb-8d7a-45f0-91b5-1573bdf871ec}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -148,6 +151,12 @@
     </ClInclude>
     <ClInclude Include="Monster.h">
       <Filter>Файлы заголовков\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="Recorder.h">
+      <Filter>Файлы заголовков\Recorder</Filter>
+    </ClInclude>
+    <ClInclude Include="Adapter.h">
+      <Filter>Файлы заголовков\Recorder</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

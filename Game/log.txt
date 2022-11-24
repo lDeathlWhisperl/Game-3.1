@@ -1,8 +1,2 @@
-d_data:       32
-walls_coords: 32
-d_rooms:      32
-startPoint_x: 4
-startPoint_y: 4
-d_width:      4
-d_height:     4
-out:          1
+==============================Начало игрового сеанса==================
+

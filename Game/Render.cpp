@@ -48,6 +48,9 @@ std::string Render::paint(double high)
 	case 7:
 		res = "\x1b[96m";				//dungeon floor
 		break;
+	case 8:
+		res = "\x1b[93m";				//pyramid floor
+		break;
 	}
 
 	res += tile;
@@ -61,6 +64,9 @@ void Render::enterTheDungeon(Player& player, int length, int width)
 	Dungeon dungeon(length, width);
 	dungeon.generate(5);
 
+	std::ofstream fout("log.txt", std::ios::app);
+	fout << "Seed генерации подземелья: " << player.getPos_x() + player.getPos_y() << "\n\n";
+	fout.close();
 	int temp_x = player.getPos_x(),
 		temp_y = player.getPos_y();
 

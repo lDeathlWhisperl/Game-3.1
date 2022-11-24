@@ -1,4 +1,5 @@
 ﻿#include "Render.h"
+#include "Adapter.h"
 
 #define gameLoop() while(true)
 #define game_over break
@@ -34,21 +35,25 @@ void colors()
 
 int main()
 {
+    //std::ofstream fout("log.txt");
+    //fout << "==============================Начало игрового сеанса==================\n\n";
+    Adapter("log.txt", "==============================Начало игрового сеанса==================").request();
     fullscreen();
     int x, y;
     unsigned int seed = 17042003;
     getConsoleScreenSize(x, y);
+    //fout << "Seed генерации мира: " << seed << "\n\n";
+    //fout.close();
 
-    World landscape(x+16, y+8);
+    /*World landscape(x+16, y+8);
     Player player;
 
     landscape.landscape();
     landscape.generator(seed, 0, 0);
-    player.setPos_x(21);
-    player.setPos_y(-29);
 
     gameLoop()
     {
+        break;
         Render::draw_world(landscape, player);
 
         player.controller();
@@ -59,6 +64,9 @@ int main()
             game_over;
 
         Render::update();
-    }
+    }*/
+
+    //fout.open("log.txt", std::ios::app);
+    //fout << "==============================Конец игры==============================\n\n";
     return 0;
 }

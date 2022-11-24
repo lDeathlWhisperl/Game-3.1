@@ -1,8 +1,18 @@
 #include "World.h"
 #include <fstream>
 
+World::World(int l, int w) : length(l), width(w)
+{
+	std::ofstream fout("log.txt", std::ios::app);
+	fout << "Создание мира...\n\n";
+	fout.close();
+}
+
 World::~World()
 {
+	std::ofstream fout("log.txt", std::ios::app);
+	fout << "Удаление мира...\n\n";
+	fout.close();
 	for (int i = 0; i < width; i++)
 		delete[] map[i];
 	delete[] map;

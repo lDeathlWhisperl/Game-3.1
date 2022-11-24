@@ -9,8 +9,6 @@
 
 class Render
 {
-	static std::string paint_dungeon(int);
-
 	static std::string paint(double);
 
 	static void enterTheDungeon(Player&, int, int);

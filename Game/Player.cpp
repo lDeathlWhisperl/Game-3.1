@@ -5,8 +5,8 @@ bool exception(int num)
 {
     switch (num)
     {
-    case 0:
-    case 2:
+    case 6:
+    case 3:
         return true;
     default:
         return false;
@@ -16,6 +16,14 @@ bool exception(int num)
 Player::Player()
 {
     character = '^';
+    std::ofstream fout("log.txt", std::ios::app);
+    fout << "Создание игрока...\n\n";
+}
+
+Player::~Player()
+{
+    std::ofstream fout("log.txt", std::ios::app);
+    fout << "Удаление игрока...\n\n";
 }
 
 void Player::controller(int top, int left, int right, int bottom)
@@ -110,23 +118,10 @@ char Player::showPlayer()
 void Player::getDamage(int dmg)
 {
     Character::getDamage(dmg);
-    /* fixing
-    switch (character)
-    {
-    case '^':
-        pos_y++;
-        break;
-    case '<':
-        pos_x++;
-        break;
-    case 'V':
-        pos_y--;
-        break;
-    case '>':
-        pos_x--;
-        break;
-    }
-    */
+    
+    std::ofstream fout("log.txt", std::ios::app);
+    fout << "Игрок получил урон в размере " << dmg << " единиц\n\n";
+    if (!status) fout << "Игрок умер на координатах " << *this << "\n\n";
 }
 
 char Player::getLastPressedKey()

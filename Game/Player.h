@@ -41,6 +41,8 @@ class Player : public Character
 public:
     Player();
 
+    ~Player();
+
     bool placeBase(int, int, bool, bool&);
 
     void controller(int, int, int, int);
@@ -56,4 +58,10 @@ public:
     char getLastPressedKey();
 
     bool isMoving();
+
+    friend std::ostream& operator<<(std::ostream& out, Player& p)
+    {
+        out << "X: " << p.pos_x << " Y: " << p.pos_y;
+        return out;
+    }
 };
