@@ -50,11 +50,10 @@ int main()
 
     landscape.landscape();
     landscape.generator(seed, 0, 0);
-    player.setPos_x(-45);
-    player.setPos_y(18);
-
+    //colors();
     gameLoop()
     {
+        //break;
         Render::draw_world(landscape, player);
 
         player.controller();

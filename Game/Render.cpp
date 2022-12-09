@@ -100,73 +100,96 @@ void Render::enterTheDungeon(Player& player, int length, int width)
  
 void Render::draw_dungeon(Dungeon& dungeon, Player& player)
 {
-	HUD hud;
+	//HUD hud;
 	
-	for (int y = 0; y < dungeon.getHeight(); y++)
-	{
-		for (int x = 0; x < dungeon.getWidth(); x++)
-		{
-			bool player_coords = (x == player.getPos_x() && y == player.getPos_y());
-			bool skip = false;
-			hud.addToViewport(&player, x, y, 1, 1);
-
-			if (player_coords && dungeon.get(x, y) == 5 && player.getLastPressedKey() == 32)
-				dungeon.Exit();
-			
-			for (AI* monster : dungeon.monsters)
-				if (monster->getPos_x() == x && monster->getPos_y() == y)
-				{
-					monster->draw();
-					skip = true;
-					break;
-				}
-			
-			if (player_coords && !skip)
-				std::cout << player.showPlayer();
-			else if (!skip)
-				std::cout << paint(dungeon.get(x, y));
-		}
-		std::cout << '\n';
-	}
+	//for (int y = 0; y < dungeon.getHeight(); y++)
+	//{
+	//	for (int x = 0; x < dungeon.getWidth(); x++)
+	//	{
+	//		bool player_coords = (x == player.getPos_x() && y == player.getPos_y());
+	//		bool skip = false;
+	//		hud.addToViewport(&player, x, y, 1, 1);
+	//
+	//		if (player_coords && dungeon.get(x, y) == 5 && player.getLastPressedKey() == 32)
+	//			dungeon.Exit();
+	//		
+	//		for (AI* monster : dungeon.monsters)
+	//			if (monster->getPos_x() == x && monster->getPos_y() == y)
+	//			{
+	//				monster->draw();
+	//				skip = true;
+	//				break;
+	//			}
+	//		
+	//		if (player_coords && !skip)
+	//			std::cout << player.showPlayer();
+	//		else if (!skip)
+	//			std::cout << paint(dungeon.get(x, y));
+	//	}
+	//	std::cout << '\n';
+	//}
 }
 
 void Render::draw_world(World &world, Player &player)
 {
-	HUD hud;
+	HUD hud(player.getMaxHP(), 1, 1);
 	bool do_once = true;
+	int player_coords = static_cast<int>(world.getMap(world.getLength() / 2, world.getWidth() / 2));
 
-	for (int y = 1; y < world.getWidth(); y++)
+	/*for (int y = 1; y < world.getWidth(); y++)
 	{
 		for (int x = 1; x < world.getLength(); x++)
 		{
-			bool player_coords = x == (world.getLength()) / 2 && y == (world.getWidth()) / 2;
-			hud.addToViewport(&player, x, y, 2, 2);
-
-			if (player_coords && player.getLastPressedKey() == 32 && world.getMap(x, y) == 5)
-			{
-				system("cls");
-				//world.clear();
-				enterTheDungeon(player, world.getLength(), world.getWidth());
-				//world.landscape();
-				system("cls");
-				return;
-			}
+			
 
 			player.breakBase(x, y, player_coords);
 
 			if (player.placeBase(x, y, player_coords, do_once))
 				continue;
 
-			if (player_coords && world.getMap(x, y) == 4)
-				player.getDamage(1);
+		}
+		std::cout << '\n';
+	}*/
 
-			if (player_coords && world.getMap(x, y) != 2)
+	HANDLE hOut;
+	COORD Position;
+
+	hOut = GetStdHandle(STD_OUTPUT_HANDLE);
+	
+	hud.addToViewport(&player);
+	update();
+
+	for (int y = 1; y < world.getWidth(); y++)
+	{
+		for (int x = 1; x < world.getLength(); x++)
+		{
+			bool p_coords = x == world.getLength() / 2 && y == world.getWidth() / 2;
+
+			if (p_coords && world.getMap(x, y) != 2)
 				std::cout << player.showPlayer();
-			else
+			else if ((x <= hud.getPos_x() || x > hud.getLength()) || (y <= hud.getPos_y() || y > hud.getWidth()))
 				std::cout << paint(world.getMap(x, y));
+			else
+			{
+				Position.X = x;
+				Position.Y = y-1;
+				SetConsoleCursorPosition(hOut, Position);
+			}
 		}
 		std::cout << '\n';
 	}
+
+	if (player_coords == 4)
+		player.getDamage(1);
+
+	if (player.getLastPressedKey() == 32 && player_coords == 5)
+	{
+		system("cls");
+		enterTheDungeon(player, world.getLength(), world.getWidth());
+		system("cls");
+		return;
+	}
+
 }
 
 void Render::update()

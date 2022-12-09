@@ -1,4 +1,5 @@
 #include "HUD.h"
+#include <windows.h>
 
 void HUD::frame()
 {
@@ -38,10 +39,38 @@ int HUD::getLength()
 	return length;
 }
 
-void HUD::addToViewport(Character* character, int& x, int& y, int pos_x, int pos_y)
+void HUD::addToViewport(Character* character)
 {
-	length = character->getMaxHP() + 2;
-	if (x == pos_x && (y == pos_y || y == pos_y + 3))
+	HANDLE hOut;
+	COORD Position;
+
+	hOut = GetStdHandle(STD_OUTPUT_HANDLE);
+
+	Position.X = pos_x;
+	Position.Y = pos_y;
+	SetConsoleCursorPosition(hOut, Position);
+
+	int y;
+
+	for (y = pos_y; y <= pos_y + 4; y++)
+	{
+		for (int x = pos_x; x < length + pos_x; x++)
+		{
+			if (x == pos_x && (y == pos_y || y == pos_y + 3))
+				frame();
+
+			else if (x == pos_x && y == pos_y + 1)
+				healthBar(character);
+
+			else if (x == pos_x && y == pos_y + 2)
+				armorBar(character);
+		}
+		Position.X = pos_x;
+		Position.Y = y+1;
+		SetConsoleCursorPosition(hOut, Position);
+	}
+	length += pos_x;
+	/*if (x == pos_x && (y == pos_y || y == pos_y + 3))
 	{
 		frame();
 		x += getLength();
@@ -57,5 +86,6 @@ void HUD::addToViewport(Character* character, int& x, int& y, int pos_x, int pos
 	{
 		armorBar(character);
 		x += getLength();
-	}
+	}*/
+
 }

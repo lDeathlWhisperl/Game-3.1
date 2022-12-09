@@ -6,7 +6,7 @@
 
 class HUD
 {
-	int length = 0;
+	int length = 0, pos_x, pos_y;
 
 	void frame();
 
@@ -15,8 +15,24 @@ class HUD
 	void armorBar(Character*);
 
 public:
+	HUD(int l, int x, int y) : length(l + 2), pos_x(x),pos_y(y) {}
 
 	int getLength();
 
-	void addToViewport(Character*, int&, int&, int, int);
+	int getWidth()
+	{
+		return pos_y + 4;
+	}
+
+	int getPos_x()
+	{
+		return pos_x;
+	}
+
+	int getPos_y()
+	{
+		return pos_y;
+	}
+
+	void addToViewport(Character*);
 };

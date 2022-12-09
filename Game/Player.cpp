@@ -107,7 +107,7 @@ void Player::controller()
         getDamage(100);
     }
 
-    lastPressedKey = ch;
+    lastPressedKey = std::tolower(ch);
 }
 
 char Player::showPlayer()
@@ -131,7 +131,7 @@ char Player::getLastPressedKey()
 
 bool Player::placeBase(int x, int y, bool player_coords, bool& do_once)
 {
-    if (player_coords && (lastPressedKey == e || lastPressedKey == E))
+    if (player_coords && lastPressedKey == e)
         base.push_back(Base(x, y));
 
     std::sort(base.begin(), base.end());

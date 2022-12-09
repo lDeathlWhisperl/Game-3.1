@@ -101,7 +101,7 @@ double World::getMap(int x, int y)
 
 int World::getLength()
 {
-	return length - 16;
+	return length - 15;
 }
 
 int World::getWidth()
