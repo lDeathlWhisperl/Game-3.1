@@ -136,21 +136,6 @@ void Render::draw_world(World &world, Player &player)
 	bool do_once = true;
 	int player_coords = static_cast<int>(world.getMap(world.getLength() / 2, world.getWidth() / 2));
 
-	/*for (int y = 1; y < world.getWidth(); y++)
-	{
-		for (int x = 1; x < world.getLength(); x++)
-		{
-			
-
-			player.breakBase(x, y, player_coords);
-
-			if (player.placeBase(x, y, player_coords, do_once))
-				continue;
-
-		}
-		std::cout << '\n';
-	}*/
-
 	HANDLE hOut;
 	COORD Position;
 
@@ -164,6 +149,11 @@ void Render::draw_world(World &world, Player &player)
 		for (int x = 1; x < world.getLength(); x++)
 		{
 			bool p_coords = x == world.getLength() / 2 && y == world.getWidth() / 2;
+
+			player.breakBase(x, y, p_coords);
+
+			if (player.placeBase(x, y, p_coords, do_once))
+				continue;
 
 			if (p_coords && world.getMap(x, y) != 2)
 				std::cout << player.showPlayer();

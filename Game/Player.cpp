@@ -155,7 +155,7 @@ bool Player::placeBase(int x, int y, bool player_coords, bool& do_once)
 
 void Player::breakBase(int x, int y, bool player_coords)
 {
-    if (player_coords && (lastPressedKey == q || lastPressedKey == Q))
+    if (player_coords && lastPressedKey == q)
     {
         for (int i = 0; i < base.size(); i++)
             if (x == base[i].getPos_x() && y == base[i].getPos_y())
