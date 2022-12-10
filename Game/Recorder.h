@@ -8,18 +8,26 @@ class Recorder
 	static std::string terminal;
 public:
 	Recorder() {};
+
 	~Recorder() {};
 
 	static void writeToFile(std::string text)
 	{
 		std::ofstream fout("log.txt");
-		fout << text << "\n\n";
+
+		terminal += text;
+
+		fout << terminal;
 	}
 
 	static void writeToTerminal(std::string text)
 	{
 		terminal += text;
-		terminal += "\n\n";
+	}
+
+	static void withoutLog()
+	{
+		terminal = "Loging has not been enabled\n\n";
 	}
 
 	static void showLogInTerminal()
