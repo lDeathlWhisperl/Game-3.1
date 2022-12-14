@@ -42,16 +42,15 @@ int main()
     unsigned int seed = 17042003;
     getConsoleScreenSize(x, y);
 
-    debug::log->request("World generation seed: ");
-    debug::log->request(std::to_string(seed));
-    debug::log->request("\n\n");
+    debug::log->request("World generation seed: " + std::to_string(seed) + "\n\n");
 
     World landscape(x+16, y+8);
     Player player;
 
     landscape.landscape();
     landscape.generator(seed, 0, 0);
-
+    player.setPos_x(-50);
+    player.setPos_y(-28);
     gameLoop()
     {
         Render::draw_world(landscape, player);

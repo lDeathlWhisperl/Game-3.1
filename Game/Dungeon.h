@@ -43,25 +43,9 @@ class Dungeon
 public:
 	AI* monsters[8] = {};
 
-	Dungeon(int width, int height) : d_width(width), d_height(height-1)
-	{
-		d_data.resize(width * height, 0);
-		startPoint_x = 0;
-		startPoint_y = 0;
-		std::ofstream fout("log.txt", std::ios::app);
-		fout << "Игрок зашел в подземелье\n\n";
-	}
+	Dungeon(int, int);
 
-	~Dungeon()
-	{
-		std::ofstream fout("log.txt", std::ios::app);
-		fout << "Игрок вышел из подземелья\n\n";
-		for (AI* m : monsters)
-			m->~AI();
-		d_data.clear();
-		walls_coords.clear();
-		d_rooms.clear();
-	}
+	~Dungeon();
 
 	void generate(int);
 

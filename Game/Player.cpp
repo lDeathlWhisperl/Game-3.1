@@ -112,17 +112,9 @@ void Player::getDamage(int dmg)
 {
     Character::getDamage(dmg);
     
-    debug::log->request("The player has got ");
-    debug::log->request(std::to_string(dmg));
-    debug::log->request(" points of damage\n\n");
+    debug::log->request("The player has taken " + std::to_string(dmg) + " points of damage\n\n");
     if (!status)
-    {
-        debug::log->request("The player died on x: ");
-        debug::log->request(std::to_string(pos_x));
-        debug::log->request(" y: ");
-        debug::log->request(std::to_string(pos_y));
-        debug::log->request(" coordinates\n\n");
-    }
+        debug::log->request("The player died on x: " + std::to_string(pos_x) + " y: " + std::to_string(pos_y) + " coordinates\n\n");
 }
 
 char Player::getLastPressedKey()

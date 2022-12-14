@@ -1,4 +1,5 @@
 #include "Render.h"
+#include "Loging.h"
 
 //32 - tree
 //92 - field
@@ -61,12 +62,10 @@ std::string Render::paint(double high)
 void Render::enterTheDungeon(Player& player, int length, int width)
 {
 	srand(player.getPos_x() + player.getPos_y());
+	debug::log->request("Dungeon generation seed: " + std::to_string(player.getPos_x() + player.getPos_y()) + "\n\n");
+
 	Dungeon dungeon(length, width);
 	dungeon.generate(5);
-
-	std::ofstream fout("log.txt", std::ios::app);
-	fout << "Seed генерации подземелья: " << player.getPos_x() + player.getPos_y() << "\n\n";
-	fout.close();
 
 	int temp_x = player.getPos_x(),
 		temp_y = player.getPos_y();
@@ -88,7 +87,7 @@ void Render::enterTheDungeon(Player& player, int length, int width)
 		if (dungeon.isExit()) break;
 		if (!player.getStatus()) exit(0);
 
-		for (AI* monster : dungeon.monsters) monster->controller(player);
+		//for (AI* monster : dungeon.monsters) monster->controller(player);
 
 		Render::update();
 	}
@@ -100,18 +99,45 @@ void Render::enterTheDungeon(Player& player, int length, int width)
  
 void Render::draw_dungeon(Dungeon& dungeon, Player& player)
 {
-	//HUD hud;
+	HUD hud(player.getMaxHP(), 1, 1);
+	int player_coords = dungeon.get(player.getPos_x(), player.getPos_y());
+
+	HANDLE hOut;
+	COORD Position;
+
+	hOut = GetStdHandle(STD_OUTPUT_HANDLE);
+
+	for (int y = 0; y < dungeon.getHeight(); y++)
+	{
+		for (int x = 0; x < dungeon.getWidth()-1; x++)
+		{
+			bool p_coords = (x == player.getPos_x() && y == player.getPos_y());
+			bool hud_coords = (x < hud.getPos_x() || x > hud.getLength()) || (y < hud.getPos_y() || y > hud.getWidth());
+
+			if (p_coords && hud_coords)
+				std::cout << player.showPlayer();
+			else if (hud_coords)
+				std::cout << paint(dungeon.get(x, y));
+			else
+			{
+				Position.X = x + 1;
+				Position.Y = y - 1;
+				SetConsoleCursorPosition(hOut, Position);
+			}
+		}
+		std::cout << '\n';
+	}
+
+	hud.addToViewport(&player);
 	
+	if (player_coords == 5 && player.getLastPressedKey() == 32)
+		dungeon.Exit();
+
 	//for (int y = 0; y < dungeon.getHeight(); y++)
 	//{
 	//	for (int x = 0; x < dungeon.getWidth(); x++)
 	//	{
-	//		bool player_coords = (x == player.getPos_x() && y == player.getPos_y());
 	//		bool skip = false;
-	//		hud.addToViewport(&player, x, y, 1, 1);
-	//
-	//		if (player_coords && dungeon.get(x, y) == 5 && player.getLastPressedKey() == 32)
-	//			dungeon.Exit();
 	//		
 	//		for (AI* monster : dungeon.monsters)
 	//			if (monster->getPos_x() == x && monster->getPos_y() == y)
@@ -120,11 +146,6 @@ void Render::draw_dungeon(Dungeon& dungeon, Player& player)
 	//				skip = true;
 	//				break;
 	//			}
-	//		
-	//		if (player_coords && !skip)
-	//			std::cout << player.showPlayer();
-	//		else if (!skip)
-	//			std::cout << paint(dungeon.get(x, y));
 	//	}
 	//	std::cout << '\n';
 	//}
@@ -157,7 +178,7 @@ void Render::draw_world(World &world, Player &player)
 			else
 			{
 				Position.X = x;
-				Position.Y = y-1;
+				Position.Y = y - 1;
 				SetConsoleCursorPosition(hOut, Position);
 			}
 		}

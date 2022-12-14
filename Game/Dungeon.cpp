@@ -1,5 +1,24 @@
 #include "Dungeon.h"
+#include "Loging.h"
 #include <queue>
+
+Dungeon::Dungeon(int width, int height) : d_width(width), d_height(height - 1)
+{
+	d_data.resize(width * height, 0);
+	startPoint_x = 0;
+	startPoint_y = 0;
+	
+	debug::log->request("Player intered into the dungeon\n\n");
+}
+
+Dungeon::~Dungeon()
+{
+	debug::log->request("Player leaved the dungeon\n\n");
+	for (AI* m : monsters) m->~AI();
+	d_data.clear();
+	walls_coords.clear();
+	d_rooms.clear();
+}
 
 bool Room::intersect(const Room& r) const
 {
@@ -21,7 +40,8 @@ void Dungeon::generate(int roomsCount) {
 					return room.intersect(r);
 				});
 
-			if (intersect == std::end(d_rooms)) {
+			if (intersect == std::end(d_rooms)) 
+			{
 				d_rooms.push_back(room);
 				break;
 			}

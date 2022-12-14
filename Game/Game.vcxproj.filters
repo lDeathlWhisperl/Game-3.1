@@ -5,14 +5,6 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="Файлы заголовков">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
-    <Filter Include="Файлы ресурсов">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
     <Filter Include="World">
       <UniqueIdentifier>{86b2c66b-2860-40d3-87d2-f207842398a8}</UniqueIdentifier>
     </Filter>
@@ -73,6 +65,24 @@
     <Filter Include="Recorder\Cpp">
       <UniqueIdentifier>{1c53812f-5d09-451c-96f1-2d49ff791fb1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Characters\Monster\Demon\Headers">
+      <UniqueIdentifier>{da325418-9f6f-4d82-8562-6177ad365163}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Characters\Monster\Demon\Cpp">
+      <UniqueIdentifier>{552ed798-ff6e-409f-b9f3-509ff26c725d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Characters\Monster\Spirit\Headers">
+      <UniqueIdentifier>{39cfbcf0-84e3-4c29-b11e-d50e6f9740f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Characters\Monster\Spirit\Cpp">
+      <UniqueIdentifier>{cb65a225-db4a-4f3b-aecb-c1e203a1c1c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Characters\Monster\Undead\Headers">
+      <UniqueIdentifier>{46b71a6c-4981-4979-925e-9a096c3610ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Characters\Monster\Undead\Cpp">
+      <UniqueIdentifier>{3e35ca94-0141-4edf-9295-48ff50bd1f1d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -105,11 +115,41 @@
     <ClCompile Include="Recorder.cpp">
       <Filter>Recorder\Cpp</Filter>
     </ClCompile>
+    <ClCompile Include="Imp.cpp">
+      <Filter>Characters\Monster\Demon\Cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Possessed.cpp">
+      <Filter>Characters\Monster\Demon\Cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Mancubus.cpp">
+      <Filter>Characters\Monster\Demon\Cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Ghoul.cpp">
+      <Filter>Characters\Monster\Spirit\Cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Gin.cpp">
+      <Filter>Characters\Monster\Spirit\Cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Mummy.cpp">
+      <Filter>Characters\Monster\Spirit\Cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Skeleton.cpp">
+      <Filter>Characters\Monster\Undead\Cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Draugr.cpp">
+      <Filter>Characters\Monster\Undead\Cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Zombie.cpp">
+      <Filter>Characters\Monster\Undead\Cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Castle.cpp">
+      <Filter>World\Cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Adapter.cpp">
+      <Filter>Recorder\Cpp</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Base.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="Undead.h">
       <Filter>Characters\Monster\Monster type</Filter>
     </ClInclude>
@@ -118,15 +158,6 @@
     </ClInclude>
     <ClInclude Include="Spirit.h">
       <Filter>Characters\Monster\Monster type</Filter>
-    </ClInclude>
-    <ClInclude Include="Skeleton.h">
-      <Filter>Characters\Monster\Undead</Filter>
-    </ClInclude>
-    <ClInclude Include="Zombie.h">
-      <Filter>Characters\Monster\Undead</Filter>
-    </ClInclude>
-    <ClInclude Include="Draugr.h">
-      <Filter>Characters\Monster\Undead</Filter>
     </ClInclude>
     <ClInclude Include="Rang_1.h">
       <Filter>Characters\Monster</Filter>
@@ -139,24 +170,6 @@
     </ClInclude>
     <ClInclude Include="Spawner.h">
       <Filter>Characters\Monster</Filter>
-    </ClInclude>
-    <ClInclude Include="Imp.h">
-      <Filter>Characters\Monster\Demon</Filter>
-    </ClInclude>
-    <ClInclude Include="Possessed.h">
-      <Filter>Characters\Monster\Demon</Filter>
-    </ClInclude>
-    <ClInclude Include="Mancubus.h">
-      <Filter>Characters\Monster\Demon</Filter>
-    </ClInclude>
-    <ClInclude Include="Mummy.h">
-      <Filter>Characters\Monster\Spirit</Filter>
-    </ClInclude>
-    <ClInclude Include="Gin.h">
-      <Filter>Characters\Monster\Spirit</Filter>
-    </ClInclude>
-    <ClInclude Include="Ghoul.h">
-      <Filter>Characters\Monster\Spirit</Filter>
     </ClInclude>
     <ClInclude Include="Monster.h">
       <Filter>Characters\Monster</Filter>
@@ -206,6 +219,33 @@
     </ClInclude>
     <ClInclude Include="Loging.h">
       <Filter>Recorder\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Imp.h">
+      <Filter>Characters\Monster\Demon\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Mancubus.h">
+      <Filter>Characters\Monster\Demon\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Possessed.h">
+      <Filter>Characters\Monster\Demon\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Ghoul.h">
+      <Filter>Characters\Monster\Spirit\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Gin.h">
+      <Filter>Characters\Monster\Spirit\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Mummy.h">
+      <Filter>Characters\Monster\Spirit\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Draugr.h">
+      <Filter>Characters\Monster\Undead\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Skeleton.h">
+      <Filter>Characters\Monster\Undead\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Zombie.h">
+      <Filter>Characters\Monster\Undead\Headers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

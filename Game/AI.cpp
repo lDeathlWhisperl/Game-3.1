@@ -1,4 +1,5 @@
 #include "AI.h"
+#include "Loging.h"
 
 AStar::Generator AI::generator;
 int AI::count = 0;
@@ -8,8 +9,7 @@ AI::~AI()
 	if (count == 1)
 		generator.clearCollisions();
 	count--;
-	std::ofstream fout("log.txt", std::ios::app);
-	fout << "Бот " << id << " уничтожен...\n\n";
+	debug::log->request("[BOT] " + std::to_string(id) + " destroyed\n\n");
 }
 
 void AI::controller(Player& player)

@@ -1,7 +1,5 @@
 #pragma once
 
-#include <fstream>
-
 class Actor
 {
 protected:

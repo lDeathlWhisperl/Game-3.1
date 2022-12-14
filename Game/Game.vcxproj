@@ -139,23 +139,33 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Adapter.cpp" />
     <ClCompile Include="AI.cpp" />
     <ClCompile Include="AStar.cpp" />
+    <ClCompile Include="Castle.cpp" />
+    <ClCompile Include="Draugr.cpp" />
     <ClCompile Include="Dungeon.cpp" />
+    <ClCompile Include="Ghoul.cpp" />
+    <ClCompile Include="Gin.cpp" />
     <ClCompile Include="HUD.cpp" />
+    <ClCompile Include="Imp.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Mancubus.cpp" />
+    <ClCompile Include="Mummy.cpp" />
     <ClCompile Include="Perlin.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Possessed.cpp" />
     <ClCompile Include="Recorder.cpp" />
     <ClCompile Include="Render.cpp" />
+    <ClCompile Include="Skeleton.cpp" />
     <ClCompile Include="World.cpp" />
+    <ClCompile Include="Zombie.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actor.h" />
     <ClInclude Include="Adapter.h" />
     <ClInclude Include="AI.h" />
     <ClInclude Include="AStar.hpp" />
-    <ClInclude Include="Base.h" />
     <ClInclude Include="Castle.h" />
     <ClInclude Include="Demon.h" />
     <ClInclude Include="Draugr.h" />
