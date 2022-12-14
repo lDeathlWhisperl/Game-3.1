@@ -11,29 +11,11 @@ public:
 
 	~Recorder() {};
 
-	static void writeToFile(std::string text)
-	{
-		std::ofstream fout("log.txt");
+	static void writeToFile(std::string);
 
-		terminal += text;
+	static void writeToTerminal(std::string);
 
-		fout << terminal;
-	}
+	static void withoutLog();
 
-	static void writeToTerminal(std::string text)
-	{
-		terminal += text;
-	}
-
-	static void withoutLog()
-	{
-		terminal = "Loging has not been enabled\n\n";
-	}
-
-	static void showLogInTerminal()
-	{
-		std::cout << terminal;
-	}
+	static void showLogInTerminal();
 };
-
-std::string Recorder::terminal = "";

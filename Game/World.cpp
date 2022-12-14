@@ -1,23 +1,22 @@
 #include "World.h"
+#include <iostream>
+#include "Loging.h"
 #include <fstream>
 
 World::World(int l, int w) : length(l), width(w)
 {
 	map = new double* [w];
-	std::ofstream fout("log.txt", std::ios::app);
-	fout << "Создание мира...\n\n";
-	fout.close();
+	debug::log->request("Creating the world\n\n");
 }
 
 World::~World()
 {
-	std::ofstream fout("log.txt", std::ios::app);
-	fout << "Удаление мира...\n\n";
-	fout.close();
-
+	debug::log->request("Deleting the world\n\n");
+	/*
 	for (int i = 0; i < width; i++)
 		delete[] map[i];
 	delete[] map;
+	*/
 }
 
 void World::plantTree(int x, int y)

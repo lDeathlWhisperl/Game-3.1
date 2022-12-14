@@ -1,5 +1,5 @@
 ﻿#include "Render.h"
-#include "Adapter.h"
+#include "Loging.h"
 
 #define gameLoop() while(true)
 #define game_over break
@@ -35,17 +35,16 @@ void colors()
 
 int main()
 {
-    Log* log = new Adapter(2);
-    log->request("========================[New-game]=========================\n\n");
+    debug::log->request("========================[New-game]=========================\n\n");
 
     fullscreen();
     int x, y;
     unsigned int seed = 17042003;
     getConsoleScreenSize(x, y);
 
-    log->request("World generation seed: ");
-    log->request(seed);
-    log->request("\n\n");
+    debug::log->request("World generation seed: ");
+    debug::log->request(std::to_string(seed));
+    debug::log->request("\n\n");
 
     World landscape(x+16, y+8);
     Player player;
@@ -67,7 +66,7 @@ int main()
         Render::update();
     }
 
-    log->request("========================[Game-over]========================\n\n");
-    delete log;
+    debug::log->request("========================[Game-over]========================\n\n");
+    delete debug::log;
     return 0;
 }

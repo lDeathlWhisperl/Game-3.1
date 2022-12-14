@@ -150,11 +150,6 @@ void Render::draw_world(World &world, Player &player)
 		{
 			bool p_coords = x == world.getLength() / 2 && y == world.getWidth() / 2;
 
-			player.breakBase(x, y, p_coords);
-
-			if (player.placeBase(x, y, p_coords, do_once))
-				continue;
-
 			if (p_coords && world.getMap(x, y) != 2)
 				std::cout << player.showPlayer();
 			else if ((x <= hud.getPos_x() || x > hud.getLength()) || (y <= hud.getPos_y() || y > hud.getWidth()))

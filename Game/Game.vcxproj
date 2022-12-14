@@ -141,12 +141,12 @@
   <ItemGroup>
     <ClCompile Include="AI.cpp" />
     <ClCompile Include="AStar.cpp" />
-    <ClCompile Include="Base.cpp" />
     <ClCompile Include="Dungeon.cpp" />
     <ClCompile Include="HUD.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Perlin.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Recorder.cpp" />
     <ClCompile Include="Render.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>
@@ -162,6 +162,7 @@
     <ClInclude Include="Dungeon.h" />
     <ClInclude Include="Ghoul.h" />
     <ClInclude Include="Gin.h" />
+    <ClInclude Include="Loging.h" />
     <ClInclude Include="HUD.h" />
     <ClInclude Include="Imp.h" />
     <ClInclude Include="Log.h" />
@@ -187,6 +188,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="log.txt" />
+    <Text Include="Settings.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

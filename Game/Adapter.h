@@ -7,23 +7,28 @@
 
 class Adapter : public Log
 {
+	int type;
+
 	void request(std::string text)
 	{
 		Proxy p(type);
 		p.request(text);
 	}
-
-	void request(unsigned int num)
-	{
-		Proxy p(type);
-		std::string str = std::to_string(num);
-		p.request(str);
-	}
 public:
-	Adapter(int t) : Log(t) {}
+	Adapter() 
+	{
+		std::ifstream fin("Settings.txt");
+		fin >> type;
+	}
 
 	~Adapter()
 	{
-		if (type >= 2) Recorder::showLogInTerminal();
+		if (type != 1) 
+		{
+			system("cls");
+			Recorder::showLogInTerminal();
+			std::ofstream fout("Log.txt");
+			fout << "\n\n";
+		}
 	}
 };

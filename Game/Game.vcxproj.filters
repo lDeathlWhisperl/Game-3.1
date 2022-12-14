@@ -13,159 +13,203 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Файлы заголовков\Monster type">
-      <UniqueIdentifier>{7be06b9e-eaab-4c9e-96fc-735c142f3ff0}</UniqueIdentifier>
+    <Filter Include="World">
+      <UniqueIdentifier>{86b2c66b-2860-40d3-87d2-f207842398a8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Файлы заголовков\Monster">
+    <Filter Include="World\Headers">
+      <UniqueIdentifier>{64113317-f108-4621-8a7a-3a7cc6a3eb74}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="World\Cpp">
+      <UniqueIdentifier>{74f31cc5-cc77-4934-a01e-b6f206dd2deb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Characters">
+      <UniqueIdentifier>{b1893d58-dfaf-48a5-8554-a909e5d517a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Characters\Player">
+      <UniqueIdentifier>{62628473-3f26-4176-b99e-be3deea34fb2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Characters\Monster">
       <UniqueIdentifier>{4694a0eb-ae0b-4914-a614-27278a59f11d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Файлы заголовков\Monster\Undead">
+    <Filter Include="Characters\Monster\Undead">
       <UniqueIdentifier>{4fbc3504-8258-4022-9631-26155a1f4857}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Файлы заголовков\Monster\Demon">
+    <Filter Include="Characters\Monster\Demon">
       <UniqueIdentifier>{33486ea4-d724-441e-8a1c-b0feec59d357}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Файлы заголовков\Monster\Spirit">
+    <Filter Include="Characters\Monster\Spirit">
       <UniqueIdentifier>{c568ede0-d42d-42f1-85c1-73993ea0d76f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Файлы заголовков\Recorder">
+    <Filter Include="Characters\Monster\Monster type">
+      <UniqueIdentifier>{7be06b9e-eaab-4c9e-96fc-735c142f3ff0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Algorithms">
+      <UniqueIdentifier>{e660fc72-8c87-4897-b3aa-d0bc09e953e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Algorithms\Headers">
+      <UniqueIdentifier>{ec8cb584-455a-4094-8f58-6dd9709f9a11}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Algorithms\Cpp">
+      <UniqueIdentifier>{cdf5f9f7-f8b7-403c-bc9a-97dae8aa5370}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Characters\Other">
+      <UniqueIdentifier>{f347b5ce-9219-4096-9fe9-3a390e0cbca6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Characters\Other\Headers">
+      <UniqueIdentifier>{bca63903-cf1f-41b4-897e-acbcb555a356}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Characters\Other\Cpp">
+      <UniqueIdentifier>{78a00062-e01a-482d-8a74-8849428f1a46}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Recorder">
       <UniqueIdentifier>{47ed0feb-8d7a-45f0-91b5-1573bdf871ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Render">
+      <UniqueIdentifier>{1d13479d-4395-482a-a5e7-4c68f71f48b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Recorder\Headers">
+      <UniqueIdentifier>{f3a3122f-90ac-43c8-9eae-6ad72ca8094d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Recorder\Cpp">
+      <UniqueIdentifier>{1c53812f-5d09-451c-96f1-2d49ff791fb1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Perlin.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="Render.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="Player.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="HUD.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="Base.cpp">
-      <Filter>Исходные файлы</Filter>
+      <Filter>Characters\Player</Filter>
     </ClCompile>
     <ClCompile Include="Dungeon.cpp">
-      <Filter>Исходные файлы</Filter>
+      <Filter>World\Cpp</Filter>
     </ClCompile>
     <ClCompile Include="World.cpp">
-      <Filter>Исходные файлы</Filter>
+      <Filter>World\Cpp</Filter>
     </ClCompile>
     <ClCompile Include="AStar.cpp">
-      <Filter>Исходные файлы</Filter>
+      <Filter>Algorithms\Cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Perlin.cpp">
+      <Filter>Algorithms\Cpp</Filter>
     </ClCompile>
     <ClCompile Include="AI.cpp">
-      <Filter>Файлы ресурсов</Filter>
+      <Filter>Characters\Other\Cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="HUD.cpp">
+      <Filter>Characters\Other\Cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Render.cpp">
+      <Filter>Render</Filter>
+    </ClCompile>
+    <ClCompile Include="Recorder.cpp">
+      <Filter>Recorder\Cpp</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="World.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Perlin.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Render.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="HUD.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="Base.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Character.h">
-      <Filter>Файлы ресурсов</Filter>
-    </ClInclude>
-    <ClInclude Include="Actor.h">
-      <Filter>Файлы ресурсов</Filter>
-    </ClInclude>
-    <ClInclude Include="Castle.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Dungeon.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="AStar.hpp">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="AI.h">
-      <Filter>Файлы ресурсов</Filter>
-    </ClInclude>
     <ClInclude Include="Undead.h">
-      <Filter>Файлы заголовков\Monster type</Filter>
+      <Filter>Characters\Monster\Monster type</Filter>
     </ClInclude>
     <ClInclude Include="Demon.h">
-      <Filter>Файлы заголовков\Monster type</Filter>
+      <Filter>Characters\Monster\Monster type</Filter>
     </ClInclude>
     <ClInclude Include="Spirit.h">
-      <Filter>Файлы заголовков\Monster type</Filter>
+      <Filter>Characters\Monster\Monster type</Filter>
     </ClInclude>
     <ClInclude Include="Skeleton.h">
-      <Filter>Файлы заголовков\Monster\Undead</Filter>
+      <Filter>Characters\Monster\Undead</Filter>
     </ClInclude>
     <ClInclude Include="Zombie.h">
-      <Filter>Файлы заголовков\Monster\Undead</Filter>
+      <Filter>Characters\Monster\Undead</Filter>
     </ClInclude>
     <ClInclude Include="Draugr.h">
-      <Filter>Файлы заголовков\Monster\Undead</Filter>
+      <Filter>Characters\Monster\Undead</Filter>
     </ClInclude>
     <ClInclude Include="Rang_1.h">
-      <Filter>Файлы заголовков\Monster</Filter>
+      <Filter>Characters\Monster</Filter>
     </ClInclude>
     <ClInclude Include="Rang_2.h">
-      <Filter>Файлы заголовков\Monster</Filter>
+      <Filter>Characters\Monster</Filter>
     </ClInclude>
     <ClInclude Include="Rang_3.h">
-      <Filter>Файлы заголовков\Monster</Filter>
+      <Filter>Characters\Monster</Filter>
     </ClInclude>
     <ClInclude Include="Spawner.h">
-      <Filter>Файлы заголовков\Monster</Filter>
+      <Filter>Characters\Monster</Filter>
     </ClInclude>
     <ClInclude Include="Imp.h">
-      <Filter>Файлы заголовков\Monster\Demon</Filter>
+      <Filter>Characters\Monster\Demon</Filter>
     </ClInclude>
     <ClInclude Include="Possessed.h">
-      <Filter>Файлы заголовков\Monster\Demon</Filter>
+      <Filter>Characters\Monster\Demon</Filter>
     </ClInclude>
     <ClInclude Include="Mancubus.h">
-      <Filter>Файлы заголовков\Monster\Demon</Filter>
+      <Filter>Characters\Monster\Demon</Filter>
     </ClInclude>
     <ClInclude Include="Mummy.h">
-      <Filter>Файлы заголовков\Monster\Spirit</Filter>
+      <Filter>Characters\Monster\Spirit</Filter>
     </ClInclude>
     <ClInclude Include="Gin.h">
-      <Filter>Файлы заголовков\Monster\Spirit</Filter>
+      <Filter>Characters\Monster\Spirit</Filter>
     </ClInclude>
     <ClInclude Include="Ghoul.h">
-      <Filter>Файлы заголовков\Monster\Spirit</Filter>
+      <Filter>Characters\Monster\Spirit</Filter>
     </ClInclude>
     <ClInclude Include="Monster.h">
-      <Filter>Файлы заголовков\Monster</Filter>
+      <Filter>Characters\Monster</Filter>
     </ClInclude>
-    <ClInclude Include="Recorder.h">
-      <Filter>Файлы заголовков\Recorder</Filter>
+    <ClInclude Include="Player.h">
+      <Filter>Characters\Player</Filter>
     </ClInclude>
-    <ClInclude Include="Proxy.h">
-      <Filter>Файлы заголовков\Recorder</Filter>
+    <ClInclude Include="Castle.h">
+      <Filter>World\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="Log.h">
-      <Filter>Файлы заголовков\Recorder</Filter>
+    <ClInclude Include="Dungeon.h">
+      <Filter>World\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="World.h">
+      <Filter>World\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="AStar.hpp">
+      <Filter>Algorithms\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Perlin.h">
+      <Filter>Algorithms\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="AI.h">
+      <Filter>Characters\Other\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Character.h">
+      <Filter>Characters\Other\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="HUD.h">
+      <Filter>Characters\Other\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor.h" />
+    <ClInclude Include="Render.h">
+      <Filter>Render</Filter>
     </ClInclude>
     <ClInclude Include="Adapter.h">
-      <Filter>Файлы заголовков\Recorder</Filter>
+      <Filter>Recorder\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Log.h">
+      <Filter>Recorder\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Proxy.h">
+      <Filter>Recorder\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Recorder.h">
+      <Filter>Recorder\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Loging.h">
+      <Filter>Recorder\Headers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="log.txt" />
+    <Text Include="Settings.txt" />
   </ItemGroup>
 </Project>

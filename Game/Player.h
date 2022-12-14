@@ -1,15 +1,10 @@
 #pragma once
 
 #include "Character.h"
-#include "Base.h"
-
 #include <conio.h>
-#include <vector>
 
 class Player : public Character
 {
-    std::vector<Base> base;
-
     enum buttons
     {
         //spec
@@ -41,13 +36,7 @@ class Player : public Character
 public:
     Player();
 
-    ~Player();
-
-    bool placeBase(int, int, bool, bool&);
-
     void controller(int, int, int, int);
-
-    void breakBase(int, int, bool);
 
     void getDamage(int);
 
@@ -58,10 +47,4 @@ public:
     char getLastPressedKey();
 
     bool isMoving();
-
-    friend std::ostream& operator<<(std::ostream& out, Player& p)
-    {
-        out << "X: " << p.pos_x << " Y: " << p.pos_y;
-        return out;
-    }
 };

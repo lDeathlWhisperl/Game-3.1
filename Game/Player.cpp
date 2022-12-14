@@ -1,5 +1,5 @@
 #include "Player.h"
-#include <algorithm>
+#include "Loging.h"
 
 bool exception(int num)
 {
@@ -16,14 +16,7 @@ bool exception(int num)
 Player::Player()
 {
     character = '^';
-    std::ofstream fout("log.txt", std::ios::app);
-    fout << "Создание игрока...\n\n";
-}
-
-Player::~Player()
-{
-    std::ofstream fout("log.txt", std::ios::app);
-    fout << "Удаление игрока...\n\n";
+    debug::log->request("Creating the player\n\n");
 }
 
 void Player::controller(int top, int left, int right, int bottom)
@@ -119,51 +112,22 @@ void Player::getDamage(int dmg)
 {
     Character::getDamage(dmg);
     
-    std::ofstream fout("log.txt", std::ios::app);
-    fout << "Игрок получил урон в размере " << dmg << " единиц\n\n";
-    if (!status) fout << "Игрок умер на координатах " << *this << "\n\n";
+    debug::log->request("The player has got ");
+    debug::log->request(std::to_string(dmg));
+    debug::log->request(" points of damage\n\n");
+    if (!status)
+    {
+        debug::log->request("The player died on x: ");
+        debug::log->request(std::to_string(pos_x));
+        debug::log->request(" y: ");
+        debug::log->request(std::to_string(pos_y));
+        debug::log->request(" coordinates\n\n");
+    }
 }
 
 char Player::getLastPressedKey()
 {
     return lastPressedKey;
-}
-
-bool Player::placeBase(int x, int y, bool player_coords, bool& do_once)
-{
-    if (player_coords && lastPressedKey == e)
-        base.push_back(Base(x, y));
-
-    std::sort(base.begin(), base.end());
-    base.erase(std::unique(base.begin(), base.end()), base.end());
-
-    if (do_once)
-    {
-        for (int i = 0; i < base.size(); i++)
-            base[i].offset(lastPressedKey);
-        do_once = false;
-    }
-
-    for (int i = 0; i < base.size(); i++)
-        if (x == base[i].getPos_x() && y == base[i].getPos_y())
-        {
-            base[i].show();
-            return true;
-        }
-    return false;
-}
-
-void Player::breakBase(int x, int y, bool player_coords)
-{
-    if (player_coords && lastPressedKey == q)
-    {
-        for (int i = 0; i < base.size(); i++)
-            if (x == base[i].getPos_x() && y == base[i].getPos_y())
-            {
-                base.erase(base.begin() + i);
-                return;
-            }
-    }
 }
 
 bool Player::isMoving()
