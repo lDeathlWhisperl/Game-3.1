@@ -36,6 +36,8 @@ class Player : public Character
 public:
     Player();
 
+    ~Player();
+
     void controller(int, int, int, int);
 
     void getDamage(int);

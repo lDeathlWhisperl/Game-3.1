@@ -1,5 +1,5 @@
 #include "Imp.h"
-#include "Loging.h"
+#include "Logging.h"
 
 Imp::Imp() : Demon(5, 1, 1, 1)
 {

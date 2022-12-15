@@ -1,5 +1,5 @@
 #include "Player.h"
-#include "Loging.h"
+#include "Logging.h"
 
 bool exception(int num)
 {
@@ -17,6 +17,11 @@ Player::Player()
 {
     character = '^';
     debug::log->request("Creating the player\n\n");
+}
+
+Player::~Player()
+{
+    debug::log->request("Deleting the player\n\n");
 }
 
 void Player::controller(int top, int left, int right, int bottom)

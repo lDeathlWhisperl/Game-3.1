@@ -1,5 +1,5 @@
 #include "Skeleton.h"
-#include "Loging.h"
+#include "Logging.h"
 
 Skeleton::Skeleton() : Undead()
 {

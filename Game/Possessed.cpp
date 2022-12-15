@@ -1,5 +1,5 @@
 #include "Possessed.h"
-#include "Loging.h"
+#include "Logging.h"
 
 Possessed::Possessed() : Demon(10, 4, 3, 2)
 {

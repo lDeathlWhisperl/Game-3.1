@@ -1,5 +1,5 @@
 #include "Dungeon.h"
-#include "Loging.h"
+#include "Logging.h"
 #include <queue>
 
 Dungeon::Dungeon(int width, int height) : d_width(width), d_height(height - 1)

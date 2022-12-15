@@ -1,5 +1,5 @@
 #include "Gin.h"
-#include "Loging.h"
+#include "Logging.h"
 
 Gin::Gin() : Spirit(5, 1, 4, 2)
 {

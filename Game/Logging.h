@@ -4,5 +4,5 @@
 
 namespace debug
 {
-	static Log* log = new Adapter();
+	static Log* log = new Adapter();	
 }

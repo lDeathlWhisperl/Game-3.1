@@ -1,5 +1,5 @@
 #include "Mummy.h"
-#include "Loging.h"
+#include "Logging.h"
 
 Mummy::Mummy() : Spirit()
 {

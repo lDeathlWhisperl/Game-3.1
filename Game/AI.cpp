@@ -1,5 +1,5 @@
 #include "AI.h"
-#include "Loging.h"
+#include "Logging.h"
 
 AStar::Generator AI::generator;
 int AI::count = 0;

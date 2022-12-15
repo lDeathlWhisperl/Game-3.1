@@ -83,6 +83,15 @@
     <Filter Include="Characters\Monster\Undead\Cpp">
       <UniqueIdentifier>{3e35ca94-0141-4edf-9295-48ff50bd1f1d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Menu">
+      <UniqueIdentifier>{360097f7-933d-4241-8612-fedc96127cb6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Menu\Headers">
+      <UniqueIdentifier>{dbc6ac93-bc25-4810-86c4-fa21f9dcd599}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Menu\Cpp">
+      <UniqueIdentifier>{c6dc646f-3793-4df6-bbb5-cbf037d4d9e1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -147,6 +156,15 @@
     </ClCompile>
     <ClCompile Include="Adapter.cpp">
       <Filter>Recorder\Cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Menu\Cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Settings.cpp">
+      <Filter>Menu\Cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Penguin.cpp">
+      <Filter>Menu\Cpp</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -217,7 +235,7 @@
     <ClInclude Include="Recorder.h">
       <Filter>Recorder\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="Loging.h">
+    <ClInclude Include="Logging.h">
       <Filter>Recorder\Headers</Filter>
     </ClInclude>
     <ClInclude Include="Imp.h">
@@ -246,6 +264,15 @@
     </ClInclude>
     <ClInclude Include="Zombie.h">
       <Filter>Characters\Monster\Undead\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Menu\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Settings.h">
+      <Filter>Menu\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Penguin.h">
+      <Filter>Menu\Headers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

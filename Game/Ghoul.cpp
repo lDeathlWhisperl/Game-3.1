@@ -1,5 +1,5 @@
 #include "Ghoul.h"
-#include "Loging.h"
+#include "Logging.h"
 
 Ghoul::Ghoul() : Spirit(8, 7, 5, 3)
 {

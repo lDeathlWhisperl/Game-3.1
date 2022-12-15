@@ -1,5 +1,5 @@
 #include "Zombie.h"
-#include "Loging.h"
+#include "Logging.h"
 
 Zombie::Zombie() : Undead(5, 1, 2, 2)
 {

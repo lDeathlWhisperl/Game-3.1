@@ -1,5 +1,5 @@
 #include "Render.h"
-#include "Loging.h"
+#include "Logging.h"
 
 //32 - tree
 //92 - field

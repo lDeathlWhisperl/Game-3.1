@@ -3,7 +3,7 @@
 #include "World.h"
 #include "Castle.h"
 #include "Perlin.h"
-#include "Loging.h"
+#include "Logging.h"
 
 World::World(int l, int w) : length(l), width(w)
 {

@@ -7,11 +7,9 @@
 
 class Adapter : public Log
 {
-	int type;
+	static int type;
 
 	void request(std::string text);
 public:
-	Adapter();
-
 	~Adapter();
 };

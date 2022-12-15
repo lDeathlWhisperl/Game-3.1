@@ -1,2 +1,14 @@
+========================[New-game]=========================
 
+World generation seed: 5687
+
+Creating the world
+
+Creating the player
+
+Deleting the player
+
+Deleting the world
+
+========================[Game-over]========================
 

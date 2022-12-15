@@ -1,5 +1,5 @@
 #include "Draugr.h"
-#include "Loging.h"
+#include "Logging.h"
 
 Draugr::Draugr() : Undead(10, 5, 5, 3)
 {
