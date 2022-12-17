@@ -1,7 +1,14 @@
 #pragma once
 
+#include "Adapter.h"
+#include "HUD.h"
+
 class Settings
 {
+    static int sett_logType;
+    static std::string sett_nickname;
+    static unsigned int sett_HUD_x, sett_HUD_y;
+
     static int menu_id;
 
     static int choice;
@@ -9,8 +16,6 @@ class Settings
     static const int BUTTON_COUNT;
 
     static char settings[][33];
-
-    static std::string general_settings;
 
     enum buttons
     {
@@ -20,21 +25,11 @@ class Settings
         SPACE = 32,
         //arrows
         ARROW_UP = 72,
-        ARROW_LEFT = 75,
-        ARROW_RIGHT = 77,
         ARROW_DOWN = 80,
         //controllers
-        A = 65,
-        D = 68,
-        E = 69,
-        Q = 81,
         S = 83,
         W = 87,
 
-        a = 97,
-        d = 100,
-        e = 101,
-        q = 113,
         s = 115,
         w = 119,
     };
@@ -45,9 +40,18 @@ class Settings
 
     static void logging();
 
+    static void setSeed();
+
+    static void setRandomSeed();
+
+    static void setNickname();
+
+    static void setHUDPosition();
+
     static void mode();
 
-    static void write(char*, unsigned int);
+    friend Adapter;
+    friend HUD;
 
     Settings() {};
 public:

@@ -204,7 +204,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="log.txt" />
-    <Text Include="settings.txt" />
+    <Text Include="leader board.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -277,6 +277,6 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="log.txt" />
-    <Text Include="settings.txt" />
+    <Text Include="leader board.txt" />
   </ItemGroup>
 </Project>

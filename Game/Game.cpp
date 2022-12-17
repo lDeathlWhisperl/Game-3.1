@@ -108,7 +108,7 @@ void Game::game()
     landscape.landscape();
     landscape.generator(seed, 0, 0);
 
-    /*gameLoop()
+    gameLoop()
     {
         Render::draw_world(landscape, player);
 
@@ -120,7 +120,7 @@ void Game::game()
             game_over;
 
         Render::update();
-    }*/
+    }
 }
 
 void Game::settings()
@@ -148,9 +148,9 @@ void Game::mode()
 void Game::init()
 {
     fullscreen();
+    getConsoleScreenSize(screen_size_x, screen_size_y);
     srand(time(NULL));
     seed = static_cast<unsigned int>(rand());
-    getConsoleScreenSize(screen_size_x, screen_size_y);
 
     while (true)
     {

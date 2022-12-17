@@ -1,5 +1,12 @@
 #include "HUD.h"
+#include "Settings.h"
 #include <windows.h>
+
+HUD::HUD(int l) : length(l + 2)
+{
+	pos_x = Settings::sett_HUD_x;
+	pos_y = Settings::sett_HUD_y;
+}
 
 void HUD::frame()
 {
@@ -70,22 +77,4 @@ void HUD::addToViewport(Character* character)
 		SetConsoleCursorPosition(hOut, Position);
 	}
 	length += pos_x;
-	/*if (x == pos_x && (y == pos_y || y == pos_y + 3))
-	{
-		frame();
-		x += getLength();
-	}
-
-	if (x == pos_x && y == pos_y + 1)
-	{
-		healthBar(character);
-		x += getLength();
-	}
-
-	if (x == pos_x && y == pos_y + 2)
-	{
-		armorBar(character);
-		x += getLength();
-	}*/
-
 }

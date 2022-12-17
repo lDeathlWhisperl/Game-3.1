@@ -15,7 +15,7 @@ class HUD
 	void armorBar(Character*);
 
 public:
-	HUD(int l, int x, int y) : length(l + 2), pos_x(x),pos_y(y) {}
+	HUD(int);
 
 	int getLength();
 

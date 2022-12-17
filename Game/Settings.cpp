@@ -8,6 +8,12 @@
 #include "Settings.h"
 #include "Penguin.h"
 
+//
+int Settings::sett_logType = 0;
+unsigned int Settings::sett_HUD_x = 0, Settings::sett_HUD_y = 0;
+std::string Settings::sett_nickname = "[NULL]";
+//
+
 static void getConsoleScreenSize(int& x, int& y)
 {
     HANDLE hWndConsole;
@@ -26,32 +32,10 @@ static void getConsoleScreenSize(int& x, int& y)
         printf("Error: %d\n", GetLastError());
 }
 
-static int foundSetting(char *search)
-{
-    int parametr = 0;
-    std::ifstream fin("settings.txt");
-    char buffer[1024];
-
-    while(fin.getline(buffer, 1024, ':'))
-        if (strstr(buffer, search))
-            fin >> parametr;
-
-    return parametr;
-}
-
-void Settings::write(char *setting_type, unsigned int setting_num)
-{
-    size_t num_count = std::to_string(setting_num).size();
-    size_t i = general_settings.find(setting_type) + 10;
-
-    general_settings.erase(i, num_count);
-    general_settings.insert(i, std::to_string(setting_num));
-}
-
 int Settings::menu_id = 0,
     Settings::choice = -1;
 
-const int Settings::BUTTON_COUNT = 6;
+const int Settings::BUTTON_COUNT = 7;
 
 static bool back = false;
 
@@ -60,12 +44,11 @@ char Settings::settings[BUTTON_COUNT][33] =
     "[             Back             ]",
     "[            Logging           ]",
     "[ Change world generation seed ]",
+    "[     Set random world seed    ]",
     "[           Nickname           ]",
-    "[       set HUD position       ]",
+    "[       Set HUD position       ]",
     "[            Penguin           ]"
 };
-
-std::string Settings::general_settings = "";
 
 void Settings::menu()
 {
@@ -89,38 +72,108 @@ void Settings::menu()
         std::cout << settings[i] << "\x1b[0m\n";
         y += 2;
     }
-
-    std::ofstream fout("settings.txt");
-    fout << general_settings;
 }
 
 void Settings::logging()
 {
-    int log_type;
-
-    char ch[] = "Log type";
-    log_type = foundSetting(ch);
-    std::cout << log_type;
-
-    if (log_type < 0 || log_type > 2) log_type = 0;
-
-    switch (log_type)
+    switch (sett_logType)
     {
     case 0:
-        log_type++;
+        sett_logType++;
         strcpy_s(settings[1], "[         FILE LOGGING         ]");
         break;
     case 1:
-        log_type++;
+        sett_logType++;
         strcpy_s(settings[1], "[       TERMINAL LOGGING       ]");
         break;
     case 2:
-        log_type = 0;
         strcpy_s(settings[1], "[        WITHOUT LOGGING       ]");
-        break;
+    default:
+        sett_logType = 0;
     }
+}
 
-    write(ch, log_type);
+void Settings::setSeed()
+{
+    system("cls");
+
+    HANDLE hOut;
+    COORD Position;
+
+    hOut = GetStdHandle(STD_OUTPUT_HANDLE);
+
+    int x, y;
+    getConsoleScreenSize(x, y);
+    x /= 2;
+    y /= 2;
+
+    Position.X = x - 18;
+    Position.Y = y;
+    SetConsoleCursorPosition(hOut, Position);
+    std::cout << "Enter the new world generation seed: ";
+    std::cin >> Game::seed;
+}
+
+void Settings::setRandomSeed()
+{
+    srand(unsigned(time(0)));
+    Game::seed = static_cast<unsigned int>(rand());
+}
+
+void Settings::setNickname()
+{
+    system("cls");
+
+    HANDLE hOut;
+    COORD Position;
+
+    hOut = GetStdHandle(STD_OUTPUT_HANDLE);
+
+    int x, y;
+    getConsoleScreenSize(x, y);
+    x = x / 2 - 22;
+    y /= 2;
+
+    Position.X = x;
+    Position.Y = y;
+    SetConsoleCursorPosition(hOut, Position);
+
+    std::cout << "Set the new nickname: " << sett_nickname << " -> ";
+    std::getline(std::cin, sett_nickname);
+}
+
+void Settings::setHUDPosition()
+{
+    system("cls");
+
+    HANDLE hOut;
+    COORD Position;
+
+    hOut = GetStdHandle(STD_OUTPUT_HANDLE);
+
+    int x, y;
+    getConsoleScreenSize(x, y);
+
+    Position.X = x / 2 - 10;
+    Position.Y = y / 2;
+    SetConsoleCursorPosition(hOut, Position);
+
+    std::cout << "Set new HUD position\n";
+    Position.X = x / 2 - 10;
+    Position.Y = (y / 2) + 1;
+    SetConsoleCursorPosition(hOut, Position);
+
+    std::cout << "X: ";
+    std::cin >> sett_HUD_x;
+    Position.X = x / 2 - 10;
+    Position.Y = (y / 2) + 2;
+    SetConsoleCursorPosition(hOut, Position);
+
+    std::cout << "Y: ";
+    std::cin >> sett_HUD_y;
+
+    if (sett_HUD_x > x) sett_HUD_x = 0;
+    if (sett_HUD_y > y) sett_HUD_y = 0;
 }
 
 //put code here
@@ -133,6 +186,18 @@ void Settings::mode()
         break;
     case 1:
         logging();
+        break;
+    case 2:
+        setSeed();
+        break;
+    case 3:
+        setRandomSeed();
+        break;
+    case 4:
+        setNickname();
+        break;
+    case 5:
+        setHUDPosition();
         break;
     case BUTTON_COUNT - 1:
         Penguin::draw();
@@ -172,15 +237,6 @@ void Settings::controller()
 
 void Settings::init()
 {
-    std::ifstream fin("settings.txt");
-    char buffer[512];
-    while (fin.getline(buffer, 512)) 
-    {
-        general_settings += buffer;
-        general_settings += '\n';
-    }
-    fin.close();
-
     back = false;
 
     while (true)
