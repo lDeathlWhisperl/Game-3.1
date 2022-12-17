@@ -9,6 +9,6 @@ void colors()
 
 int main()
 {
-    Game::init();
+    Game::init(); 
     return 0;
 }

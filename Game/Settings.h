@@ -8,6 +8,10 @@ class Settings
 
     static const int BUTTON_COUNT;
 
+    static char settings[][33];
+
+    static std::string general_settings;
+
     enum buttons
     {
         //spec
@@ -42,6 +46,8 @@ class Settings
     static void logging();
 
     static void mode();
+
+    static void write(char*, unsigned int);
 
     Settings() {};
 public:

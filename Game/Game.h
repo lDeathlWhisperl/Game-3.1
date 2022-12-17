@@ -1,7 +1,6 @@
 #pragma once
 
-#define gameLoop() while(true)
-#define game_over break
+#include "Settings.h"
 
 class Game
 {
@@ -53,6 +52,8 @@ class Game
     static void settings();
 
     static void mode();
+
+    friend Settings;
 
     Game() {};
 public:

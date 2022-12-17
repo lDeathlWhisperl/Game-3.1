@@ -4,6 +4,9 @@
 #include "Logging.h"
 #include "Render.h"
 
+#define gameLoop() while(true)
+#define game_over break
+
 int Game::menu_id = 0,
     Game::choice = -1,
     Game::screen_size_x = 0,
@@ -57,31 +60,18 @@ void Game::menu()
     hOut = GetStdHandle(STD_OUTPUT_HANDLE);
 
     int x = screen_size_x / 2,
-        y = screen_size_y / 2;
-
-    Position.X = x - 6;
-    Position.Y = y++;
-    SetConsoleCursorPosition(hOut, Position);
-
-    for (int i = 0; i < 15; i++) std::cout << (unsigned char)219;
+        y = screen_size_y / 2 - 3 / 2;
 
     for (int i = 0; i < 3; i++)
     {
         Position.X = x - 6;
-        Position.Y = y++;
+        Position.Y = y;
         SetConsoleCursorPosition(hOut, Position);
 
-        std::cout << (unsigned char)219 << ' ';
-
-        if (i == menu_id) std::cout << "\x1b[102m";
-        std::cout << buttons[i] << "\x1b[0m " << (unsigned char)219;
+        if (i == menu_id) std::cout << "\x1b[102m\x1b[30m";
+        std::cout << buttons[i] << "\x1b[0m";
+        y += 2;
     }
-
-    Position.X = x - 6;
-    Position.Y = y;
-    SetConsoleCursorPosition(hOut, Position);
-
-    for (int i = 0; i < 15; i++) std::cout << (unsigned char)219;
 }
 
 void Game::fullscreen()

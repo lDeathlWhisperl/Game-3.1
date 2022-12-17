@@ -45,6 +45,7 @@ void Penguin::draw()
 
 	system("cls");
 
+	std::cout << "            quack\n";
 	for (int i = 0; i < 12; i++)
 	{
 		for (int j = 0; j < 15; j++)

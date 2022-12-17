@@ -1,4 +1,5 @@
 #include <fstream>
+#include <string>
 #include "Adapter.h"
 
 int Adapter::type;
@@ -16,8 +17,13 @@ Adapter::~Adapter()
 
 void Adapter::request(std::string text)
 {
-	std::ifstream fin("Settings.txt");
-	fin >> type;
+	std::ifstream fin("settings.txt");
+
+	std::string str;
+	std::getline(fin, str, ':');
+
+	fin >> type >> str;
+
 	Proxy p(type);
 	p.request(text);
 }

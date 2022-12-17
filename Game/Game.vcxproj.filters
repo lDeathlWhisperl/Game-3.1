@@ -277,6 +277,6 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="log.txt" />
-    <Text Include="Settings.txt" />
+    <Text Include="settings.txt" />
   </ItemGroup>
 </Project>
