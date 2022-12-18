@@ -1,5 +1,5 @@
 #include "Mancubus.h"
-#include "Loging.h"
+#include "Logging.h"
 
 Mancubus::Mancubus() : Demon(15, 10, 8, 3)
 {

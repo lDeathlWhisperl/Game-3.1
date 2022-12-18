@@ -47,6 +47,4 @@ public:
     char showPlayer();
 
     char getLastPressedKey();
-
-    bool isMoving();
 };

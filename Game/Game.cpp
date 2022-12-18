@@ -101,7 +101,7 @@ void Game::game()
 {
     if (seed == 0)
     {
-        srand(time(NULL));
+        srand((unsigned int)time(NULL));
         seed = static_cast<unsigned int>(rand());
     }
 
