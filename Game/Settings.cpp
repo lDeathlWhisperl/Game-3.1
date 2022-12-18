@@ -14,24 +14,6 @@ unsigned int Settings::sett_HUD_x = 0, Settings::sett_HUD_y = 0;
 std::string Settings::sett_nickname = "[NULL]";
 //
 
-static void getConsoleScreenSize(int& x, int& y)
-{
-    HANDLE hWndConsole;
-    if (hWndConsole = GetStdHandle(-12))
-    {
-        CONSOLE_SCREEN_BUFFER_INFO consoleInfo;
-        if (GetConsoleScreenBufferInfo(hWndConsole, &consoleInfo))
-        {
-            x = consoleInfo.srWindow.Right - consoleInfo.srWindow.Left + 1;
-            y = consoleInfo.srWindow.Bottom - consoleInfo.srWindow.Top + 1;
-        }
-        else
-            printf("Error: %d\n", GetLastError());
-    }
-    else
-        printf("Error: %d\n", GetLastError());
-}
-
 int Settings::menu_id = 0,
     Settings::choice = -1;
 
@@ -58,7 +40,7 @@ void Settings::menu()
     hOut = GetStdHandle(STD_OUTPUT_HANDLE);
 
     int x, y;
-    getConsoleScreenSize(x, y);
+    Game::getConsoleScreenSize(x, y);
     x /= 2;
     y /= 2;
                
@@ -103,7 +85,7 @@ void Settings::setSeed()
     hOut = GetStdHandle(STD_OUTPUT_HANDLE);
 
     int x, y;
-    getConsoleScreenSize(x, y);
+    Game::getConsoleScreenSize(x, y);
     x /= 2;
     y /= 2;
 
@@ -130,7 +112,7 @@ void Settings::setNickname()
     hOut = GetStdHandle(STD_OUTPUT_HANDLE);
 
     int x, y;
-    getConsoleScreenSize(x, y);
+    Game::getConsoleScreenSize(x, y);
     x = x / 2 - 22;
     y /= 2;
 
@@ -152,7 +134,7 @@ void Settings::setHUDPosition()
     hOut = GetStdHandle(STD_OUTPUT_HANDLE);
 
     int x, y;
-    getConsoleScreenSize(x, y);
+    Game::getConsoleScreenSize(x, y);
 
     Position.X = x / 2 - 10;
     Position.Y = y / 2;
@@ -172,8 +154,8 @@ void Settings::setHUDPosition()
     std::cout << "Y: ";
     std::cin >> sett_HUD_y;
 
-    if (sett_HUD_x > x) sett_HUD_x = 0;
-    if (sett_HUD_y > y) sett_HUD_y = 0;
+    if (sett_HUD_x > (unsigned int)x) sett_HUD_x = 0;
+    if (sett_HUD_y > (unsigned int)y) sett_HUD_y = 0;
 }
 
 //put code here

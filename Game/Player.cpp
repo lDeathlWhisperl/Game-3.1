@@ -65,7 +65,7 @@ void Player::controller(int top, int left, int right, int bottom)
         getDamage(100);
     }
 
-    lastPressedKey = ch;
+    lastPressedKey = std::tolower(ch);
 }
 
 void Player::controller()
@@ -100,7 +100,7 @@ void Player::controller()
     case ARROW_RIGHT:
         character = '>';
         break;
-    case 'x':
+    case ESC:
         armor -= 5;
         getDamage(100);
     }

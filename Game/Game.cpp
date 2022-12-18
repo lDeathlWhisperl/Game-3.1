@@ -99,13 +99,19 @@ void Game::getConsoleScreenSize(int& x, int& y)
 
 void Game::game()
 {
+    if (seed == 0)
+    {
+        srand(time(NULL));
+        seed = static_cast<unsigned int>(rand());
+    }
+
     debug::log->request("========================[New-game]=========================\n\n");
     debug::log->request("World generation seed: " + std::to_string(seed) + "\n\n");
 
     World landscape(screen_size_x + 16, screen_size_y + 8);
     Player player;
 
-    landscape.landscape();
+        landscape.landscape();
     landscape.generator(seed, 0, 0);
 
     gameLoop()
@@ -121,6 +127,8 @@ void Game::game()
 
         Render::update();
     }
+
+    seed = 0;
 }
 
 void Game::settings()
@@ -149,9 +157,7 @@ void Game::init()
 {
     fullscreen();
     getConsoleScreenSize(screen_size_x, screen_size_y);
-    srand(time(NULL));
-    seed = static_cast<unsigned int>(rand());
-
+    
     while (true)
     {
         system("cls");

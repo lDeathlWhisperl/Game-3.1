@@ -153,7 +153,7 @@ void Render::draw_dungeon(Dungeon& dungeon, Player& player)
 
 void Render::draw_world(World &world, Player &player)
 {
-	HUD hud(player.getMaxHP() + 20);
+	HUD hud(player.getMaxHP());
 	bool do_once = true;
 	int player_coords = static_cast<int>(world.getMap(world.getLength() / 2, world.getWidth() / 2));
 
