@@ -19,7 +19,7 @@ int Settings::menu_id = 0,
 
 const int Settings::BUTTON_COUNT = 7;
 
-static bool back = false;
+static bool out = false;
 
 char Settings::settings[BUTTON_COUNT][33] =
 {
@@ -164,7 +164,7 @@ void Settings::mode()
     switch (choice)
     {
     case 0:
-        back = true;
+        out = true;
         break;
     case 1:
         logging();
@@ -219,13 +219,12 @@ void Settings::controller()
 
 void Settings::init()
 {
-    back = false;
+    out = false;
 
-    while (true)
+    while (!out)
     {
         system("cls");
         menu();
         controller();
-        if (back) break;
     }    
 }

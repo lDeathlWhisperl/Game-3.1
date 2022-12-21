@@ -2,7 +2,7 @@
 
 #include "Undead.h"
 
-class Skeleton : public Undead
+class Skeleton final : public Undead
 {
 public:
 	Skeleton();

@@ -3,6 +3,7 @@
 #include "Game.h"
 #include "Logging.h"
 #include "Render.h"
+#include <conio.h>
 
 #define gameLoop() while(true)
 #define game_over break
@@ -14,7 +15,7 @@ int Game::menu_id = 0,
 
 unsigned int Game::seed = 0;
 
-static bool EXIT = false;
+static bool out = false;
 
 void Game::controller()
 {
@@ -147,7 +148,7 @@ void Game::mode()
         settings();
         break;
     case 2:
-        EXIT = true;
+        out = true;
         break;
     }
     choice = -1;
@@ -158,12 +159,11 @@ void Game::init()
     fullscreen();
     getConsoleScreenSize(screen_size_x, screen_size_y);
     
-    while (true)
+    while (!out)
     {
         system("cls");
         menu();
         controller();
-        if (EXIT) break;
     }
 
     debug::log->request("========================[Game-over]========================\n\n");

@@ -2,7 +2,7 @@
 
 #include "Spirit.h"
 
-class Gin : public Spirit
+class Gin final : public Spirit
 {
 public:
 	Gin();

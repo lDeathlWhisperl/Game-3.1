@@ -150,6 +150,7 @@
     <ClCompile Include="Gin.cpp" />
     <ClCompile Include="HUD.cpp" />
     <ClCompile Include="Imp.cpp" />
+    <ClCompile Include="Level.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Mancubus.cpp" />
     <ClCompile Include="Mummy.cpp" />
@@ -176,6 +177,7 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="Ghoul.h" />
     <ClInclude Include="Gin.h" />
+    <ClInclude Include="Level.h" />
     <ClInclude Include="Logging.h" />
     <ClInclude Include="HUD.h" />
     <ClInclude Include="Imp.h" />

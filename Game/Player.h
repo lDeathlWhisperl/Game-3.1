@@ -1,9 +1,10 @@
 #pragma once
 
 #include "Character.h"
-#include <conio.h>
 
-class Player : public Character
+//class Level;
+
+class Player final : public Character
 {
     enum buttons
     {
@@ -20,6 +21,7 @@ class Player : public Character
         A = 65,
         D = 68,
         E = 69,
+        I = 73,
         Q = 81,
         S = 83,
         W = 87,
@@ -27,10 +29,14 @@ class Player : public Character
         a = 97,
         d = 100,
         e = 101,
+        i = 105,
         q = 113,
         s = 115,
         w = 119,
     };
+
+    int strength = 1;
+    int money = 100000;
 
     char lastPressedKey = '\0';
 public:
@@ -47,4 +53,16 @@ public:
     char showPlayer();
 
     char getLastPressedKey();
+
+    int getStrength();
+
+    int getMoney()
+    {
+        return money;
+    }
+
+    void setMoney(int m)
+    {
+        money = m;
+    }
 };

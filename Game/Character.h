@@ -12,7 +12,8 @@ protected:
 		armor    = 5,
 		strength = 0,
 		max_HP   = 25,
-		level    = 0;
+		level    = 0, 
+		money    = 0;
 
 	char character = '\0';
 
@@ -63,5 +64,15 @@ public:
 	bool getStatus()
 	{
 		return status;
+	}
+
+	int getLevel()
+	{
+		return level;
+	}
+
+	int level_up()
+	{
+		return ++level;
 	}
 };

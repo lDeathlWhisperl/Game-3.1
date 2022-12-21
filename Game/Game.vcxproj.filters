@@ -166,6 +166,9 @@
     <ClCompile Include="Penguin.cpp">
       <Filter>Menu\Cpp</Filter>
     </ClCompile>
+    <ClCompile Include="Level.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Undead.h">
@@ -273,6 +276,9 @@
     </ClInclude>
     <ClInclude Include="Penguin.h">
       <Filter>Menu\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Level.h">
+      <Filter>Исходные файлы</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -2,7 +2,7 @@
 
 #include "Demon.h"
 
-class Mancubus : public Demon
+class Mancubus final : public Demon
 {
 public:
 	Mancubus();

@@ -2,7 +2,7 @@
 
 #include "Spirit.h"
 
-class Mummy : public Spirit
+class Mummy final : public Spirit
 {
 public:
 	Mummy();

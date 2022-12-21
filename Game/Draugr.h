@@ -2,7 +2,7 @@
 
 #include "Undead.h"
 
-class Draugr : public Undead
+class Draugr final : public Undead
 {
 public:
 	Draugr();

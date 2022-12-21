@@ -2,7 +2,7 @@
 
 #include "Demon.h"
 
-class Imp : public Demon
+class Imp final : public Demon
 {
 public:
 	Imp();
