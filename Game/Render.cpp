@@ -63,7 +63,7 @@ std::string Render::paint(double high)
 void Render::draw_dungeon(Dungeon& dungeon, Player& player)
 {
 	HUD hud(player.getMaxHP());
-	int player_coords = dungeon.get(player.getPos_x(), player.getPos_y());
+	int player_coords = dungeon.getVertex(player.getPos_x(), player.getPos_y());
 
 	HANDLE hOut;
 	COORD Position;
@@ -80,7 +80,7 @@ void Render::draw_dungeon(Dungeon& dungeon, Player& player)
 			if (p_coords && hud_coords)
 				std::cout << player.showPlayer();
 			else if (hud_coords)
-				std::cout << paint(dungeon.get(x, y));
+				std::cout << paint(dungeon.getVertex(x, y));
 			else
 			{
 				Position.X = x;

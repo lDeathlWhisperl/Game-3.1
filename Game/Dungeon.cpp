@@ -104,7 +104,7 @@ void Dungeon::generate(int roomsCount) {
 	d_rooms.clear();
 }
 
-int Dungeon::get(int x, int y)
+int Dungeon::getVertex(int x, int y)
 {
 	return d_data[x + y * d_width];
 }

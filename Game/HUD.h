@@ -4,7 +4,7 @@
 
 #include "Character.h"
 
-class HUD
+class HUD final
 {
 	int length = 0, pos_x, pos_y;
 

@@ -24,55 +24,19 @@ public:
 
 	Character(int hp, int arm, int str) : HP(hp), armor(arm), strength(str), max_HP(hp) {}
 
-	void getDamage(int dmg)
-	{
-		if (armor > 0)
-			armor--;
-		else
-			HP = HP - dmg;
+	void getDamage(int);
 
-		if (armor < 0)
-			armor = 0;
+	int getMaxHP();
 
-		if (HP <= 0)
-		{
-			status = dead;
-			character = 'X';
-		}
-	}
+	int getHP();
 
-	int getMaxHP()
-	{
-		return max_HP;
-	}
+	int getArmor();
 
-	int getHP()
-	{
-		return HP;
-	}
+	int attack();
 
-	int getArmor()
-	{
-		return armor;
-	}
+	bool getStatus();
 
-	int attack()
-	{
-		return strength;
-	}
+	int getLevel();
 
-	bool getStatus()
-	{
-		return status;
-	}
-
-	int getLevel()
-	{
-		return level;
-	}
-
-	int level_up()
-	{
-		return ++level;
-	}
+	int level_up();
 };

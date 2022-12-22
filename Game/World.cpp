@@ -34,15 +34,15 @@ void World::landscape()
 	}
 }
 
-void World::generator(unsigned int seed, int x_index, int y_index)
+void World::generator(unsigned int seed, int offset_x, int offset_y)
 {
 	PerlinNoise pn(seed);
 
 	for (int y = 0; y < width; y++)
 		for (int x = 0; x < length; x++)
 		{
-			double t_x = (double)(x + x_index) / ((double)length);
-			double t_y = (double)(y + y_index) / ((double)width);
+			double t_x = (double)(x + offset_x) / ((double)length);
+			double t_y = (double)(y + offset_y) / ((double)width);
 
 			//Forest noise
 			map[y][x] = pn.noise(3 * t_x, 3 * t_y, 600);

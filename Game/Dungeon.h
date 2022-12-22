@@ -47,7 +47,7 @@ public:
 
 	void generate(int);
 
-	int get(int, int);
+	int getVertex(int, int);
 
 	int getWidth();
 

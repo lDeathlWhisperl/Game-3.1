@@ -181,6 +181,9 @@
     <ClCompile Include="Level.cpp">
       <Filter>Characters\Other\Cpp</Filter>
     </ClCompile>
+    <ClCompile Include="Character.cpp">
+      <Filter>Characters\Other\Cpp</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Undead.h">

@@ -150,10 +150,10 @@ void Castle::enter(Player& player, int length, int width)
 	{
 		Render::draw_dungeon(dungeon, player);
 
-		int top    = dungeon.get(player.getPos_x(), player.getPos_y() - 1),
-			left   = dungeon.get(player.getPos_x() - 1, player.getPos_y()),
-			right  = dungeon.get(player.getPos_x() + 1, player.getPos_y()),
-			bottom = dungeon.get(player.getPos_x(), player.getPos_y() + 1);
+		int top    = dungeon.getVertex(player.getPos_x(), player.getPos_y() - 1),
+			left   = dungeon.getVertex(player.getPos_x() - 1, player.getPos_y()),
+			right  = dungeon.getVertex(player.getPos_x() + 1, player.getPos_y()),
+			bottom = dungeon.getVertex(player.getPos_x(), player.getPos_y() + 1);
 
 		player.controller(top, left, right, bottom);
 
