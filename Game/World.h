@@ -5,11 +5,6 @@ class World
 private:
 	int length, width;
 	double** map;
-
-	void plantTree(int, int);
-
-	void plantCactus(int, int);
-
 public:
 	World(int, int);
 

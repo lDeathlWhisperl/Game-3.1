@@ -21,7 +21,7 @@ public:
 	
 	AI(int hp, int arm, int str) : Character(hp, arm, str), id(++count) {}
 
-	~AI();
+	virtual ~AI();
 
 	void controller(Player& player);
 

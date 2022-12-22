@@ -10,8 +10,6 @@
 class Render
 {
 	static std::string paint(double);
-
-	static void enterTheDungeon(Player&, int, int);
 public:
 	static void draw_world(World&, Player&);
 

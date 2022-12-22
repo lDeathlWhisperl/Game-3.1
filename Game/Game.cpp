@@ -112,7 +112,7 @@ void Game::game()
     World landscape(screen_size_x + 16, screen_size_y + 8);
     Player player;
 
-        landscape.landscape();
+    landscape.landscape();
     landscape.generator(seed, 0, 0);
 
     gameLoop()

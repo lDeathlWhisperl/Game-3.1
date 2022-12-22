@@ -92,6 +92,15 @@
     <Filter Include="Menu\Cpp">
       <UniqueIdentifier>{c6dc646f-3793-4df6-bbb5-cbf037d4d9e1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="World\Buildings">
+      <UniqueIdentifier>{0b7750d2-5ca2-459a-a6de-ac31cb50f895}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="World\Buildings\Cpp">
+      <UniqueIdentifier>{c448bb89-5470-402a-adc6-962978213bce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="World\Buildings\Headers">
+      <UniqueIdentifier>{59ef35e4-e48f-45b2-ac7c-e062345701e9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -151,9 +160,6 @@
     <ClCompile Include="Zombie.cpp">
       <Filter>Characters\Monster\Undead\Cpp</Filter>
     </ClCompile>
-    <ClCompile Include="Castle.cpp">
-      <Filter>World\Cpp</Filter>
-    </ClCompile>
     <ClCompile Include="Adapter.cpp">
       <Filter>Recorder\Cpp</Filter>
     </ClCompile>
@@ -166,8 +172,14 @@
     <ClCompile Include="Penguin.cpp">
       <Filter>Menu\Cpp</Filter>
     </ClCompile>
+    <ClCompile Include="Castle.cpp">
+      <Filter>World\Buildings\Cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Pyramid.cpp">
+      <Filter>World\Buildings\Cpp</Filter>
+    </ClCompile>
     <ClCompile Include="Level.cpp">
-      <Filter>Исходные файлы</Filter>
+      <Filter>Characters\Other\Cpp</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -197,9 +209,6 @@
     </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Characters\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Castle.h">
-      <Filter>World\Headers</Filter>
     </ClInclude>
     <ClInclude Include="Dungeon.h">
       <Filter>World\Headers</Filter>
@@ -277,8 +286,14 @@
     <ClInclude Include="Penguin.h">
       <Filter>Menu\Headers</Filter>
     </ClInclude>
+    <ClInclude Include="Castle.h">
+      <Filter>World\Buildings\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Pyramid.h">
+      <Filter>World\Buildings\Headers</Filter>
+    </ClInclude>
     <ClInclude Include="Level.h">
-      <Filter>Исходные файлы</Filter>
+      <Filter>Characters\Other\Headers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

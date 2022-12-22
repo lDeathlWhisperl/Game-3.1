@@ -24,7 +24,7 @@ struct Point
 	}
 };
 
-class Dungeon
+class Dungeon final
 {
 	std::vector<int> d_data, walls_coords;
 	std::vector<Room> d_rooms; 
@@ -34,8 +34,6 @@ class Dungeon
 	bool out = false;
 
 	void generatePassage(const Point&, const Point&);
-
-	int getRandomNumber(int, int);
 
 	AI* spawn(int, int);
 

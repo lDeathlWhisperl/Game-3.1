@@ -158,6 +158,7 @@
     <ClCompile Include="Perlin.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Possessed.cpp" />
+    <ClCompile Include="Pyramid.cpp" />
     <ClCompile Include="Recorder.cpp" />
     <ClCompile Include="Render.cpp" />
     <ClCompile Include="Settings.cpp" />
@@ -191,6 +192,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="Possessed.h" />
     <ClInclude Include="Proxy.h" />
+    <ClInclude Include="Pyramid.h" />
     <ClInclude Include="Rang_1.h" />
     <ClInclude Include="Rang_2.h" />
     <ClInclude Include="Rang_3.h" />

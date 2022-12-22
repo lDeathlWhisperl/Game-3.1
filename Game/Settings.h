@@ -2,6 +2,7 @@
 
 #include "Adapter.h"
 #include "HUD.h"
+#include "Level.h"
 
 class Settings
 {
@@ -52,6 +53,7 @@ class Settings
 
     friend Adapter;
     friend HUD;
+    friend Level;
 
     Settings() {};
 public:

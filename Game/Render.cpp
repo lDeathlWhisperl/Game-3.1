@@ -1,4 +1,5 @@
 #include "Render.h"
+#include "Castle.h"
 #include "Logging.h"
 
 //32 - tree
@@ -41,7 +42,7 @@ std::string Render::paint(double high)
 		res = "\x1b[90m";				//stone and dungeon walls
 		break;
 	case 5:
-		res = "\x1b[33m";				//door and pyramid brick
+		res = "\x1b[33m";				//castle door and pyramid brick
 		break;
 	case 6:
 		res = "\x1b[30m";				//window, dungeon void and pyramid passage
@@ -58,44 +59,6 @@ std::string Render::paint(double high)
 	res += "\x1b[0m";
 	return res;
 }
-
-void Render::enterTheDungeon(Player& player, int length, int width)
-{
-	srand(player.getPos_x() + player.getPos_y());
-	debug::log->request("Dungeon generation seed: " + std::to_string(player.getPos_x() + player.getPos_y()) + "\n\n");
-
-	Dungeon dungeon(length, width);
-	dungeon.generate(5);
-
-	int temp_x = player.getPos_x(),
-		temp_y = player.getPos_y();
-
-	player.setPos_x(dungeon.spawn_x());
-	player.setPos_y(dungeon.spawn_y());
-
-	while (true)
-	{
-		Render::draw_dungeon(dungeon, player);
-
-		int top = dungeon.get(player.getPos_x(), player.getPos_y() - 1),
-			left = dungeon.get(player.getPos_x() - 1, player.getPos_y()),
-			right = dungeon.get(player.getPos_x() + 1, player.getPos_y()),
-			bottom = dungeon.get(player.getPos_x(), player.getPos_y() + 1);
-
-		player.controller(top, left, right, bottom);
-
-		if (dungeon.isExit()) break;
-		if (!player.getStatus()) exit(0);
-
-		//for (AI* monster : dungeon.monsters) monster->controller(player);
-
-		Render::update();
-	}
-
-	player.setPos_x(temp_x);
-	player.setPos_y(temp_y);
-}
-
  
 void Render::draw_dungeon(Dungeon& dungeon, Player& player)
 {
@@ -120,8 +83,8 @@ void Render::draw_dungeon(Dungeon& dungeon, Player& player)
 				std::cout << paint(dungeon.get(x, y));
 			else
 			{
-				Position.X = x + 1;
-				Position.Y = y - 1;
+				Position.X = x;
+				Position.Y = y;
 				SetConsoleCursorPosition(hOut, Position);
 			}
 		}
@@ -191,7 +154,7 @@ void Render::draw_world(World &world, Player &player)
 	if (player.getLastPressedKey() == 32 && player_coords == 5)
 	{
 		system("cls");
-		enterTheDungeon(player, world.getLength(), world.getWidth());
+		Castle::enter(player, world.getLength(), world.getWidth());
 		system("cls");
 		return;
 	}

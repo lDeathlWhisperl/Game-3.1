@@ -1,4 +1,6 @@
 #include "castle.h"
+#include "Logging.h"
+#include "Render.h"
 
 
 int Castle::door   = 5,
@@ -9,7 +11,7 @@ int Castle::door   = 5,
 
 double** Castle::world_copy;
 
-void Castle::line_1(int x, int y)
+void Castle::line(int x, int y)
 {
 	pos_x -= 14;
 	if (pos_x < 0) pos_x = 0;
@@ -109,7 +111,7 @@ void Castle::draw(double** world, int x, int y)
 	world_copy = world;
 	if (isColapse()) return;
 	//
-	line_1(x, y);
+	line(x, y);
 	if (pos_y == 0) return;
 	//
 	line_2(x);
@@ -128,4 +130,38 @@ void Castle::draw(double** world, int x, int y)
 	if (pos_y == 0) return;
 	//
 	line_7(x);
+}
+
+void Castle::enter(Player& player, int length, int width)
+{
+	srand(player.getPos_x() + player.getPos_y());
+	debug::log->request("Dungeon generation seed: " + std::to_string(player.getPos_x() + player.getPos_y()) + "\n\n");
+
+	Dungeon dungeon(length, width);
+	dungeon.generate(5);
+
+	int temp_x = player.getPos_x(),
+		temp_y = player.getPos_y();
+
+	player.setPos_x(dungeon.spawn_x());
+	player.setPos_y(dungeon.spawn_y());
+
+	while (!dungeon.isExit() && player.getStatus())
+	{
+		Render::draw_dungeon(dungeon, player);
+
+		int top    = dungeon.get(player.getPos_x(), player.getPos_y() - 1),
+			left   = dungeon.get(player.getPos_x() - 1, player.getPos_y()),
+			right  = dungeon.get(player.getPos_x() + 1, player.getPos_y()),
+			bottom = dungeon.get(player.getPos_x(), player.getPos_y() + 1);
+
+		player.controller(top, left, right, bottom);
+
+		//for (AI* monster : dungeon.monsters) monster->controller(player);
+
+		Render::update();
+	}
+
+	player.setPos_x(temp_x);
+	player.setPos_y(temp_y);
 }

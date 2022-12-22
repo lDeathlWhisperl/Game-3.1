@@ -154,11 +154,10 @@ void Settings::setHUDPosition()
     std::cout << "Y: ";
     std::cin >> sett_HUD_y;
 
-    if (sett_HUD_x > (unsigned int)x) sett_HUD_x = 0;
-    if (sett_HUD_y > (unsigned int)y) sett_HUD_y = 0;
+    if (sett_HUD_x > (unsigned int)x - 27) sett_HUD_x = 0;
+    if (sett_HUD_y > (unsigned int)y - 5) sett_HUD_y = 0;
 }
 
-//put code here
 void Settings::mode()
 {
     switch (choice)

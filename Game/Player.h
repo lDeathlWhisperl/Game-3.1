@@ -56,6 +56,26 @@ public:
 
     int getStrength();
 
+    void incraseStrength()
+    {
+        strength++;
+    }
+
+    void heal()
+    {
+        HP++;
+    }
+
+    void incraseMaxHP()
+    {
+        max_HP++;
+    }
+
+    void fixArmor()
+    {
+        armor++;
+    }
+
     int getMoney()
     {
         return money;

@@ -1,7 +1,10 @@
 #include <iostream>
 
 #include "World.h"
+
 #include "Castle.h"
+#include "Pyramid.h"
+
 #include "Perlin.h"
 #include "Logging.h"
 
@@ -14,41 +17,11 @@ World::World(int l, int w) : length(l), width(w)
 World::~World()
 {
 	debug::log->request("Deleting the world\n\n");
-	/*
+	
 	for (int i = 0; i < width; i++)
 		delete[] map[i];
 	delete[] map;
-	*/
-}
-
-void World::plantTree(int x, int y)
-{
-	if (map[y - 1][x] != 5)map[y - 1][x] = 2;
-	map[y][x - 1] = 2;
-	map[y][x] = 2;
-}
-
-void World::plantCactus(int x, int y)
-{
-	if (!(map[y - 1][x - 1] > 0.5 && map[y - 1][x - 1] <= 0.545))
-		map[y - 1][x - 1] = 0.34;
-	if (!(map[y - 1][x] > 0.5 && map[y - 1][x] <= 0.545))
-		map[y - 1][x] = 0.34;
-	if (!(map[y - 1][x + 1] > 0.5 && map[y - 1][x + 1] <= 0.545))
-		map[y - 1][x + 1] = 0.34;
-	if (!(map[y][x - 1] > 0.5 && map[y][x - 1] <= 0.545))
-		map[y][x - 1] = 0.34;
-
-	map[y][x] = 4;
-
-	if (!(map[y][x + 1] > 0.5 && map[y][x + 1] <= 0.545))
-		map[y][x + 1] = 0.34;
-	if (!(map[y + 1][x - 1] > 0.5 && map[y + 1][x - 1] <= 0.545))
-		map[y + 1][x - 1] = 0.34;
-	if (!(map[y + 1][x] > 0.5 && map[y + 1][x] <= 0.545))
-		map[y + 1][x] = 0.34;
-	if (!(map[y + 1][x + 1] > 0.5 && map[y + 1][x + 1] <= 0.545))
-		map[y + 1][x + 1] = 0.34;
+	
 }
 
 void World::landscape()
@@ -80,18 +53,28 @@ void World::generator(unsigned int seed, int x_index, int y_index)
 					map[y][x] = 0.34;
 			
 			//foliage noise
-			if ((map[y][x] > 0.34 && map[y][x] <= 0.5 || map[y][x] >= 0.546) && map[y][x] < 1 && y > 0 && x > 0)
+			if ((map[y][x] > 0.34 && map[y][x] <= 0.5 || map[y][x] >= 0.546) && y > 0 && x > 0)
 				if (pn.noise(222 * t_x, 222 * t_y, 600) >= 0.38 && pn.noise(222 * t_x, 222 * t_y, 600) <= 0.45)
-					plantTree(x, y);
+				{
+					if (map[y - 1][x] != 5)map[y - 1][x] = 2;
+					map[y][x - 1] = 2;
+					map[y][x] = 2;
+				}
 
-			if (map[y][x] == 0.34 && x > 0 && x < length - 1 && y > 0 && y < width - 1)
-				if (pn.noise(555 * t_x, 555 * t_y, 600) >= 0.38 && pn.noise(555 * t_x, 555 * t_y, 600) <= 0.45)
-					plantCactus(x, y);
+			if (map[y][x] == 0.34)
+				if (pn.noise(222 * t_x, 222 * t_y, 600) >= 0.44 && pn.noise(222 * t_x, 222 * t_y, 600) <= 0.45)
+					map[y][x] = 4;
 
 			//spawn castle
 			if ((map[y][x] > 0.34 && map[y][x] != 4) && (map[y][x] < 0.5 || map[y][x] > 0.545))
 				if (pn.noise(555 * t_x, 555 * t_y, 600) <= 0.13)
 					Castle::draw(map, x, y);
+
+			//spawn pyramid
+			if (map[y][x] == 0.34)
+				if (pn.noise(555 * t_x, 555 * t_y, 600) <= 0.13)
+					Pyramid::draw(map, x, y);
+
 		}
 }
 

@@ -1,11 +1,12 @@
 #include "Level.h"
+#include "Settings.h"
 #include <iostream>
 #include <conio.h>
 #include <iomanip>
 #include <windows.h>
 
 int Level::choice = -1;
-int Level::menu_id = 1;
+int Level::menu_id = 0;
 int Level::cost[4];
 Player* Level::player;
 
@@ -66,7 +67,9 @@ int Level::calcCost(int i)
     case 1:
         return cost[i] = 10;
     case 2:
-        return cost[i] = player->getMaxHP() + 1;
+        int x, y;
+        getConsoleScreenSize(x, y);
+        return (player->getMaxHP() == x - Settings::sett_HUD_x - 2) ? cost[i] = 0 : cost[i] = player->getMaxHP() + 1;
     case 3:
         return cost[i] = player->getStrength() + 2;
     default:
@@ -83,7 +86,9 @@ int Level::potential(int i)
     case 1:
         return (player->getArmor() + 1 > player->getMaxHP()) ? player->getMaxHP() : player->getArmor() + 1;
     case 2:
-        return player->getMaxHP() + 1;
+        int x, y;
+        getConsoleScreenSize(x, y);
+        return (player->getMaxHP() == x - Settings::sett_HUD_x - 2) ? x - Settings::sett_HUD_x - 2 : player->getMaxHP() + 1;
     case 3:
         return (player->getStrength() > 15) ? player->getStrength() : player->getStrength() + 1;
     default:
@@ -141,16 +146,16 @@ void Level::mode()
 {
     switch (choice)
     {
-    case 1:
+    case 0:
         restoreHP();
         break;
-    case 2:
+    case 1:
         restoreArmor();
         break;
-    case 3:
+    case 2:
         incraseHP();
         break;
-    case 4:
+    case 3:
         incraseStrength();
         break;        
     }
@@ -159,22 +164,40 @@ void Level::mode()
 
 void Level::restoreHP()
 {
-
+    if (cost[0] <= player->getMoney() && player->getHP() != player->getMaxHP()) 
+    {
+        player->heal();
+        player->setMoney(player->getMoney() - cost[0]);
+    }
 }
 
 void Level::restoreArmor()
 {
-
+    if (cost[1] <= player->getMoney() && player->getArmor() != player->getMaxHP() / 2)
+    {
+        player->fixArmor();
+        player->setMoney(player->getMoney() - cost[1]);
+    }
 }
 
 void Level::incraseHP()
 {
-
+    int x, y;
+    getConsoleScreenSize(x, y);
+    if (cost[2] <= player->getMoney() && player->getMaxHP() < x - Settings::sett_HUD_x - 2)
+    {
+        player->incraseMaxHP();
+        player->setMoney(player->getMoney() - cost[2]);
+    }
 }
 
 void Level::incraseStrength()
 {
-
+    if (cost[3] <= player->getMoney())
+    {
+        player->incraseStrength();
+        player->setMoney(player->getMoney() - cost[3]);
+    }
 }
 
 void Level::upgrade(Player &pl)
@@ -185,5 +208,6 @@ void Level::upgrade(Player &pl)
     {
         menu();
         controller();
+        mode();
     }
 }

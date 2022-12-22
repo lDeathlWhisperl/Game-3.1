@@ -2,6 +2,11 @@
 #include "Logging.h"
 #include <queue>
 
+int getRandomNumber(int min, int max)
+{
+	return min + rand() % (max - min + 1);
+}
+
 Dungeon::Dungeon(int width, int height) : d_width(width), d_height(height - 1)
 {
 	d_data.resize(width * height, 0);
@@ -54,8 +59,6 @@ void Dungeon::generate(int roomsCount) {
 			for (int y = 0; y < room.height; ++y)
 				d_data[(room.x + x) + (room.y + y) * d_width] = 7;
 		
-	
-
 	Point start, end;
 
 	for (int i = 0; i < d_rooms.size() - 1; i++)
@@ -149,11 +152,6 @@ AI* Dungeon::spawn(int rang, int monster)
 	}
 	delete spawner;
 	return ai;
-}
-
-int Dungeon::getRandomNumber(int min, int max)
-{
-	return min + rand() % (max - min + 1);
 }
 
 void Dungeon::generateWalls() {
