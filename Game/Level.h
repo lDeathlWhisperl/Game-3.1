@@ -43,9 +43,9 @@ class Level final
 
     static void restoreArmor();
 
-    static void incraseHP();
+    static void increaseHP();
 
-    static void incraseStrength();
+    static void increaseStrength();
 public:
 	static void upgrade(Player&);
 };

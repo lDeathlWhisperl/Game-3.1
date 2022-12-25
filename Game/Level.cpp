@@ -111,12 +111,12 @@ void Level::menu()
     Position.Y = y-8;
     SetConsoleCursorPosition(hOut, Position);
 
-    char field[][19] =
+    char field[][20] =
     {
-        " Restore HP       ",
-        " Restore armor    ",
-        " Incrase max HP   ",
-        " Incrase strength "
+        " Restore HP        ",
+        " Restore armor     ",
+        " Increase max HP   ",
+        " Increase strength "
     };
 
     int stats[4] =
@@ -126,11 +126,11 @@ void Level::menu()
 
     int length = player->getMaxHP();
 
-    for (int i = 0; i < 37; i++) std::cout << (char)219;
+    for (int i = 0; i < 38; i++) std::cout << (char)219;
     std::cout << '\n';
 
     std::cout.setf(std::ios::left);
-    std::cout << "\x1b[4m" << (char)219 << ' ' << std::setw(6) << player->getMoney() << "$          lvl    up   cost " << (char)219 << "\x1b[0m\n";
+    std::cout << "\x1b[4m" << (char)219 << ' ' << std::setw(6) << player->getMoney() << "$           lvl    up   cost " << (char)219 << "\x1b[0m\n";
 
     for (int i = 0; i < 4; i++)
     {
@@ -139,7 +139,7 @@ void Level::menu()
         std::cout << field[i] << std::setw(4) << stats[i] << "-> " << std::setw(4) << potential(i) << ' ' << std::setw(5) << calcCost(i) << "\x1b[0m" << (char)219 << '\n';
     }
     std::cout.unsetf(std::ios::left);
-    for (int i = 0; i < 37; i++) std::cout << (char)219;
+    for (int i = 0; i < 38; i++) std::cout << (char)219;
 }
 
 void Level::mode()
@@ -153,10 +153,10 @@ void Level::mode()
         restoreArmor();
         break;
     case 2:
-        incraseHP();
+        increaseHP();
         break;
     case 3:
-        incraseStrength();
+        increaseStrength();
         break;        
     }
     choice = -1;
@@ -180,22 +180,22 @@ void Level::restoreArmor()
     }
 }
 
-void Level::incraseHP()
+void Level::increaseHP()
 {
     int x, y;
     getConsoleScreenSize(x, y);
     if (cost[2] <= player->getMoney() && player->getMaxHP() < x - Settings::sett_HUD_x - 2)
     {
-        player->incraseMaxHP();
+        player->increaseMaxHP();
         player->setMoney(player->getMoney() - cost[2]);
     }
 }
 
-void Level::incraseStrength()
+void Level::increaseStrength()
 {
     if (cost[3] <= player->getMoney())
     {
-        player->incraseStrength();
+        player->increaseStrength();
         player->setMoney(player->getMoney() - cost[3]);
     }
 }

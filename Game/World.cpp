@@ -18,9 +18,9 @@ World::~World()
 {
 	debug::log->request("Deleting the world\n\n");
 	
-	for (int i = 0; i < width; i++)
+	/*for (int i = 0; i < width; i++)
 		delete[] map[i];
-	delete[] map;
+	delete[] map;*/
 	
 }
 

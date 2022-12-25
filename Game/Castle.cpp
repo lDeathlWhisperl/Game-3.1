@@ -157,7 +157,7 @@ void Castle::enter(Player& player, int length, int width)
 
 		player.controller(top, left, right, bottom);
 
-		//for (AI* monster : dungeon.monsters) monster->controller(player);
+		for (AI* monster : dungeon.monsters) monster->controller(player);
 
 		Render::update();
 	}

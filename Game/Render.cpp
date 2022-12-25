@@ -75,13 +75,22 @@ void Render::draw_dungeon(Dungeon& dungeon, Player& player)
 		for (int x = 0; x < dungeon.getWidth()-1; x++)
 		{
 			bool p_coords = (x == player.getPos_x() && y == player.getPos_y());
-			bool hud_coords = (x < hud.getPos_x() || x > hud.getLength()) || (y < hud.getPos_y() || y > hud.getWidth());
+			bool hud_coords = (x < hud.getPos_x() || x > hud.getLength()) || (y < hud.getPos_y() || y >= hud.getWidth());
+			bool skip = false;
+					
+			for (AI* monster : dungeon.monsters)
+				if (monster->getPos_x() == x && monster->getPos_y() == y)
+				{
+					monster->draw();
+					skip = true;
+					break;
+				}
 
-			if (p_coords && hud_coords)
+			if (p_coords && hud_coords && !skip)
 				std::cout << player.showPlayer();
-			else if (hud_coords)
+			else if (hud_coords && !skip)
 				std::cout << paint(dungeon.getVertex(x, y));
-			else
+			else if (!skip)
 			{
 				Position.X = x;
 				Position.Y = y;
@@ -95,23 +104,6 @@ void Render::draw_dungeon(Dungeon& dungeon, Player& player)
 	
 	if (player_coords == 5 && player.getLastPressedKey() == 32)
 		dungeon.Exit();
-
-	//for (int y = 0; y < dungeon.getHeight(); y++)
-	//{
-	//	for (int x = 0; x < dungeon.getWidth(); x++)
-	//	{
-	//		bool skip = false;
-	//		
-	//		for (AI* monster : dungeon.monsters)
-	//			if (monster->getPos_x() == x && monster->getPos_y() == y)
-	//			{
-	//				monster->draw();
-	//				skip = true;
-	//				break;
-	//			}
-	//	}
-	//	std::cout << '\n';
-	//}
 }
 
 void Render::draw_world(World &world, Player &player)

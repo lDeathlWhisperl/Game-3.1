@@ -137,3 +137,33 @@ int Player::getStrength()
 {
     return strength;
 }
+
+void Player::increaseStrength()
+{
+    strength++;
+}
+
+void Player::heal()
+{
+    HP++;
+}
+
+void Player::increaseMaxHP()
+{
+    max_HP++;
+}
+
+void Player::fixArmor()
+{
+    armor++;
+}
+
+int Player::getMoney()
+{
+    return money;
+}
+
+void Player::setMoney(int m)
+{
+    money = m;
+}
