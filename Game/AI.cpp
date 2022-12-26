@@ -4,6 +4,11 @@
 AStar::Generator AI::generator;
 int AI::count = 0;
 
+int mod(int x)
+{
+	return (x < 0) ? x * -1 : x;
+}
+
 AI::~AI()
 {
 	if (count == 1)
@@ -14,13 +19,14 @@ AI::~AI()
 
 void AI::controller(Player& player)
 {
-	if (status)
+	int abs_pos = pos_x - player.getPos_x() - pos_y + player.getPos_y();
+	if (status && mod(abs_pos) < 10)
 	{
 		if (!canAttack)
 		{
 			auto path = generator.findPath({ pos_x, pos_y }, { player.getPos_x(), player.getPos_y() });
 
-			size_t i = path.size()-2;
+			size_t i = path.size() - 2;
 			if (i > 0)
 			{
 				pos_x = path[i].x;
@@ -32,6 +38,8 @@ void AI::controller(Player& player)
 		else
 			player.getDamage(attack());
 	}
+	else
+		canAttack = false;
 }
 
 void AI::collision(std::vector<int> walls, int width, int height)

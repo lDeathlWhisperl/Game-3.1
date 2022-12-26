@@ -1,7 +1,6 @@
-#include "castle.h"
+#include "Castle.h"
 #include "Logging.h"
 #include "Render.h"
-
 
 int Castle::door   = 5,
 	Castle::stone  = 3,
@@ -138,7 +137,7 @@ void Castle::enter(Player& player, int length, int width)
 	debug::log->request("Dungeon generation seed: " + std::to_string(player.getPos_x() + player.getPos_y()) + "\n\n");
 
 	Dungeon dungeon(length, width);
-	dungeon.generate(5);
+	dungeon.generate(5, {1, 3}, {1, 2});
 
 	int temp_x = player.getPos_x(),
 		temp_y = player.getPos_y();
@@ -148,7 +147,7 @@ void Castle::enter(Player& player, int length, int width)
 
 	while (!dungeon.isExit() && player.getStatus())
 	{
-		Render::draw_dungeon(dungeon, player);
+		Render::draw_castle_dungeon(dungeon, player);
 
 		int top    = dungeon.getVertex(player.getPos_x(), player.getPos_y() - 1),
 			left   = dungeon.getVertex(player.getPos_x() - 1, player.getPos_y()),
@@ -157,7 +156,7 @@ void Castle::enter(Player& player, int length, int width)
 
 		player.controller(top, left, right, bottom);
 
-		for (AI* monster : dungeon.monsters) monster->controller(player);
+		//for (AI* monster : dungeon.monsters) monster->controller(player);
 
 		Render::update();
 	}

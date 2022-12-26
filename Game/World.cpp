@@ -49,21 +49,22 @@ void World::generator(unsigned int seed, int offset_x, int offset_y)
 
 			//Desert
 			if (pn.noise(-0.8 * t_x, -0.8 * t_y, 90000) < 0.45)
-				if (!(map[y][x] > 0.5 && map[y][x] <= 0.545))
+				if (!(map[y][x] > 0.5 && map[y][x] <= 0.545 || map[y][x] <= 0.3))
 					map[y][x] = 0.34;
 			
-			//foliage noise
+			//tree noise
 			if ((map[y][x] > 0.34 && map[y][x] <= 0.5 || map[y][x] >= 0.546) && y > 0 && x > 0)
 				if (pn.noise(222 * t_x, 222 * t_y, 600) >= 0.38 && pn.noise(222 * t_x, 222 * t_y, 600) <= 0.45)
 				{
-					if (map[y - 1][x] != 5)map[y - 1][x] = 2;
+					if (map[y - 1][x] != 5 && map[y - 1][x] != 6)map[y - 1][x] = 2;
 					map[y][x - 1] = 2;
 					map[y][x] = 2;
 				}
-
+			
+			//cactus noise
 			if (map[y][x] == 0.34)
 				if (pn.noise(222 * t_x, 222 * t_y, 600) >= 0.44 && pn.noise(222 * t_x, 222 * t_y, 600) <= 0.45)
-					map[y][x] = 4;
+					map[y][x] = 9;
 
 			//spawn castle
 			if ((map[y][x] > 0.34 && map[y][x] != 4) && (map[y][x] < 0.5 || map[y][x] > 0.545))

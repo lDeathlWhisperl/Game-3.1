@@ -24,6 +24,11 @@ struct Point
 	}
 };
 
+struct Range
+{
+	int min, max;
+};
+
 class Dungeon final
 {
 	std::vector<int> d_data, walls_coords;
@@ -45,7 +50,7 @@ public:
 
 	~Dungeon();
 
-	void generate(int);
+	void generate(int, Range, Range);
 
 	int getVertex(int, int);
 

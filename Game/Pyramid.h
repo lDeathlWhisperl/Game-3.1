@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Player.h"
+
 class Pyramid final
 {
 	static int pos_y, pos_x;
@@ -13,4 +15,6 @@ class Pyramid final
 	static bool isColapse();
 public:
 	static void draw(double**, int, int);
+
+	static void enter(Player&, int, int);
 };

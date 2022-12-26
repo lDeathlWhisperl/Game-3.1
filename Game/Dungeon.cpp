@@ -30,7 +30,7 @@ bool Room::intersect(const Room& r) const
 	return !(r.x >= (x + width) || x >= (r.x + r.width) || r.y >= (y + height) || y >= (r.y + r.height));
 }
 
-void Dungeon::generate(int roomsCount) {
+void Dungeon::generate(int roomsCount, Range rang, Range monster) {
 	d_rooms.clear();
 
 	for (int i = 0; i < roomsCount; ++i)
@@ -84,7 +84,7 @@ void Dungeon::generate(int roomsCount) {
 	int room = 1;
 	for (int i = 1; i < 9; i++)
 	{
-		monsters[i - 1] = spawn(getRandomNumber(1, 3), getRandomNumber(1, 2));
+		monsters[i - 1] = spawn(getRandomNumber(rang.min, rang.max), getRandomNumber(monster.min, monster.max));
 		if (i % 2 == 0)
 		{
 			monsters[i - 1]->setPos_x(d_rooms[room].x);

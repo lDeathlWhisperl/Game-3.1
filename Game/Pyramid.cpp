@@ -1,8 +1,13 @@
+#include <string>
+
 #include "Pyramid.h"
+#include "Dungeon.h"
+#include "Render.h"
+#include "Logging.h"
 
 int Pyramid::pos_y = 0, 
     Pyramid::pos_x = 0,
-    Pyramid::brick = 5, 
+    Pyramid::brick = 10, 
     Pyramid::door = 6;
 
 double** Pyramid::world_copy;
@@ -77,4 +82,38 @@ void Pyramid::draw(double** world, int x, int y)
 	if (pos_y == 0) return;
 	//
 	line(x);
+}
+
+void Pyramid::enter(Player &player, int length, int width)
+{
+	srand(player.getPos_x() + player.getPos_y());
+	debug::log->request("Dungeon generation seed: " + std::to_string(player.getPos_x() + player.getPos_y()) + "\n\n");
+
+	Dungeon dungeon(length, width);
+	dungeon.generate(5, { 1, 3 }, {3, 3});
+
+	int temp_x = player.getPos_x(),
+		temp_y = player.getPos_y();
+
+	player.setPos_x(dungeon.spawn_x());
+	player.setPos_y(dungeon.spawn_y());
+
+	while (!dungeon.isExit() && player.getStatus())
+	{
+		Render::draw_pyramid_dungeon(dungeon, player);
+
+		int top = dungeon.getVertex(player.getPos_x(), player.getPos_y() - 1),
+			left = dungeon.getVertex(player.getPos_x() - 1, player.getPos_y()),
+			right = dungeon.getVertex(player.getPos_x() + 1, player.getPos_y()),
+			bottom = dungeon.getVertex(player.getPos_x(), player.getPos_y() + 1);
+
+		player.controller(top, left, right, bottom);
+
+		//for (AI* monster : dungeon.monsters) monster->controller(player);
+
+		Render::update();
+	}
+
+	player.setPos_x(temp_x);
+	player.setPos_y(temp_y);
 }

@@ -1,5 +1,6 @@
 #include "Render.h"
 #include "Castle.h"
+#include "Pyramid.h"
 #include "Logging.h"
 
 //32 - tree
@@ -30,18 +31,18 @@ std::string Render::paint(double high)
 	else
 		res = "\x1b[92m";               //field
 
-	int i = static_cast<int>(high);
-
-	switch (i)
+	switch ((int)high)
 	{
 	case 2:
-	case 4:
+	case 9:
 		res = "\x1b[32m";				//tree and cactus
 		break;
 	case 3:
 		res = "\x1b[90m";				//stone and dungeon walls
 		break;
+	case 4:
 	case 5:
+	case 10:
 		res = "\x1b[33m";				//castle door and pyramid brick
 		break;
 	case 6:
@@ -60,7 +61,7 @@ std::string Render::paint(double high)
 	return res;
 }
  
-void Render::draw_dungeon(Dungeon& dungeon, Player& player)
+void Render::draw_castle_dungeon(Dungeon& dungeon, Player& player)
 {
 	HUD hud(player.getMaxHP());
 	int player_coords = dungeon.getVertex(player.getPos_x(), player.getPos_y());
@@ -106,6 +107,52 @@ void Render::draw_dungeon(Dungeon& dungeon, Player& player)
 		dungeon.Exit();
 }
 
+void Render::draw_pyramid_dungeon(Dungeon& dungeon, Player& player)
+{
+	HUD hud(player.getMaxHP());
+	int player_coords = dungeon.getVertex(player.getPos_x(), player.getPos_y());
+
+	HANDLE hOut;
+	COORD Position;
+
+	hOut = GetStdHandle(STD_OUTPUT_HANDLE);
+
+	for (int y = 0; y < dungeon.getHeight(); y++)
+	{
+		for (int x = 0; x < dungeon.getWidth() - 1; x++)
+		{
+			bool p_coords = (x == player.getPos_x() && y == player.getPos_y());
+			bool hud_coords = (x < hud.getPos_x() || x > hud.getLength()) || (y < hud.getPos_y() || y >= hud.getWidth());
+			bool skip = false;
+
+			for (AI* monster : dungeon.monsters)
+				if (monster->getPos_x() == x && monster->getPos_y() == y)
+				{
+					monster->draw();
+					skip = true;
+					break;
+				}
+
+			if (p_coords && hud_coords && !skip)
+				std::cout << player.showPlayer();
+			else if (hud_coords && !skip)
+				std::cout << ((dungeon.getVertex(x, y) == 6) ? paint(6) : paint(dungeon.getVertex(x, y) + 1));
+			else if (!skip)
+			{
+				Position.X = x;
+				Position.Y = y;
+				SetConsoleCursorPosition(hOut, Position);
+			}
+		}
+		std::cout << '\n';
+	}
+
+	hud.addToViewport(&player);
+
+	if (player_coords == 5 && player.getLastPressedKey() == 32)
+		dungeon.Exit();
+}
+
 void Render::draw_world(World &world, Player &player)
 {
 	HUD hud(player.getMaxHP());
@@ -140,13 +187,21 @@ void Render::draw_world(World &world, Player &player)
 		std::cout << '\n';
 	}
 
-	if (player_coords == 4)
+	if (player_coords == 9)
 		player.getDamage(1);
 
 	if (player.getLastPressedKey() == 32 && player_coords == 5)
 	{
 		system("cls");
 		Castle::enter(player, world.getLength(), world.getWidth());
+		system("cls");
+		return;
+	}
+
+	if (player.getLastPressedKey() == 32 && player_coords == 6)
+	{
+		system("cls");
+		Pyramid::enter(player, world.getLength(), world.getWidth());
 		system("cls");
 		return;
 	}
